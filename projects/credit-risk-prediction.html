@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Risk & Loan Default Prediction | Nikhilesh Narkhede</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .project-hero { background: var(--gradient); color: white; padding: 8rem 2rem 4rem; text-align: center; }
+        .project-hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .project-hero p { font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
+        .back-link { display: inline-block; margin-bottom: 1rem; color: rgba(255,255,255,0.8); font-size: 0.95rem; }
+        .back-link:hover { color: white; }
+        .project-detail { padding: 4rem 2rem; max-width: 900px; margin: 0 auto; }
+        .project-detail h2 { color: var(--dark); margin-bottom: 1.5rem; font-size: 1.5rem; }
+        .highlight-list { list-style: none; padding: 0; }
+        .highlight-list li { padding: 0.75rem 0 0.75rem 2rem; position: relative; color: var(--secondary); font-size: 1.05rem; border-bottom: 1px solid var(--gray); }
+        .highlight-list li:last-child { border-bottom: none; }
+        .highlight-list li::before { content: '✓'; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
+        .repo-card { background: white; border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); border-left: 4px solid var(--primary); transition: var(--transition); margin: 2rem 0; }
+        .repo-card:hover { transform: translateX(5px); box-shadow: var(--shadow-lg); }
+        .repo-card h3 { color: var(--dark); margin-bottom: 0.5rem; font-size: 1.15rem; }
+        .repo-card p { color: var(--secondary); margin-bottom: 1rem; font-size: 0.95rem; }
+        .repo-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); font-weight: 600; font-size: 0.9rem; }
+        .repo-link:hover { color: var(--primary-dark); }
+        .skills-section { background: var(--light); padding: 2rem; border-radius: var(--radius); margin-top: 2rem; }
+        .skills-section h3 { color: var(--dark); margin-bottom: 1rem; }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tech-tags span { background: var(--primary); color: white; padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 500; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">Nikhilesh Narkhede</a>
+            <ul class="nav-menu">
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#projects">Projects</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="project-hero">
+        <a href="../index.html#projects" class="back-link">← Back to Projects</a>
+        <h1>Applied Machine Learning for Credit Risk & Loan Default Prediction</h1>
+        <p>Supervised ML models predicting payday loan default risk using LightGBM, CatBoost, and neural networks</p>
+    </header>
+
+    <main class="project-detail">
+        <section>
+            <h2>Project Overview</h2>
+            <ul class="highlight-list">
+                <li>Developed supervised machine learning models to predict payday loan default risk using structured financial and behavioral data</li>
+                <li>Performed data preprocessing and feature engineering to improve signal quality and model generalization</li>
+                <li>Evaluated multiple classification algorithms, identifying LightGBM and CatBoost as top-performing models compared to baseline approaches</li>
+                <li>Built a feedforward neural network (FFN) to benchmark deep learning performance against traditional ML models</li>
+                <li>Assessed model performance using appropriate classification metrics to guide model selection and tuning</li>
+                <li>Demonstrated real-world risk modeling skills applicable to finance, lending, and decision-support systems</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Repository</h2>
+            <div class="repo-card">
+                <h3>💰 Payday Loan Defaulter Prediction</h3>
+                <p>Machine learning models for credit risk assessment predicting payday loan defaults using LightGBM, CatBoost, and feedforward neural networks.</p>
+                <a href="https://github.com/nikhileshnarkhede/Payday-Loan-Defaulter-Prediction" target="_blank" class="repo-link">
+                    View on GitHub →
+                </a>
+            </div>
+        </section>
+
+        <div class="skills-section">
+            <h3>Technologies Used</h3>
+            <div class="tech-tags">
+                <span>Python</span>
+                <span>Machine Learning</span>
+                <span>Classification</span>
+                <span>LightGBM</span>
+                <span>CatBoost</span>
+                <span>Neural Networks</span>
+                <span>Feature Engineering</span>
+                <span>Model Evaluation</span>
+                <span>Applied Data Science</span>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Nikhilesh Narkhede. All rights reserved.</p>
+    </footer>
+</body>
+</html>

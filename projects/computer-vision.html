@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Vision Systems | Nikhilesh Narkhede</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .project-hero {
+            background: var(--gradient);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+        }
+        .project-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .project-hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+        }
+        .back-link:hover {
+            color: white;
+        }
+        .project-detail {
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .project-detail h2 {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        .highlight-list {
+            list-style: none;
+            padding: 0;
+        }
+        .highlight-list li {
+            padding: 0.75rem 0 0.75rem 2rem;
+            position: relative;
+            color: var(--secondary);
+            font-size: 1.05rem;
+            border-bottom: 1px solid var(--gray);
+        }
+        .highlight-list li:last-child {
+            border-bottom: none;
+        }
+        .highlight-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        .repo-cards {
+            display: grid;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .repo-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary);
+            transition: var(--transition);
+        }
+        .repo-card:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .repo-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.15rem;
+        }
+        .repo-card p {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        .repo-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .repo-link:hover {
+            color: var(--primary-dark);
+        }
+        .skills-section {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: var(--radius);
+            margin-top: 2rem;
+        }
+        .skills-section h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .tech-tags span {
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">Nikhilesh Narkhede</a>
+            <ul class="nav-menu">
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#projects">Projects</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="project-hero">
+        <a href="../index.html#projects" class="back-link">← Back to Projects</a>
+        <h1>End-to-End Computer Vision Systems</h1>
+        <p>CNN-based pipelines for image classification, object detection, facial recognition, and medical image diagnosis</p>
+    </header>
+
+    <main class="project-detail">
+        <section>
+            <h2>Project Overview</h2>
+            <ul class="highlight-list">
+                <li>Designed and implemented multiple CNN-based computer vision pipelines for image classification, object detection, and facial recognition</li>
+                <li>Built face detection and recognition systems using MTCNN and VGGFace embeddings to identify and verify human faces</li>
+                <li>Applied transfer learning techniques by fine-tuning ImageNet-pretrained models to improve accuracy on limited datasets</li>
+                <li>Developed deep CNN models for handwritten digit classification (MNIST) and medical image diagnosis using chest X-ray images</li>
+                <li>Preprocessed and augmented image datasets to enhance model robustness and generalization</li>
+                <li>Evaluated model performance across multiple vision tasks, emphasizing accuracy, generalization, and inference reliability</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Repositories</h2>
+            <div class="repo-cards">
+                <div class="repo-card">
+                    <h3>👤 Face Detection & Recognition</h3>
+                    <p>Face detection and recognition system using MTCNN and VGGFace embeddings to identify and verify human faces in images.</p>
+                    <a href="https://github.com/nikhileshnarkhede/Face-Detection-and-Face-recognition-" target="_blank" class="repo-link">
+                        View on GitHub →
+                    </a>
+                </div>
+                <div class="repo-card">
+                    <h3>🔄 Transfer Learning with ImageNet</h3>
+                    <p>Transfer learning model fine-tuning ImageNet-pretrained architectures to achieve high accuracy on custom image classification tasks.</p>
+                    <a href="https://github.com/nikhileshnarkhede/transfer-learning-model-with-generic-image-of-ImageNet" target="_blank" class="repo-link">
+                        View on GitHub →
+                    </a>
+                </div>
+                <div class="repo-card">
+                    <h3>🔢 MNIST Classification using CNN</h3>
+                    <p>Deep convolutional neural network for handwritten digit classification achieving high accuracy on the MNIST dataset.</p>
+                    <a href="https://github.com/nikhileshnarkhede/MNIST_CLASSIFICATION_USING_CNN" target="_blank" class="repo-link">
+                        View on GitHub →
+                    </a>
+                </div>
+                <div class="repo-card">
+                    <h3>🏥 Pneumonia Detection from X-Ray</h3>
+                    <p>Medical image diagnosis system using CNN to detect pneumonia from chest X-ray images with high classification accuracy.</p>
+                    <a href="https://github.com/nikhileshnarkhede/Pneumonia-detection-from-xray-using-CNN" target="_blank" class="repo-link">
+                        View on GitHub →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="skills-section">
+            <h3>Technologies Used</h3>
+            <div class="tech-tags">
+                <span>Python</span>
+                <span>Computer Vision</span>
+                <span>Deep Learning</span>
+                <span>CNNs</span>
+                <span>Transfer Learning</span>
+                <span>ImageNet</span>
+                <span>MTCNN</span>
+                <span>VGGFace</span>
+                <span>Medical Imaging</span>
+                <span>TensorFlow/Keras</span>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Nikhilesh Narkhede. All rights reserved.</p>
+    </footer>
+</body>
+</html>
