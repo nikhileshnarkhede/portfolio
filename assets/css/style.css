@@ -321,6 +321,23 @@ a {
 .timeline-content p {
     color: var(--secondary);
     font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+}
+
+.exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+}
+
+.exp-tags span {
+    background: var(--gray);
+    padding: 0.25rem 0.6rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--secondary);
 }
 
 /* ===== Projects ===== */
@@ -491,19 +508,84 @@ a {
 }
 
 .certification {
-    text-align: center;
-    padding: 1.5rem;
-    background: var(--light);
-    border-radius: var(--radius);
+    margin-top: 2rem;
 }
 
 .certification h3 {
+    text-align: center;
     color: var(--dark);
+    margin-bottom: 1.5rem;
+}
+
+.cert-card {
+    background: var(--light);
+    border-radius: var(--radius);
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary);
+}
+
+.cert-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gray);
+}
+
+.cert-icon {
+    font-size: 2.5rem;
+}
+
+.cert-header h4 {
+    color: var(--dark);
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.cert-header h4 a {
+    color: var(--primary);
+    transition: var(--transition);
+}
+
+.cert-header h4 a:hover {
+    color: var(--primary-dark);
+}
+
+.cert-issuer {
+    color: var(--secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.cert-modules {
+    display: grid;
+    gap: 1rem;
+}
+
+.cert-module {
+    background: white;
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+}
+
+.cert-module h5 {
+    color: var(--dark);
+    font-size: 1rem;
     margin-bottom: 0.5rem;
 }
 
-.certification p {
+.cert-module p {
     color: var(--secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.cert-card .btn {
+    display: inline-block;
 }
 
 /* ===== Contact ===== */
