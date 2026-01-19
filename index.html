@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -316,32 +317,9 @@
     <section id="skills" class="section">
         <div class="container">
             <h2 class="section-title">Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>🐍 Programming & Databases</h3>
-                    <p>Python, SQL, MATLAB, MySQL, PostgreSQL, MongoDB, SQL Server</p>
-                </div>
-                <div class="skill-category">
-                    <h3>🧠 Machine Learning & AI</h3>
-                    <p>PyTorch, TensorFlow, Keras, Scikit-learn, XGBoost, LightGBM, CatBoost, Neural Networks (FFN, CNN, RNN, LSTM)</p>
-                </div>
-                <div class="skill-category">
-                    <h3>🤖 Generative AI</h3>
-                    <p>LangChain, LangGraph, RAG, Agentic AI, Prompt Engineering, LLMs, MCP, API Integration</p>
-                </div>
-                <div class="skill-category">
-                    <h3>📊 Data & Visualization</h3>
-                    <p>Pandas, NumPy, Plotly, Tableau, Power BI, D3.js, Streamlit, EDA, Statistical Modeling</p>
-                </div>
-                <div class="skill-category">
-                    <h3>⚙️ MLOps & Tools</h3>
-                    <p>FastAPI, Docker, Git, GitHub, GPU/Parallel Computing, Model Deployment, NSGA-II Optimization</p>
-                </div>
-                <div class="skill-category">
-                    <h3>🔬 Engineering & Research</h3>
-                    <p>CFD, Ansys, SOLIDWORKS, CAD, Mathematical Modeling, Simulation, Symbolic Regression</p>
-                </div>
-            </div>
+            <p class="skills-subtitle">Interactive skill map — drag nodes to explore, hover for details</p>
+            <div id="skills-graph"></div>
+            <div id="skill-tooltip"></div>
         </div>
     </section>
 
@@ -425,5 +403,6 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/skills-graph.js"></script>
 </body>
 </html>
