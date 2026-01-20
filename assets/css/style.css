@@ -224,6 +224,7 @@ a {
     margin-bottom: 1rem;
     color: var(--secondary);
     font-size: 1.05rem;
+    text-align: justify;
 }
 
 .about-text strong {
@@ -322,6 +323,7 @@ a {
     color: var(--secondary);
     font-size: 0.95rem;
     margin-bottom: 0.75rem;
+    text-align: justify;
 }
 
 .exp-tags {
@@ -371,6 +373,7 @@ a {
     color: var(--secondary);
     margin-bottom: 1rem;
     font-size: 0.95rem;
+    text-align: justify;
 }
 
 .project-tags {
@@ -435,6 +438,7 @@ a {
     color: var(--secondary);
     font-size: 0.95rem;
     margin-bottom: 0.75rem;
+    text-align: justify;
 }
 
 /* ===== Skills Grid ===== */
@@ -505,6 +509,7 @@ a {
 .education-card p {
     color: var(--secondary);
     font-size: 0.95rem;
+    text-align: justify;
 }
 
 .certification {
@@ -582,6 +587,7 @@ a {
     color: var(--secondary);
     font-size: 0.9rem;
     line-height: 1.6;
+    text-align: justify;
 }
 
 .cert-card .btn {

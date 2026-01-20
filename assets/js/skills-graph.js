@@ -154,6 +154,8 @@ function initSkillsGraph() {
     
     const width = container.offsetWidth;
     const height = 600;
+    const centerX = width / 2;
+    const centerY = height / 2;
     
     // Clear any existing SVG
     d3.select('#skills-graph').selectAll('*').remove();
@@ -196,23 +198,74 @@ function initSkillsGraph() {
     // Create tooltip
     const tooltip = d3.select('#skill-tooltip');
     
-    // Create force simulation
+    // Set initial positions for better layout
+    const categories = skillsData.nodes.filter(n => n.group === 'category');
+    const categoryRadius = Math.min(width, height) * 0.28;
+    
+    // Position categories in a circle around center
+    categories.forEach((cat, i) => {
+        const angle = (i / categories.length) * 2 * Math.PI - Math.PI / 2;
+        cat.x = centerX + categoryRadius * Math.cos(angle);
+        cat.y = centerY + categoryRadius * Math.sin(angle);
+    });
+    
+    // Position center node
+    const centerNode = skillsData.nodes.find(n => n.group === 'center');
+    if (centerNode) {
+        centerNode.x = centerX;
+        centerNode.y = centerY;
+        centerNode.fx = centerX; // Fix center position
+        centerNode.fy = centerY;
+    }
+    
+    // Position child nodes around their parent categories
+    const childRadius = 85;
+    skillsData.nodes.filter(n => n.parent).forEach(node => {
+        const parent = categories.find(c => c.id === node.parent);
+        if (parent) {
+            const siblings = skillsData.nodes.filter(n => n.parent === node.parent);
+            const idx = siblings.indexOf(node);
+            const parentAngle = Math.atan2(parent.y - centerY, parent.x - centerX);
+            const spreadAngle = Math.PI * 0.8; // Spread children over 144 degrees
+            const startAngle = parentAngle - spreadAngle / 2;
+            const angle = startAngle + (idx / (siblings.length - 1 || 1)) * spreadAngle;
+            node.x = parent.x + childRadius * Math.cos(angle);
+            node.y = parent.y + childRadius * Math.sin(angle);
+        }
+    });
+    
+    // Create force simulation with better organization
     const simulation = d3.forceSimulation(skillsData.nodes)
         .force('link', d3.forceLink(skillsData.links)
             .id(d => d.id)
             .distance(d => {
-                if (d.source.group === 'center' || d.source === 'Skills') return 140;
-                return 70;
+                if (d.source.group === 'center' || d.source === 'Skills') return categoryRadius;
+                return 65;
             })
-            .strength(d => d.strength || 0.5))
+            .strength(d => {
+                if (d.source.group === 'center' || d.source === 'Skills') return 0.8;
+                return 1;
+            }))
         .force('charge', d3.forceManyBody()
             .strength(d => {
-                if (d.group === 'center') return -1000;
-                if (d.group === 'category') return -500;
-                return -200;
+                if (d.group === 'center') return -800;
+                if (d.group === 'category') return -350;
+                return -120;
             }))
-        .force('center', d3.forceCenter(width / 2, height / 2))
-        .force('collision', d3.forceCollide().radius(d => d.size + 15));
+        .force('collision', d3.forceCollide().radius(d => d.size + 8))
+        .force('radial', d3.forceRadial(
+            d => {
+                if (d.group === 'center') return 0;
+                if (d.group === 'category') return categoryRadius;
+                return categoryRadius + 90;
+            },
+            centerX,
+            centerY
+        ).strength(d => {
+            if (d.group === 'center') return 1;
+            if (d.group === 'category') return 0.3;
+            return 0.1;
+        }));
     
     // Create links
     const link = g.append('g')
