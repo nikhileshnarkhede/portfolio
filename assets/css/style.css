@@ -1,14 +1,45 @@
 /* ===== CSS Variables ===== */
 :root {
-    --primary: #2563eb;
-    --primary-dark: #1d4ed8;
-    --secondary: #64748b;
-    --dark: #0f172a;
-    --light: #f8fafc;
-    --gray: #e2e8f0;
-    --gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    /* Soft Neutrals */
+    --off-white: #F7F7F8;
+    --light-gray: #ECEDEF;
+    --warm-beige: #F3EFEA;
+    --soft-sand: #E8E2D8;
+    
+    /* Muted Blues */
+    --soft-blue: #E6F0FA;
+    --steel-blue: #5F7C8A;
+    --slate-blue: #6B7C93;
+    --deep-navy: #1F2A44;
+    
+    /* Gentle Greens */
+    --sage-green: #DCE6DF;
+    --muted-green: #7FA89A;
+    --olive-soft: #8A9A5B;
+    --forest-muted: #2F5D50;
+    
+    /* Warm Accents */
+    --soft-peach: #F6D6C9;
+    --dusty-rose: #C48B9F;
+    --warm-coral: #E07A5F;
+    --muted-gold: #C9A24D;
+    
+    /* Text Colors */
+    --charcoal: #2E2E2E;
+    --soft-black: #1C1C1C;
+    --cool-gray: #4A4A4A;
+    
+    /* Primary Theme Colors */
+    --primary: #5F7C8A;
+    --primary-dark: #1F2A44;
+    --secondary: #6B7C93;
+    --accent: #E07A5F;
+    --dark: #2E2E2E;
+    --light: #F7F7F8;
+    --gray: #ECEDEF;
+    --gradient: linear-gradient(135deg, #5F7C8A 0%, #1F2A44 100%);
+    --shadow: 0 4px 6px -1px rgba(31, 42, 68, 0.08);
+    --shadow-lg: 0 10px 15px -3px rgba(31, 42, 68, 0.1);
     --radius: 12px;
     --transition: all 0.3s ease;
 }
@@ -29,6 +60,75 @@ body {
     background: var(--light);
     color: var(--dark);
     line-height: 1.6;
+    position: relative;
+}
+
+/* AI/Data Science Background Pattern */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    background-image: 
+        /* Soft gradient blobs */
+        radial-gradient(circle at 10% 20%, rgba(95, 124, 138, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(31, 42, 68, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(127, 168, 154, 0.04) 0%, transparent 60%),
+        radial-gradient(circle at 80% 20%, rgba(224, 122, 95, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 20% 80%, rgba(201, 162, 77, 0.03) 0%, transparent 40%),
+        /* Subtle grid pattern */
+        linear-gradient(rgba(95, 124, 138, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(95, 124, 138, 0.04) 1px, transparent 1px);
+    background-size: 
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        100% 100%,
+        60px 60px,
+        60px 60px;
+}
+
+/* Floating particles animation */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    background-image:
+        /* Small dots like data points */
+        radial-gradient(circle, rgba(95, 124, 138, 0.12) 1.5px, transparent 1.5px),
+        radial-gradient(circle, rgba(127, 168, 154, 0.1) 1px, transparent 1px),
+        radial-gradient(circle, rgba(224, 122, 95, 0.08) 1px, transparent 1px);
+    background-size: 
+        120px 120px,
+        180px 180px,
+        240px 240px;
+    background-position:
+        0 0,
+        60px 60px,
+        120px 30px;
+    animation: floatParticles 80s linear infinite;
+}
+
+@keyframes floatParticles {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    50% {
+        transform: translateY(-20px) translateX(10px);
+    }
+    100% {
+        transform: translateY(0) translateX(0);
+    }
 }
 
 a {
@@ -79,7 +179,7 @@ a {
 }
 
 .nav-menu a:hover {
-    color: var(--primary);
+    color: var(--warm-coral);
 }
 
 .hamburger {
@@ -125,7 +225,7 @@ a {
     left: 0;
     width: 100%;
     height: 8px;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(224, 122, 95, 0.4);
     z-index: -1;
 }
 
@@ -157,14 +257,25 @@ a {
     cursor: pointer;
 }
 
-.btn-primary {
+.hero .btn-primary {
+    background: var(--warm-coral);
+    color: white;
+}
+
+.hero .btn-primary:hover {
     background: white;
-    color: var(--primary);
+    color: var(--warm-coral);
+}
+
+.btn-primary {
+    background: var(--warm-coral);
+    color: white;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
+    background: var(--primary-dark);
 }
 
 .btn-secondary {
@@ -184,7 +295,7 @@ a {
 }
 
 .section-alt {
-    background: white;
+    background: var(--warm-beige);
 }
 
 .container {
@@ -252,7 +363,7 @@ a {
 }
 
 .skill-tags span:hover {
-    background: var(--primary);
+    background: var(--steel-blue);
     color: white;
 }
 
@@ -287,7 +398,7 @@ a {
     top: 5px;
     width: 15px;
     height: 15px;
-    background: var(--primary);
+    background: var(--warm-coral);
     border-radius: 50%;
     border: 3px solid white;
     box-shadow: var(--shadow);
@@ -296,12 +407,12 @@ a {
 .timeline-date {
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--primary);
+    color: var(--steel-blue);
     margin-bottom: 0.5rem;
 }
 
 .timeline-content {
-    background: var(--light);
+    background: var(--off-white);
     padding: 1.5rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
@@ -354,7 +465,7 @@ a {
     padding: 1.75rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    border-left: 4px solid var(--primary);
+    border-left: 4px solid var(--warm-coral);
     transition: var(--transition);
 }
 
@@ -392,7 +503,7 @@ a {
 }
 
 .project-link {
-    color: var(--primary);
+    color: var(--warm-coral);
     font-weight: 600;
     font-size: 0.9rem;
     transition: var(--transition);
@@ -414,11 +525,11 @@ a {
 }
 
 .publication-item {
-    background: var(--light);
+    background: var(--off-white);
     padding: 2rem;
     border-radius: var(--radius);
     margin-bottom: 1rem;
-    border-left: 4px solid var(--primary);
+    border-left: 4px solid var(--muted-green);
 }
 
 .publication-item h3 {
@@ -428,7 +539,7 @@ a {
 }
 
 .pub-venue {
-    color: var(--primary);
+    color: var(--muted-green);
     font-weight: 600;
     font-size: 0.9rem;
     margin-bottom: 0.75rem;
@@ -482,7 +593,7 @@ a {
 }
 
 .education-card {
-    background: var(--light);
+    background: var(--off-white);
     padding: 2rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
@@ -494,7 +605,7 @@ a {
 }
 
 .education-card h4 {
-    color: var(--primary);
+    color: var(--steel-blue);
     font-weight: 500;
     margin-bottom: 0.5rem;
 }
@@ -523,13 +634,13 @@ a {
 }
 
 .cert-card {
-    background: var(--light);
+    background: var(--off-white);
     border-radius: var(--radius);
     padding: 2rem;
     max-width: 900px;
     margin: 0 auto;
     box-shadow: var(--shadow);
-    border-left: 4px solid var(--primary);
+    border-left: 4px solid var(--muted-gold);
 }
 
 .cert-header {
@@ -552,12 +663,12 @@ a {
 }
 
 .cert-header h4 a {
-    color: var(--primary);
+    color: var(--steel-blue);
     transition: var(--transition);
 }
 
 .cert-header h4 a:hover {
-    color: var(--primary-dark);
+    color: var(--warm-coral);
 }
 
 .cert-issuer {
@@ -681,7 +792,7 @@ a {
 .contact-link:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
-    color: var(--primary);
+    color: var(--warm-coral);
 }
 
 .contact-link .icon {
@@ -695,8 +806,8 @@ a {
 
 /* ===== Footer ===== */
 .footer {
-    background: var(--dark);
-    color: var(--gray);
+    background: var(--deep-navy);
+    color: var(--light-gray);
     text-align: center;
     padding: 2rem;
 }

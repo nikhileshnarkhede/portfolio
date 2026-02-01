@@ -48,7 +48,7 @@
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>I am a <strong>Master's student in Data Science</strong> at UMass Dartmouth with a Bachelor's degree in Mechanical Engineering and an <strong><a href="https://verify.eicta.digitalcredentials.in/65e424b5-68ff-44eb-b974-fc73e27add6c" target="_blank" style="color: var(--primary);">Advanced Certification in AI & ML from IIT Kanpur</a></strong>. I bring a strong academic foundation and deep enthusiasm for statistical modeling, mathematics, and using data to solve real-world problems.</p>
+                    <p>I am a <strong>Master's student in Data Science</strong> at UMass Dartmouth with a Bachelor's degree in Mechanical Engineering and an <strong><a href="https://verify.eicta.digitalcredentials.in/65e424b5-68ff-44eb-b974-fc73e27add6c" target="_blank" style="color: var(--warm-coral);">Advanced Certification in AI & ML from IIT Kanpur</a></strong>. I bring a strong academic foundation and deep enthusiasm for statistical modeling, mathematics, and using data to solve real-world problems.</p>
                     <p>My approach spans the entire data science lifecycle—from data ingestion and preprocessing to model deployment and performance optimization—grounded in both theory and practical application. I excel at translating complex, ambiguous domain problems into clear, impactful machine learning tasks, specializing in building <strong>interpretable, scalable, and production-ready models</strong> that deliver measurable results.</p>
                     <p>I have a strong interest in research and enjoy working at the intersection of data, experimentation, and domain expertise to develop innovative, AI-driven solutions. For me, data science is more than just a discipline—it is a powerful tool for transforming ideas into actionable strategies and real-world impact.</p>
                 </div>
@@ -388,6 +388,10 @@
                         <span class="icon">💼</span>
                         LinkedIn
                     </a>
+                    <a href="https://medium.com/@narkhede.nikhilesh" target="_blank" class="contact-link">
+                        <span class="icon">✍️</span>
+                        Medium
+                    </a>
                     <a href="tel:+15085093697" class="contact-link">
                         <span class="icon">📱</span>
                         +1 (508) 509-3697
@@ -401,6 +405,107 @@
     <footer class="footer">
         <p>&copy; 2025 Nikhilesh Narkhede. All rights reserved.</p>
     </footer>
+
+    <!-- Chatbot Floating Button & Modal -->
+    <button id="chatbot-btn" onclick="document.getElementById('chatbot-modal').style.display='flex'" title="Chat with me!">
+        <span class="chat-icon">💬</span>
+        <span class="chat-label">Chat with Me</span>
+    </button>
+
+    <div id="chatbot-modal">
+        <div id="chatbot-header">
+            <span>💬 Chat with Nikhilesh</span>
+            <button id="chatbot-close" onclick="document.getElementById('chatbot-modal').style.display='none'">&times;</button>
+        </div>
+        <iframe
+            src="https://nikhileshportfoliochatbot.streamlit.app/?embed=true"
+            id="chatbot-iframe"
+            title="Chat with Nikhilesh"
+            allow="camera;microphone"
+        ></iframe>
+    </div>
+
+    <style>
+        /* Floating Button */
+        #chatbot-btn {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: linear-gradient(135deg, #7c83fd, #6366f1);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            padding: 14px 22px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(124, 131, 253, 0.4);
+            transition: all 0.3s ease;
+            z-index: 999;
+            font-family: 'Inter', sans-serif;
+        }
+        #chatbot-btn:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 28px rgba(124, 131, 253, 0.55);
+        }
+        .chat-icon {
+            font-size: 18px;
+        }
+
+        /* Modal */
+        #chatbot-modal {
+            display: none;
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 400px;
+            max-width: 92vw;
+            height: 580px;
+            background: #0f1117;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+            z-index: 1000;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #2a2d3e;
+        }
+
+        /* Modal Header */
+        #chatbot-header {
+            background: linear-gradient(135deg, #1e2140, #2a2d4a);
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        #chatbot-close {
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 22px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        #chatbot-close:hover {
+            color: #fff;
+        }
+
+        /* Iframe */
+        #chatbot-iframe {
+            flex: 1;
+            width: 100%;
+            border: none;
+            background: #0f1117;
+        }
+    </style>
 
     <script src="assets/js/main.js"></script>
     <script src="assets/js/skills-graph.js"></script>
