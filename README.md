@@ -89,7 +89,7 @@ Edit `assets/css/style.css` — CSS variables at the top:
 ### Update Chatbot URL
 If you redeploy the chatbot to a new Streamlit URL, update the iframe `src` in `index.html`:
 ```html
-<iframe src="[https://nikhileshportfoliochatbot.streamlit.app/?embed=true](https://nikhileshportfoliochatbot.streamlit.app/?embed=true)" ...></iframe>
+<iframe src="[https://nikhileshportfoliochatbot.streamlit.app/?embed=true]" ...></iframe>
 ```
 
 ---
