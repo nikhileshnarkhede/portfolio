@@ -240,28 +240,28 @@ body {
     box-shadow: none;
 }
 
-/* Pill outline — "Learn more" style on dark bg */
+/* Pill outline — "Learn more" / newsletter on dark bg
+   Inherits size from .btn — only overrides visual style */
 .btn-pill-dark {
     background: transparent;
-    color: var(--link-dark);
+    color: var(--link-dark);       /* #2997ff bright blue */
     border: 1px solid var(--link-dark);
-    border-radius: 980px;
-    font-size: 0.875rem;          /* 14px */
-    padding: 6px 14px;
+    border-radius: 980px;          /* DESIGN.md signature pill */
 }
 
 .btn-pill-dark:hover {
     color: var(--white);
-    border-color: var(--white);
+    border-color: rgba(255,255,255,0.70);
+    background: rgba(255,255,255,0.06);
 }
 
-/* Pill outline on light bg */
+/* Pill outline on light bg — inline "Learn more" */
 .btn-pill-light {
     background: transparent;
     color: var(--link-light);
     border: 1px solid var(--link-light);
     border-radius: 980px;
-    font-size: 0.875rem;
+    font-size: 0.875rem;           /* smaller — used inline in content */
     padding: 6px 14px;
 }
 
