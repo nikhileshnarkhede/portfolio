@@ -861,6 +861,37 @@ body {
     color: var(--text-secondary-light);
 }
 
+.libutton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 7px 14px;
+    text-align: center;
+    text-decoration: none !important;
+    color: #ffffff !important;
+    min-width: 200px;
+    height: 32px;
+    border-radius: 16px;
+    background-color: #0A66C2;
+    font-family: "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    margin: 0 auto 1rem auto;
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.libutton:hover {
+    filter: brightness(1.07);
+    transform: translateY(-1px);
+}
+
+.libutton-icon {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    display: block;
+}
+
 /* ===========================
    FOOTER
    =========================== */
