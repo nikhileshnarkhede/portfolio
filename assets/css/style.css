@@ -753,34 +753,31 @@ body {
 .cert-modules { display: grid; gap: 0.75rem; }
 
 .cert-module {
-    background: var(--ds-4);
+    background: #ffffff;          /* white so logos show original colors */
     padding: 1rem 1.25rem;
     border-radius: 8px;
 }
 
 .cert-module h5 {
-    display: grid;
-    grid-template-columns: 1.25rem 1fr;
-    align-items: start;
-    column-gap: 0.45rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
     font-family: var(--font-display);
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     font-weight: 600;
-    color: var(--white);
+    color: var(--near-black);     /* dark text on white card */
     letter-spacing: -0.224px;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
 }
 
 .module-icon {
-    width: 1.15rem;
-    height: 1.15rem;
+    width: 32px;
+    height: 32px;
     object-fit: contain;
-    display: block;
-    transform: translateY(1px);
+    flex-shrink: 0;
+    border-radius: 4px;
     background: transparent;
-    mix-blend-mode: multiply;
-    opacity: 0.98;
-    filter: saturate(1.05) contrast(1.08) brightness(1.12);
+    /* no filter — show original brand colors */
 }
 
 .cert-module p {
@@ -789,7 +786,7 @@ body {
     font-weight: 400;
     line-height: 1.47;
     letter-spacing: -0.12px;
-    color: var(--text-secondary-dark);
+    color: var(--text-secondary-light);
 }
 
 .cert-card .btn {
@@ -859,37 +856,37 @@ body {
     font-size: 0.875rem;
     letter-spacing: -0.224px;
     color: var(--text-secondary-light);
+    margin-top: 1.5rem;
 }
 
+/* LinkedIn newsletter pill — DESIGN.md 980px pill CTA */
 .libutton {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
     gap: 0.5rem;
-    padding: 7px 14px;
-    text-align: center;
-    text-decoration: none !important;
-    color: #ffffff !important;
-    min-width: 200px;
-    height: 32px;
-    border-radius: 16px;
-    background-color: #0A66C2;
-    font-family: "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 0.875rem;
-    margin: 0 auto 1rem auto;
-    transition: filter 0.2s ease, transform 0.2s ease;
+    padding: 10px 22px;
+    background: #0a66c2;           /* LinkedIn brand blue */
+    color: #ffffff;
+    border-radius: 980px;          /* DESIGN.md pill shape */
+    font-family: var(--font-body);
+    font-size: 0.9375rem;          /* 15px — between body and button size */
+    font-weight: 400;
+    letter-spacing: -0.224px;
+    text-decoration: none;
+    margin-top: 1.25rem;
+    transition: var(--transition);
 }
 
 .libutton:hover {
-    filter: brightness(1.07);
-    transform: translateY(-1px);
+    background: #004182;
+    color: #ffffff;
 }
 
 .libutton-icon {
-    width: 14px;
-    height: 14px;
+    width: 18px;
+    height: 18px;
     object-fit: contain;
-    display: block;
+    flex-shrink: 0;
 }
 
 /* ===========================
@@ -904,6 +901,33 @@ body {
     font-size: 0.75rem;
     font-weight: 400;
     letter-spacing: -0.08px;
+}
+
+/* ===========================
+   IMAGE ICONS
+   =========================== */
+
+/* Contact link icons */
+.contact-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 4px;
+}
+
+/* Chatbot button image */
+.chat-icon-img {
+    width: 22px;
+    height: 22px;
+    object-fit: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+#chatbot-header .chat-icon-img {
+    width: 18px;
+    height: 18px;
 }
 
 /* ===========================
