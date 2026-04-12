@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Nikhilesh Narkhede - Data Science Researcher | ML/DL Engineer">
+    <meta name="description" content="Nikhilesh Narkhede - Data Science Researcher | ML/DL Engineer ">
     <title>Nikhilesh Narkhede | Portfolio</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
@@ -40,14 +43,14 @@
         </div>
     </header>
 
-    <section id="about" class="section section-light">
+    <section id="about" class="section">
         <div class="container">
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>I am a <strong>Master's student in Data Science</strong> at UMass Dartmouth with a Bachelor's degree in Mechanical Engineering and an <strong><a href="https://verify.eicta.digitalcredentials.in/65e424b5-68ff-44eb-b974-fc73e27add6c" target="_blank">Advanced Certification in AI & ML from IIT Kanpur</a></strong>. I bring a strong academic foundation and deep enthusiasm for statistical modeling, mathematics, and using data to solve real-world problems.</p>
-                    <p>My approach spans the entire data science lifecycle from data ingestion and preprocessing to model deployment and performance optimization grounded in both theory and practical application. I excel at translating complex, ambiguous domain problems into clear, impactful machine learning tasks, specializing in building <strong>interpretable, scalable, and production-ready models</strong> that deliver measurable results.</p>
-                    <p>I have a strong interest in research and enjoy working at the intersection of data, experimentation, and domain expertise to develop innovative, AI-driven solutions. For me, data science is more than just a discipline it is a powerful tool for transforming ideas into actionable strategies and real-world impact.</p>
+                    <p>I am a <strong>Master's student in Data Science</strong> at UMass Dartmouth with a Bachelor's degree in Mechanical Engineering and an <strong><a href="https://verify.eicta.digitalcredentials.in/65e424b5-68ff-44eb-b974-fc73e27add6c" target="_blank" style="color: var(--warm-coral);">Advanced Certification in AI & ML from IIT Kanpur</a></strong>. I bring a strong academic foundation and deep enthusiasm for statistical modeling, mathematics, and using data to solve real-world problems.</p>
+                    <p>My approach spans the entire data science lifecycle—from data ingestion and preprocessing to model deployment and performance optimization—grounded in both theory and practical application. I excel at translating complex, ambiguous domain problems into clear, impactful machine learning tasks, specializing in building <strong>interpretable, scalable, and production-ready models</strong> that deliver measurable results.</p>
+                    <p>I have a strong interest in research and enjoy working at the intersection of data, experimentation, and domain expertise to develop innovative, AI-driven solutions. For me, data science is more than just a discipline—it is a powerful tool for transforming ideas into actionable strategies and real-world impact.</p>
                 </div>
                 <div class="skills">
                     <h3>Core Expertise</h3>
@@ -66,7 +69,7 @@
         </div>
     </section>
 
-    <section id="experience" class="section section-dark">
+    <section id="experience" class="section section-alt">
         <div class="container">
             <h2 class="section-title">Experience</h2>
             <div class="timeline">
@@ -186,7 +189,7 @@
         </div>
     </section>
 
-    <section id="projects" class="section section-light">
+    <section id="projects" class="section">
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
             <div class="projects-grid">
@@ -297,7 +300,7 @@
         </div>
     </section>
 
-    <section id="publications" class="section section-dark">
+    <section id="publications" class="section section-alt">
         <div class="container">
             <h2 class="section-title">Publications</h2>
             <div class="publications-list">
@@ -311,16 +314,16 @@
         </div>
     </section>
 
-    <section id="skills" class="section section-light">
+    <section id="skills" class="section">
         <div class="container">
             <h2 class="section-title">Technical Skills</h2>
-            <p class="skills-subtitle">Interactive skill map  drag nodes to explore, hover for details</p>
+            <p class="skills-subtitle">Interactive skill map — drag nodes to explore, hover for details</p>
             <div id="skills-graph"></div>
             <div id="skill-tooltip"></div>
         </div>
     </section>
 
-    <section id="education" class="section section-dark">
+    <section id="education" class="section section-alt">
         <div class="container">
             <h2 class="section-title">Education</h2>
             <div class="education-grid">
@@ -367,14 +370,14 @@
         </div>
     </section>
 
-    <section id="contact" class="section section-light">
+    <section id="contact" class="section">
         <div class="container">
             <h2 class="section-title">Get in Touch</h2>
             <div class="contact-content">
                 <p>Interested in collaboration, research opportunities, or just want to connect?</p>
                 <div class="contact-links">
-                    <a href="mailto:narkhede.nikhilesh@gmail.com" class="contact-link">
-                        <img class="contact-icon" src="Image/pngtree-email-icon-png-image_5065641.jpg" alt="">narkhede.nikhilesh@gmail.com
+                    <a href="mailto:nnarkhede@umassd.edu" class="contact-link">
+                        <img class="contact-icon" src="Image/pngtree-email-icon-png-image_5065641.jpg" alt="">nnarkhede@umassd.edu
                     </a>
                     <a href="https://github.com/nikhileshnarkhede" target="_blank" class="contact-link">
                         <img class="contact-icon" src="Image/github-computer-icons-logo-repository-png-favpng-3D6iEY0b391hz9PYJZqnvKTLT.jpg" alt="">GitHub
@@ -400,13 +403,13 @@
 
     <!-- Chatbot Floating Button & Modal -->
     <button id="chatbot-btn" onclick="document.getElementById('chatbot-modal').style.display='flex'" title="Chat with me!">
-        <img class="chat-icon-img" src="Image/chatbot-icon.jpeg" alt="" aria-hidden="true">
+        <span class="chat-icon">🤖</span>
         <span class="chat-label">Chat with My AI Clone</span>
     </button>
 
     <div id="chatbot-modal">
         <div id="chatbot-header">
-            <span><img class="chat-icon-img" src="Image/chatbot-icon.jpeg" alt="" aria-hidden="true"> Chat with My AI Clone</span>
+            <span>🤖 Chat with My AI Clone</span>
             <button id="chatbot-close" onclick="document.getElementById('chatbot-modal').style.display='none'">&times;</button>
         </div>
         <iframe
@@ -417,9 +420,90 @@
         ></iframe>
     </div>
 
+    <style>
+        /* Floating Button */
+        #chatbot-btn {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: linear-gradient(135deg, #7c83fd, #6366f1);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            padding: 14px 22px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(124, 131, 253, 0.4);
+            transition: all 0.3s ease;
+            z-index: 999;
+            font-family: 'Inter', sans-serif;
+        }
+        #chatbot-btn:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 28px rgba(124, 131, 253, 0.55);
+        }
+        .chat-icon {
+            font-size: 18px;
+        }
+
+        /* Modal */
+        #chatbot-modal {
+            display: none;
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 400px;
+            max-width: 92vw;
+            height: 580px;
+            background: #0f1117;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+            z-index: 1000;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #2a2d3e;
+        }
+
+        /* Modal Header */
+        #chatbot-header {
+            background: linear-gradient(135deg, #1e2140, #2a2d4a);
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        #chatbot-close {
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 22px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        #chatbot-close:hover {
+            color: #fff;
+        }
+
+        /* Iframe */
+        #chatbot-iframe {
+            flex: 1;
+            width: 100%;
+            border: none;
+            background: #0f1117;
+        }
+    </style>
+
     <script src="assets/js/main.js"></script>
     <script src="assets/js/skills-graph.js"></script>
 </body>
 </html>
-
 

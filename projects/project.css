@@ -1,0 +1,255 @@
+/* ===========================
+   PROJECT PAGES — Apple Design
+   Shared stylesheet for all
+   projects/*.html pages
+   =========================== */
+
+/* ===========================
+   PROJECT HERO — Black immersive
+   =========================== */
+.project-hero {
+    background: #000000;
+    color: #ffffff;
+    padding: 7rem 2rem 4.5rem;
+    text-align: center;
+    min-height: 42vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: -0.224px;
+    color: #2997ff;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.project-hero h1 {
+    font-family: -apple-system, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.07;
+    letter-spacing: -0.28px;
+    color: #ffffff;
+    margin-bottom: 1.25rem;
+    max-width: 800px;
+}
+
+.project-hero p {
+    font-family: -apple-system, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.1875rem;             /* ~19px */
+    font-weight: 400;
+    line-height: 1.42;
+    letter-spacing: 0.012em;
+    color: rgba(255, 255, 255, 0.72);
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+/* ===========================
+   PROJECT DETAIL — Light content
+   =========================== */
+.project-detail {
+    padding: 4rem 2rem 5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    background: #f5f5f7;
+}
+
+.project-detail section {
+    margin-bottom: 3rem;
+}
+
+.project-detail h2 {
+    font-family: -apple-system, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.75rem;               /* 28px tile heading */
+    font-weight: 600;
+    line-height: 1.14;
+    letter-spacing: 0.196px;
+    color: #1d1d1f;
+    margin-bottom: 1.5rem;
+}
+
+/* ===========================
+   HIGHLIGHT LIST
+   =========================== */
+.highlight-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.highlight-list li {
+    position: relative;
+    padding: 0.875rem 0 0.875rem 2rem;
+    font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.0625rem;             /* 17px */
+    font-weight: 400;
+    line-height: 1.47;
+    letter-spacing: -0.374px;
+    color: rgba(0, 0, 0, 0.80);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.highlight-list li:last-child {
+    border-bottom: none;
+}
+
+.highlight-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0.875rem;
+    color: #0071e3;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+/* ===========================
+   REPO CARDS
+   =========================== */
+.repo-cards {
+    display: grid;
+    gap: 1.25rem;
+    margin: 0;
+}
+
+.repo-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: rgba(0, 0, 0, 0.22) 3px 5px 30px 0px;
+    border: none;
+    border-left: none;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    margin: 0;
+}
+
+.repo-card + .repo-card {
+    margin-top: 0;
+}
+
+/* Single repo-card (no .repo-cards wrapper) */
+.project-detail > section .repo-card,
+.project-detail section .repo-card {
+    margin: 0;
+}
+
+.repo-card:hover {
+    box-shadow: rgba(0, 0, 0, 0.28) 3px 8px 40px 0px;
+    transform: translateY(-2px);
+}
+
+.repo-card h3 {
+    font-family: -apple-system, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    line-height: 1.19;
+    letter-spacing: 0.231px;
+    color: #1d1d1f;
+    margin-bottom: 0.5rem;
+}
+
+.repo-card p {
+    font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.47;
+    letter-spacing: -0.224px;
+    color: rgba(0, 0, 0, 0.64);
+    margin-bottom: 1rem;
+}
+
+.repo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: -0.224px;
+    color: #0066cc;
+    transition: color 0.2s ease;
+}
+
+.repo-link:hover {
+    color: #0071e3;
+    text-decoration: underline;
+}
+
+/* ===========================
+   TECHNOLOGIES — Skills section
+   =========================== */
+.skills-section {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.22) 3px 5px 30px 0px;
+}
+
+.skills-section h3 {
+    font-family: -apple-system, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: 0.231px;
+    color: #1d1d1f;
+    margin-bottom: 1rem;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tech-tags span {
+    font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: -0.224px;
+    background: #f5f5f7;
+    color: #1d1d1f;
+    padding: 6px 14px;
+    border-radius: 980px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.tech-tags span:hover {
+    background: #0071e3;
+    color: #ffffff;
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+@media (max-width: 768px) {
+    .project-hero {
+        padding: 6rem 1.5rem 3rem;
+        min-height: 38vh;
+    }
+
+    .project-hero h1 {
+        font-size: 1.875rem;
+        letter-spacing: -0.2px;
+    }
+
+    .project-detail {
+        padding: 3rem 1.25rem 4rem;
+    }
+
+    .project-detail h2 {
+        font-size: 1.4375rem;
+    }
+}
