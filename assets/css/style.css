@@ -1,6 +1,6 @@
-/* ===========================
+﻿/* ===========================
    APPLE DESIGN SYSTEM
-   DESIGN.md — Applied
+   DESIGN.md â€” Applied
    =========================== */
 
 :root {
@@ -10,7 +10,7 @@
     --near-black:     #1d1d1f;
     --white:          #ffffff;
 
-    /* Interactive — Apple Blue ONLY accent */
+    /* Interactive â€” Apple Blue ONLY accent */
     --apple-blue:     #0071e3;
     --link-light:     #0066cc;
     --link-dark:      #2997ff;
@@ -32,9 +32,11 @@
     /* Shadows */
     --shadow-card: rgba(0, 0, 0, 0.22) 3px 5px 30px 0px;
 
-    /* Typography */
-    --font-display: -apple-system, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --font-body:    -apple-system, "SF Pro Text",    "Helvetica Neue", Helvetica, Arial, sans-serif;
+    /* Typography â€” emoji fonts included so ðŸ¤–ðŸ’¬ðŸ“ˆ etc. render in full color */
+    --font-display: -apple-system, "SF Pro Display", "Helvetica Neue", Helvetica, Arial,
+                    "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+    --font-body:    -apple-system, "SF Pro Text",    "Helvetica Neue", Helvetica, Arial,
+                    "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
 
     --transition: all 0.3s ease;
 }
@@ -53,7 +55,7 @@ body {
 }
 
 /* ===========================
-   NAVIGATION — Apple glass
+   NAVIGATION â€” Apple glass
    =========================== */
 .navbar {
     position: fixed;
@@ -133,7 +135,7 @@ body {
     margin: 0 auto;
 }
 
-/* Section titles — light bg */
+/* Section titles â€” light bg */
 .section-title {
     font-family: var(--font-display);
     font-size: 2.50rem;           /* 40px */
@@ -145,17 +147,17 @@ body {
     color: var(--near-black);
 }
 
-/* Section titles — dark bg */
+/* Section titles â€” dark bg */
 .section-dark .section-title {
     color: var(--white);
 }
 
 .section-title::after {
-    display: none;                /* Remove old underline — Apple doesn't do this */
+    display: none;                /* Remove old underline â€” Apple doesn't do this */
 }
 
 /* ===========================
-   HERO — Black immersive
+   HERO â€” Black immersive
    =========================== */
 .hero {
     min-height: 100vh;
@@ -179,7 +181,7 @@ body {
 }
 
 .highlight {
-    color: var(--white);          /* Keep white — no colored underline */
+    color: var(--white);          /* Keep white â€” no colored underline */
 }
 
 .tagline {
@@ -240,8 +242,8 @@ body {
     box-shadow: none;
 }
 
-/* Pill outline — "Learn more" / newsletter on dark bg
-   Inherits size from .btn — only overrides visual style */
+/* Pill outline â€” "Learn more" / newsletter on dark bg
+   Inherits size from .btn â€” only overrides visual style */
 .btn-pill-dark {
     background: transparent;
     color: var(--link-dark);       /* #2997ff bright blue */
@@ -255,13 +257,13 @@ body {
     background: rgba(255,255,255,0.06);
 }
 
-/* Pill outline on light bg — inline "Learn more" */
+/* Pill outline on light bg â€” inline "Learn more" */
 .btn-pill-light {
     background: transparent;
     color: var(--link-light);
     border: 1px solid var(--link-light);
     border-radius: 980px;
-    font-size: 0.875rem;           /* smaller — used inline in content */
+    font-size: 0.875rem;           /* smaller â€” used inline in content */
     padding: 6px 14px;
 }
 
@@ -269,7 +271,7 @@ body {
     text-decoration: underline;
 }
 
-/* Hero secondary — pill outline white */
+/* Hero secondary â€” pill outline white */
 .btn-secondary {
     background: transparent;
     color: var(--white);
@@ -294,7 +296,7 @@ body {
 }
 
 /* ===========================
-   ABOUT — Light section
+   ABOUT â€” Light section
    =========================== */
 .about-content {
     display: grid;
@@ -355,7 +357,7 @@ body {
 }
 
 /* ===========================
-   EXPERIENCE — Dark section
+   EXPERIENCE â€” Dark section
    =========================== */
 .timeline {
     position: relative;
@@ -455,7 +457,7 @@ body {
 }
 
 /* ===========================
-   PROJECTS — Light section
+   PROJECTS â€” Light section
    =========================== */
 .projects-grid {
     display: grid;
@@ -531,7 +533,7 @@ body {
 }
 
 /* ===========================
-   PUBLICATIONS — Dark section
+   PUBLICATIONS â€” Dark section
    =========================== */
 .publications-list {
     max-width: 860px;
@@ -580,7 +582,7 @@ body {
 }
 
 /* ===========================
-   SKILLS GRAPH — Light section
+   SKILLS GRAPH â€” Light section
    =========================== */
 .skills-subtitle {
     text-align: center;
@@ -592,19 +594,21 @@ body {
     margin-bottom: 2rem;
 }
 
+/* Desktop SVG graph */
 #skills-graph {
     width: 100%;
     height: 600px;
     background: var(--light-bg);
     border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 0;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: rgba(0, 0, 0, 0.10) 0 8px 24px -18px;
     position: relative;
 }
 
 #skills-graph svg {
     display: block;
+    width: 100%;
+    height: 100%;
     position: relative;
     z-index: 1;
 }
@@ -614,8 +618,8 @@ body {
     background: rgba(255, 255, 255, 0.99);
     border: 1px solid rgba(29, 29, 31, 0.12);
     padding: 0.6rem 0.85rem;
-    border-radius: 0;
-    box-shadow: rgba(0, 0, 0, 0.14) 0 10px 26px -18px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.16s ease;
@@ -632,8 +636,99 @@ body {
     font-weight: 600;
 }
 
+/* Mobile skills accordion â€” shown only on small screens */
+#skills-mobile {
+    display: none;
+}
+
+.sk-accordion-item {
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+}
+
+.sk-accordion-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--near-black);
+    letter-spacing: -0.224px;
+    text-align: left;
+    transition: background 0.2s ease;
+}
+
+.sk-accordion-header:hover {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.sk-accordion-header.active {
+    color: var(--apple-blue);
+}
+
+.sk-accordion-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-right: 0.75rem;
+}
+
+.sk-accordion-chevron {
+    font-style: normal;
+    font-size: 0.75rem;
+    opacity: 0.45;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+}
+
+.sk-accordion-header.active .sk-accordion-chevron {
+    transform: rotate(180deg);
+    opacity: 0.8;
+}
+
+.sk-accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.32s ease, padding 0.2s ease;
+    padding: 0 1.25rem;
+}
+
+.sk-accordion-body.open {
+    max-height: 400px;
+    padding: 0 1.25rem 1rem;
+}
+
+.sk-accordion-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.sk-accordion-pill {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    letter-spacing: -0.12px;
+    background: var(--light-bg);
+    color: var(--near-black);
+    padding: 5px 12px;
+    border-radius: 980px;
+    border: 1px solid rgba(0,0,0,0.08);
+}
+
 /* ===========================
-   EDUCATION — Dark section
+   EDUCATION â€” Dark section
    =========================== */
 .education-grid {
     display: grid;
@@ -725,6 +820,8 @@ body {
     justify-content: center;
     flex-shrink: 0;
     transform: translateY(1px);
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+    font-variant-emoji: emoji;
 }
 
 .cert-header h4 {
@@ -778,7 +875,7 @@ body {
     flex-shrink: 0;
     border-radius: 4px;
     background: transparent;
-    /* no filter — show original brand colors */
+    /* no filter â€” show original brand colors */
 }
 
 .cert-module p {
@@ -796,7 +893,7 @@ body {
 }
 
 /* ===========================
-   CONTACT — Light section
+   CONTACT â€” Light section
    =========================== */
 .contact-content { text-align: center; }
 
@@ -860,7 +957,7 @@ body {
     margin-top: 1.5rem;
 }
 
-/* LinkedIn newsletter pill — DESIGN.md 980px pill CTA */
+/* LinkedIn newsletter pill â€” DESIGN.md 980px pill CTA */
 .libutton {
     display: inline-flex;
     align-items: center;
@@ -870,7 +967,7 @@ body {
     color: #ffffff;
     border-radius: 980px;          /* DESIGN.md pill shape */
     font-family: var(--font-body);
-    font-size: 0.9375rem;          /* 15px — between body and button size */
+    font-size: 0.9375rem;          /* 15px â€” between body and button size */
     font-weight: 400;
     letter-spacing: -0.224px;
     text-decoration: none;
@@ -932,7 +1029,7 @@ body {
 }
 
 /* ===========================
-   CHATBOT — updated to Apple
+   CHATBOT â€” updated to Apple
    =========================== */
 #chatbot-btn {
     position: fixed;
@@ -1063,28 +1160,68 @@ body {
     .hamburger.active span:nth-child(2) { opacity: 0; }
     .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
+    /* Layouts */
     .about-content { grid-template-columns: 1fr; }
     .projects-grid { grid-template-columns: 1fr; }
     .education-grid { grid-template-columns: 1fr; }
 
+    /* Hero */
+    .hero { padding: 5rem 1.5rem 4rem; }
     .hero-content h1 { font-size: 2.25rem; }
+    .cta-buttons { flex-direction: column; align-items: center; gap: 0.75rem; }
+    .btn, .btn-secondary, .btn-pill-dark { width: 100%; max-width: 280px; text-align: center; }
+
+    /* Typography */
     .section-title { font-size: 2rem; }
+    .section { padding: 4rem 1.25rem; }
 
-    .contact-links {
-        flex-direction: column;
-        align-items: center;
-    }
+    /* Timeline */
+    .timeline::before { left: 0; }
 
-    #skills-graph { height: 500px; }
+    /* Contact */
+    .contact-links { flex-direction: column; align-items: stretch; }
+    .contact-link { justify-content: center; }
+
+    /* Cert modules */
+    .cert-header { grid-template-columns: 1.75rem 1fr; column-gap: 0.75rem; }
+    .module-icon { width: 26px; height: 26px; }
+
+    /* Skills graph - keep SVG visible on mobile */
+    #skills-graph { display: block; height: 460px; min-height: 420px; }
+    #skills-mobile { display: none; }
+    .skills-subtitle { font-size: 0.9375rem; margin-bottom: 1.25rem; }
+
+    /* Chatbot button â€” smaller on mobile */
+    #chatbot-btn { padding: 9px 14px; font-size: 0.8125rem; bottom: 16px; right: 16px; }
+    .chat-label { display: none; }   /* icon only on mobile */
+    #chatbot-btn .chat-icon-img { width: 20px; height: 20px; }
 }
 
 @media (max-width: 480px) {
     .nav-logo { font-size: 0.75rem; }
     .hero-content h1 { font-size: 1.75rem; letter-spacing: -0.2px; }
     .tagline { font-size: 1rem; }
-    .section { padding: 4rem 1.25rem; }
-    .timeline::before { left: 0; }
+    .section { padding: 3.5rem 1rem; }
+    .section-title { font-size: 1.75rem; }
+
+    #skills-graph { height: 400px; min-height: 360px; }
+
+    /* Project cards full-width */
+    .project-card { padding: 1.25rem; }
+
+    /* Timeline tighter */
+    .timeline-item { padding-left: 2rem; }
+    .timeline-content { padding: 1rem; }
+
+    /* Libutton full width */
+    .libutton { width: 100%; max-width: 280px; justify-content: center; }
+
+    /* Chatbot modal full-screen on very small phones */
+    #chatbot-modal { width: 100vw; height: 100vh; bottom: 0; right: 0; border-radius: 0; }
 }
+
+
+
 
 
 

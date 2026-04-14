@@ -133,8 +133,8 @@ function initSkillsGraph() {
     const tooltip = d3.select("#skill-tooltip");
     if (!tooltip.empty()) tooltip.style("opacity", 0);
 
-    const width = Math.max(container.clientWidth || 960, 720);
-    const height = Math.max(container.clientHeight || 600, 560);
+    const width = Math.max(container.clientWidth || 320, 280);
+    const height = Math.max(container.clientHeight || 520, 380);
 
     const svg = d3
         .select(container)
@@ -220,22 +220,50 @@ function initSkillsGraph() {
     }
 
     function computeLayoutState() {
+        const isCompact = width <= 768;
+        const isNarrow = width <= 420;
+
         if (!activeCategoryId) {
-            rootNode.targetX = width / 2;
-            rootNode.targetY = height / 2;
-            rootNode.targetW = 96;
-            rootNode.targetH = 34;
+            if (isCompact) {
+                rootNode.targetX = width / 2;
+                rootNode.targetY = isNarrow ? 44 : 50;
+                rootNode.targetW = 86;
+                rootNode.targetH = 28;
 
-            const ringRX = Math.max(220, width * 0.34);
-            const ringRY = Math.max(150, height * 0.30);
+                const cols = 2;
+                const rows = Math.ceil(categoryNodes.length / cols);
+                const areaLeft = 12;
+                const areaRight = width - 12;
+                const areaTop = isNarrow ? 84 : 94;
+                const areaBottom = height - 14;
+                const cellW = Math.max(100, (areaRight - areaLeft) / cols);
+                const cellH = Math.max(52, (areaBottom - areaTop) / rows);
 
-            categoryNodes.forEach((node, index) => {
-                const angle = ((index / categoryNodes.length) * Math.PI * 2) - (Math.PI / 2);
-                node.targetX = (width / 2) + (Math.cos(angle) * ringRX);
-                node.targetY = (height / 2) + (Math.sin(angle) * ringRY);
-                node.targetW = labelWidth(node.label, 100, 220, 30);
-                node.targetH = 28;
-            });
+                categoryNodes.forEach((node, index) => {
+                    const col = index % cols;
+                    const row = Math.floor(index / cols);
+                    node.targetX = areaLeft + (col * cellW) + (cellW / 2);
+                    node.targetY = areaTop + (row * cellH) + (cellH / 2);
+                    node.targetW = labelWidth(node.label, 90, isNarrow ? 136 : 156, 20);
+                    node.targetH = 24;
+                });
+            } else {
+                rootNode.targetX = width / 2;
+                rootNode.targetY = height / 2;
+                rootNode.targetW = 96;
+                rootNode.targetH = 34;
+
+                const ringRX = Math.max(220, width * 0.34);
+                const ringRY = Math.max(150, height * 0.30);
+
+                categoryNodes.forEach((node, index) => {
+                    const angle = ((index / categoryNodes.length) * Math.PI * 2) - (Math.PI / 2);
+                    node.targetX = (width / 2) + (Math.cos(angle) * ringRX);
+                    node.targetY = (height / 2) + (Math.sin(angle) * ringRY);
+                    node.targetW = labelWidth(node.label, 100, 220, 30);
+                    node.targetH = 28;
+                });
+            }
 
             skillNodes.forEach((node) => {
                 const parent = nodeById.get(node.parentId);
@@ -247,21 +275,22 @@ function initSkillsGraph() {
         } else {
             const activeCategory = nodeById.get(activeCategoryId);
 
-            rootNode.targetX = 68;
-            rootNode.targetY = 36;
-            rootNode.targetW = 72;
+            rootNode.targetX = 62;
+            rootNode.targetY = 34;
+            rootNode.targetW = 68;
             rootNode.targetH = 22;
 
             if (activeCategory) {
                 activeCategory.targetX = width / 2;
-                activeCategory.targetY = 72;
-                activeCategory.targetW = labelWidth(activeCategory.label, 130, 260, 42);
+                activeCategory.targetY = width <= 420 ? 64 : 72;
+                activeCategory.targetW = labelWidth(activeCategory.label, 126, 260, 42);
                 activeCategory.targetH = 32;
             }
 
             const otherCategories = categoryNodes.filter((node) => node.id !== activeCategoryId);
-            const sidePadding = 28;
-            const topY = 36;
+            const isCompact = width <= 768;
+            const sidePadding = 18;
+            const topY = 34;
             const spacing = otherCategories.length > 1
                 ? (width - (sidePadding * 2)) / (otherCategories.length - 1)
                 : 0;
@@ -269,19 +298,27 @@ function initSkillsGraph() {
             otherCategories.forEach((node, index) => {
                 node.targetX = sidePadding + (spacing * index);
                 node.targetY = topY;
-                node.targetW = labelWidth(node.label, 58, 150, 14);
-                node.targetH = 18;
+                node.targetW = isCompact ? 14 : labelWidth(node.label, 58, 150, 14);
+                node.targetH = isCompact ? 14 : 18;
             });
 
             const activeSkills = skillNodes.filter((node) => node.parentId === activeCategoryId);
-            const areaLeft = 16;
-            const areaRight = width - 16;
-            const areaTop = 126;
-            const areaBottom = height - 20;
-            const areaWidth = Math.max(260, areaRight - areaLeft);
+            const areaLeft = width <= 420 ? 10 : 16;
+            const areaRight = width - (width <= 420 ? 10 : 16);
+            const areaTop = width <= 420 ? 96 : 118;
+            const areaBottom = height - 12;
+            const areaWidth = Math.max(220, areaRight - areaLeft);
             const areaHeight = Math.max(220, areaBottom - areaTop);
 
-            const columnCount = Math.max(2, Math.ceil(Math.sqrt((activeSkills.length * areaWidth) / areaHeight)));
+            let columnCount;
+            if (width <= 420) {
+                columnCount = 1;
+            } else if (width <= 768) {
+                columnCount = 2;
+            } else {
+                columnCount = Math.max(2, Math.ceil(Math.sqrt((activeSkills.length * areaWidth) / areaHeight)));
+            }
+
             const rowCount = Math.max(1, Math.ceil(activeSkills.length / columnCount));
             const cellWidth = areaWidth / columnCount;
             const cellHeight = areaHeight / rowCount;
@@ -291,7 +328,12 @@ function initSkillsGraph() {
                 const row = Math.floor(index / columnCount);
                 node.targetX = areaLeft + (col * cellWidth) + (cellWidth / 2);
                 node.targetY = areaTop + (row * cellHeight) + (cellHeight / 2);
-                node.targetW = labelWidth(node.label, 92, 210, 26);
+
+                if (columnCount === 1) {
+                    node.targetW = clamp(areaWidth - 10, 170, 260);
+                } else {
+                    node.targetW = labelWidth(node.label, 92, 210, 26);
+                }
                 node.targetH = 24;
             });
 
@@ -307,13 +349,17 @@ function initSkillsGraph() {
         }
 
         nodes.forEach((node) => {
+            const isCompact = width <= 768;
+
             if (node.type === "skill") {
                 const isActiveSkill = activeCategoryId && node.parentId === activeCategoryId;
                 node.showLabel = !!isActiveSkill;
                 node.opacity = isActiveSkill ? 1 : 0;
             } else if (node.type === "category") {
-                node.showLabel = true;
-                node.opacity = (activeCategoryId && node.id !== activeCategoryId) ? 0.56 : 1;
+                const isActiveCat = activeCategoryId && node.id === activeCategoryId;
+                const isShrunkOther = isCompact && activeCategoryId && !isActiveCat;
+                node.showLabel = !isShrunkOther;
+                node.opacity = (activeCategoryId && !isActiveCat) ? 0.56 : 1;
             } else {
                 node.showLabel = true;
                 node.opacity = 1;
@@ -374,7 +420,6 @@ function initSkillsGraph() {
             })
             .attr("font-size", (node) => {
                 if (node.type === "root") return "11px";
-                if (node.type === "category" && activeCategoryId && node.id !== activeCategoryId) return "8px";
                 if (node.type === "skill") return "9px";
                 return "10px";
             })
@@ -435,20 +480,20 @@ function initSkillsGraph() {
 
         if (node.type === "root") {
             activeCategoryId = null;
-            applyLayout(420);
+            applyLayout(380);
             return;
         }
 
         if (node.type === "category") {
             activeCategoryId = activeCategoryId === node.id ? null : node.id;
-            applyLayout(420);
+            applyLayout(380);
         }
     });
 
     svg.on("click", () => {
         if (activeCategoryId) {
             activeCategoryId = null;
-            applyLayout(420);
+            applyLayout(380);
         }
     });
 
