@@ -1,387 +1,462 @@
-// Technical Skills Graph - Apple design aligned
-const skillsData = {
-    nodes: [
-        { id: "Skills", group: "center", size: 52 },
+﻿// Skills Graph - stable click layout (no force simulation)
+const SKILL_GROUPS = [
+    {
+        name: "Machine Learning",
+        skills: [
+            "Linear Models", "Decision Trees", "Random Forest", "Extra Trees", "SVM", "K-Means", "PCA",
+            "XGBoost", "LightGBM", "CatBoost", "Feature Engineering", "Hyperparameter Tuning", "Pipelines"
+        ]
+    },
+    {
+        name: "Deep Learning",
+        skills: [
+            "PyTorch", "TensorFlow", "Keras", "CNN", "RNN / LSTM", "Transformers", "BERT", "VAEs", "GANs", "Style Transfer"
+        ]
+    },
+    {
+        name: "Generative AI",
+        skills: [
+            "LLMs", "LangChain", "LangGraph", "RAG", "Prompt Engineering", "OpenAI API", "HuggingFace", "FAISS", "ChromaDB", "Agentic AI"
+        ]
+    },
+    {
+        name: "Computer Vision",
+        skills: ["MTCNN", "VGGFace", "Transfer Learning", "Object Detection", "Autonomous Vehicles", "OpenCV"]
+    },
+    {
+        name: "Data & Viz",
+        skills: ["Pandas", "NumPy", "Plotly", "D3.js", "Streamlit", "Tableau", "SQL", "Databases", "Jupyter", "Data Handling"]
+    },
+    {
+        name: "Programming",
+        skills: ["Python", "MATLAB", "PostgreSQL", "MongoDB", "MySQL", "Git", "KNN", "Math for ML"]
+    },
+    {
+        name: "MLOps & Deploy",
+        skills: ["Docker", "FastAPI", "Model Interpretation", "Vibe Coding", "Cursor / MCP", "GitHub Copilot", "Windsurf"]
+    },
+    {
+        name: "Soft Skills",
+        skills: ["Problem Solving", "Communication", "Teamwork", "Attention to Detail", "Research", "Teaching"]
+    }
+];
 
-        { id: "Machine Learning", group: "category", size: 34 },
-        { id: "Deep Learning", group: "category", size: 34 },
-        { id: "Generative AI", group: "category", size: 34 },
-        { id: "Vibe Coding", group: "category", size: 34 },
-        { id: "Data & Viz", group: "category", size: 34 },
-        { id: "Programming", group: "category", size: 34 },
-        { id: "MLOps", group: "category", size: 34 },
-
-        { id: "PyTorch", group: "skill", size: 19, parent: "Machine Learning" },
-        { id: "TensorFlow", group: "skill", size: 19, parent: "Machine Learning" },
-        { id: "Scikit-learn", group: "skill", size: 17, parent: "Machine Learning" },
-        { id: "XGBoost", group: "skill", size: 16, parent: "Machine Learning" },
-        { id: "LightGBM", group: "skill", size: 16, parent: "Machine Learning" },
-        { id: "CatBoost", group: "skill", size: 16, parent: "Machine Learning" },
-
-        { id: "Keras", group: "skill", size: 19, parent: "Deep Learning" },
-        { id: "CNN", group: "skill", size: 18, parent: "Deep Learning" },
-        { id: "RNN", group: "skill", size: 16, parent: "Deep Learning" },
-        { id: "LSTM", group: "skill", size: 17, parent: "Deep Learning" },
-        { id: "Transformers", group: "skill", size: 18, parent: "Deep Learning" },
-        { id: "GANs", group: "skill", size: 16, parent: "Deep Learning" },
-
-        { id: "LangChain", group: "skill", size: 18, parent: "Generative AI" },
-        { id: "LangGraph", group: "skill", size: 16, parent: "Generative AI" },
-        { id: "RAG", group: "skill", size: 18, parent: "Generative AI" },
-        { id: "LLMs", group: "skill", size: 20, parent: "Generative AI" },
-        { id: "Prompt Eng", group: "skill", size: 16, parent: "Generative AI" },
-        { id: "OpenAI API", group: "skill", size: 16, parent: "Generative AI" },
-
-        { id: "Claude", group: "skill", size: 18, parent: "Vibe Coding" },
-        { id: "Cursor", group: "skill", size: 18, parent: "Vibe Coding" },
-        { id: "MCP", group: "skill", size: 17, parent: "Vibe Coding" },
-        { id: "GitHub Copilot", group: "skill", size: 16, parent: "Vibe Coding" },
-        { id: "Windsurf", group: "skill", size: 16, parent: "Vibe Coding" },
-        { id: "Agentic AI", group: "skill", size: 16, parent: "Vibe Coding" },
-
-        { id: "Pandas", group: "skill", size: 19, parent: "Data & Viz" },
-        { id: "NumPy", group: "skill", size: 18, parent: "Data & Viz" },
-        { id: "Plotly", group: "skill", size: 17, parent: "Data & Viz" },
-        { id: "D3.js", group: "skill", size: 17, parent: "Data & Viz" },
-        { id: "Streamlit", group: "skill", size: 18, parent: "Data & Viz" },
-        { id: "Tableau", group: "skill", size: 16, parent: "Data & Viz" },
-
-        { id: "Python", group: "skill", size: 20, parent: "Programming" },
-        { id: "SQL", group: "skill", size: 18, parent: "Programming" },
-        { id: "MATLAB", group: "skill", size: 16, parent: "Programming" },
-        { id: "PostgreSQL", group: "skill", size: 16, parent: "Programming" },
-        { id: "MongoDB", group: "skill", size: 16, parent: "Programming" },
-        { id: "MySQL", group: "skill", size: 16, parent: "Programming" },
-
-        { id: "Docker", group: "skill", size: 18, parent: "MLOps" },
-        { id: "Git", group: "skill", size: 18, parent: "MLOps" },
-        { id: "FastAPI", group: "skill", size: 17, parent: "MLOps" },
-        { id: "HuggingFace", group: "skill", size: 17, parent: "MLOps" },
-        { id: "FAISS", group: "skill", size: 16, parent: "MLOps" },
-        { id: "ChromaDB", group: "skill", size: 16, parent: "MLOps" }
-    ],
-    links: [
-        { source: "Skills", target: "Machine Learning", strength: 0.5 },
-        { source: "Skills", target: "Deep Learning", strength: 0.5 },
-        { source: "Skills", target: "Generative AI", strength: 0.5 },
-        { source: "Skills", target: "Vibe Coding", strength: 0.5 },
-        { source: "Skills", target: "Data & Viz", strength: 0.5 },
-        { source: "Skills", target: "Programming", strength: 0.5 },
-        { source: "Skills", target: "MLOps", strength: 0.5 },
-
-        { source: "Machine Learning", target: "PyTorch", strength: 0.85 },
-        { source: "Machine Learning", target: "TensorFlow", strength: 0.85 },
-        { source: "Machine Learning", target: "Scikit-learn", strength: 0.85 },
-        { source: "Machine Learning", target: "XGBoost", strength: 0.85 },
-        { source: "Machine Learning", target: "LightGBM", strength: 0.85 },
-        { source: "Machine Learning", target: "CatBoost", strength: 0.85 },
-
-        { source: "Deep Learning", target: "Keras", strength: 0.85 },
-        { source: "Deep Learning", target: "CNN", strength: 0.85 },
-        { source: "Deep Learning", target: "RNN", strength: 0.85 },
-        { source: "Deep Learning", target: "LSTM", strength: 0.85 },
-        { source: "Deep Learning", target: "Transformers", strength: 0.85 },
-        { source: "Deep Learning", target: "GANs", strength: 0.85 },
-
-        { source: "Generative AI", target: "LangChain", strength: 0.85 },
-        { source: "Generative AI", target: "LangGraph", strength: 0.85 },
-        { source: "Generative AI", target: "RAG", strength: 0.85 },
-        { source: "Generative AI", target: "LLMs", strength: 0.85 },
-        { source: "Generative AI", target: "Prompt Eng", strength: 0.85 },
-        { source: "Generative AI", target: "OpenAI API", strength: 0.85 },
-
-        { source: "Vibe Coding", target: "Claude", strength: 0.85 },
-        { source: "Vibe Coding", target: "Cursor", strength: 0.85 },
-        { source: "Vibe Coding", target: "MCP", strength: 0.85 },
-        { source: "Vibe Coding", target: "GitHub Copilot", strength: 0.85 },
-        { source: "Vibe Coding", target: "Windsurf", strength: 0.85 },
-        { source: "Vibe Coding", target: "Agentic AI", strength: 0.85 },
-
-        { source: "Data & Viz", target: "Pandas", strength: 0.85 },
-        { source: "Data & Viz", target: "NumPy", strength: 0.85 },
-        { source: "Data & Viz", target: "Plotly", strength: 0.85 },
-        { source: "Data & Viz", target: "D3.js", strength: 0.85 },
-        { source: "Data & Viz", target: "Streamlit", strength: 0.85 },
-        { source: "Data & Viz", target: "Tableau", strength: 0.85 },
-
-        { source: "Programming", target: "Python", strength: 0.85 },
-        { source: "Programming", target: "SQL", strength: 0.85 },
-        { source: "Programming", target: "MATLAB", strength: 0.85 },
-        { source: "Programming", target: "PostgreSQL", strength: 0.85 },
-        { source: "Programming", target: "MongoDB", strength: 0.85 },
-        { source: "Programming", target: "MySQL", strength: 0.85 },
-
-        { source: "MLOps", target: "Docker", strength: 0.85 },
-        { source: "MLOps", target: "Git", strength: 0.85 },
-        { source: "MLOps", target: "FastAPI", strength: 0.85 },
-        { source: "MLOps", target: "HuggingFace", strength: 0.85 },
-        { source: "MLOps", target: "FAISS", strength: 0.85 },
-        { source: "MLOps", target: "ChromaDB", strength: 0.85 }
-    ]
-};
-
-const graphTheme = {
+const GRAPH_THEME = {
     accent: "#0071e3",
     nearBlack: "#1d1d1f",
     softGray: "#d2d2d7",
-    surface: "#ffffff",
-    link: "rgba(29, 29, 31, 0.22)",
-    rootLink: "rgba(29, 29, 31, 0.36)",
-    labelMuted: "rgba(0, 0, 0, 0.56)"
+    white: "#ffffff",
+    edge: "rgba(29, 29, 31, 0.18)",
+    link: "rgba(29, 29, 31, 0.20)",
+    linkDim: "rgba(29, 29, 31, 0.08)",
+    skillFill: "#ffffff"
 };
 
-function getNodeFill(node) {
-    if (node.group === "center") return graphTheme.nearBlack;
-    if (node.group === "category") return graphTheme.softGray;
-    return graphTheme.surface;
+function slug(input) {
+    return input.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 }
 
-function isRootLink(linkDatum) {
-    const sourceId = typeof linkDatum.source === "object" ? linkDatum.source.id : linkDatum.source;
-    return sourceId === "Skills";
+function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
 }
 
-function connectedToNode(linkDatum, nodeId) {
-    const sourceId = typeof linkDatum.source === "object" ? linkDatum.source.id : linkDatum.source;
-    const targetId = typeof linkDatum.target === "object" ? linkDatum.target.id : linkDatum.target;
-    return sourceId === nodeId || targetId === nodeId;
+function labelWidth(label, minWidth, maxWidth, padding) {
+    const calculated = (label.length * 6.8) + padding;
+    return clamp(calculated, minWidth, maxWidth);
 }
 
-function categoryToolCount(categoryId) {
-    return skillsData.nodes.filter((n) => n.parent === categoryId).length;
+function buildGraphData() {
+    const nodes = [];
+    const links = [];
+
+    nodes.push({
+        id: "skills-root",
+        type: "root",
+        label: "Skills",
+        baseW: 94,
+        baseH: 34,
+        categoryIndex: -1
+    });
+
+    SKILL_GROUPS.forEach((group, groupIndex) => {
+        const categoryId = `cat-${slug(group.name)}-${groupIndex}`;
+
+        nodes.push({
+            id: categoryId,
+            type: "category",
+            label: group.name,
+            categoryIndex: groupIndex,
+            baseW: labelWidth(group.name, 100, 220, 30),
+            baseH: 28
+        });
+
+        links.push({
+            source: "skills-root",
+            target: categoryId,
+            kind: "root",
+            parentId: null
+        });
+
+        group.skills.forEach((skillName, skillIndex) => {
+            const skillId = `skill-${slug(group.name)}-${skillIndex}-${slug(skillName)}`;
+
+            nodes.push({
+                id: skillId,
+                type: "skill",
+                label: skillName,
+                parentId: categoryId,
+                groupName: group.name,
+                categoryIndex: groupIndex,
+                skillIndex,
+                baseW: labelWidth(skillName, 88, 200, 26),
+                baseH: 24
+            });
+
+            links.push({
+                source: categoryId,
+                target: skillId,
+                kind: "child",
+                parentId: categoryId
+            });
+        });
+    });
+
+    return { nodes, links };
 }
 
 function initSkillsGraph() {
     const container = document.getElementById("skills-graph");
     if (!container || typeof d3 === "undefined") return;
 
-    const width = container.offsetWidth;
-    const height = 600;
-    const centerX = width / 2;
-    const centerY = height / 2;
+    d3.select(container).selectAll("*").remove();
 
-    d3.select("#skills-graph").selectAll("*").remove();
+    const tooltip = d3.select("#skill-tooltip");
+    if (!tooltip.empty()) tooltip.style("opacity", 0);
+
+    const width = Math.max(container.clientWidth || 960, 720);
+    const height = Math.max(container.clientHeight || 600, 560);
 
     const svg = d3
-        .select("#skills-graph")
+        .select(container)
         .append("svg")
         .attr("width", width)
         .attr("height", height)
-        .attr("viewBox", [0, 0, width, height]);
+        .attr("viewBox", [0, 0, width, height])
+        .attr("role", "img")
+        .attr("aria-label", "Interactive technical skills graph");
 
-    const g = svg.append("g");
+    const mainLayer = svg.append("g");
+    const { nodes, links } = buildGraphData();
 
-    svg.call(
-        d3
-            .zoom()
-            .scaleExtent([0.6, 2.2])
-            .on("zoom", (event) => {
-                g.attr("transform", event.transform);
-            })
-    );
+    const nodeById = new Map(nodes.map((node) => [node.id, node]));
+    const rootNode = nodes.find((node) => node.type === "root");
+    const categoryNodes = nodes.filter((node) => node.type === "category");
+    const skillNodes = nodes.filter((node) => node.type === "skill");
 
-    const tooltip = d3.select("#skill-tooltip");
-    const categories = skillsData.nodes.filter((n) => n.group === "category");
-    const categoryRadius = Math.min(width, height) * 0.30;
-
-    categories.forEach((cat, i) => {
-        const angle = (i / categories.length) * 2 * Math.PI - Math.PI / 2;
-        cat.x = centerX + categoryRadius * Math.cos(angle);
-        cat.y = centerY + categoryRadius * Math.sin(angle);
+    nodes.forEach((node) => {
+        node.x = width / 2;
+        node.y = height / 2;
+        node.boxW = node.baseW;
+        node.boxH = node.baseH;
+        node.targetX = node.x;
+        node.targetY = node.y;
+        node.targetW = node.baseW;
+        node.targetH = node.baseH;
+        node.showLabel = node.type !== "skill";
+        node.opacity = node.type === "skill" ? 0 : 1;
     });
 
-    const centerNode = skillsData.nodes.find((n) => n.group === "center");
-    if (centerNode) {
-        centerNode.x = centerX;
-        centerNode.y = centerY;
-        centerNode.fx = centerX;
-        centerNode.fy = centerY;
-    }
+    let activeCategoryId = null;
 
-    const childRadius = 84;
-    skillsData.nodes.filter((n) => n.parent).forEach((node) => {
-        const parent = categories.find((c) => c.id === node.parent);
-        if (!parent) return;
-
-        const siblings = skillsData.nodes.filter((n) => n.parent === node.parent);
-        const idx = siblings.indexOf(node);
-        const parentAngle = Math.atan2(parent.y - centerY, parent.x - centerX);
-        const spreadAngle = Math.PI * 0.82;
-        const startAngle = parentAngle - spreadAngle / 2;
-        const angle = startAngle + (idx / (siblings.length - 1 || 1)) * spreadAngle;
-
-        node.x = parent.x + childRadius * Math.cos(angle);
-        node.y = parent.y + childRadius * Math.sin(angle);
-    });
-
-    const simulation = d3
-        .forceSimulation(skillsData.nodes)
-        .force(
-            "link",
-            d3
-                .forceLink(skillsData.links)
-                .id((d) => d.id)
-                .distance((d) => (isRootLink(d) ? categoryRadius : 64))
-                .strength((d) => (isRootLink(d) ? 0.72 : 0.95))
-        )
-        .force(
-            "charge",
-            d3.forceManyBody().strength((d) => {
-                if (d.group === "center") return -760;
-                if (d.group === "category") return -320;
-                return -115;
-            })
-        )
-        .force("collision", d3.forceCollide().radius((d) => d.size + 8))
-        .force(
-            "radial",
-            d3
-                .forceRadial(
-                    (d) => {
-                        if (d.group === "center") return 0;
-                        if (d.group === "category") return categoryRadius;
-                        return categoryRadius + 88;
-                    },
-                    centerX,
-                    centerY
-                )
-                .strength((d) => {
-                    if (d.group === "center") return 1;
-                    if (d.group === "category") return 0.3;
-                    return 0.1;
-                })
-        );
-
-    const link = g
+    const linkSel = mainLayer
         .append("g")
-        .attr("class", "links")
+        .attr("class", "sk-links")
         .selectAll("line")
-        .data(skillsData.links)
+        .data(links)
         .join("line")
-        .attr("stroke", (d) => (isRootLink(d) ? graphTheme.rootLink : graphTheme.link))
-        .attr("stroke-width", (d) => (isRootLink(d) ? 2.1 : 1.3))
-        .attr("stroke-opacity", 0.9);
+        .attr("shape-rendering", "geometricPrecision")
+        .attr("stroke", GRAPH_THEME.link)
+        .attr("stroke-width", 1)
+        .attr("x1", width / 2)
+        .attr("y1", height / 2)
+        .attr("x2", width / 2)
+        .attr("y2", height / 2);
 
-    const node = g
+    const nodeSel = mainLayer
         .append("g")
-        .attr("class", "nodes")
+        .attr("class", "sk-nodes")
         .selectAll("g")
-        .data(skillsData.nodes)
+        .data(nodes)
         .join("g")
-        .call(
-            d3
-                .drag()
-                .on("start", dragstarted)
-                .on("drag", dragged)
-                .on("end", dragended)
-        );
+        .attr("transform", `translate(${width / 2},${height / 2})`)
+        .style("cursor", (node) => (node.type === "category" || node.type === "root" ? "pointer" : "default"));
 
-    node
-        .append("circle")
-        .attr("r", (d) => d.size)
-        .attr("fill", (d) => getNodeFill(d))
-        .attr("stroke", (d) => (d.group === "center" ? "#ffffff" : "rgba(29, 29, 31, 0.14)"))
-        .attr("stroke-width", (d) => (d.group === "center" ? 1.8 : 1.2))
-        .style("cursor", "pointer")
-        .on("mouseover", function (event, d) {
-            d3.select(this).transition().duration(180).attr("r", d.size * 1.08).attr("stroke", graphTheme.accent).attr("stroke-width", 2.4);
+    nodeSel
+        .append("rect")
+        .attr("x", (node) => -node.boxW / 2)
+        .attr("y", (node) => -node.boxH / 2)
+        .attr("width", (node) => node.boxW)
+        .attr("height", (node) => node.boxH)
+        .attr("rx", 0)
+        .attr("ry", 0)
+        .attr("fill", GRAPH_THEME.white)
+        .attr("stroke", GRAPH_THEME.edge)
+        .attr("stroke-width", 1.1)
+        .attr("opacity", (node) => node.opacity);
 
-            link
-                .attr("stroke-opacity", (l) => (connectedToNode(l, d.id) ? 1 : 0.14))
-                .attr("stroke", (l) => (connectedToNode(l, d.id) ? graphTheme.accent : isRootLink(l) ? graphTheme.rootLink : graphTheme.link))
-                .attr("stroke-width", (l) => (connectedToNode(l, d.id) ? (isRootLink(l) ? 3 : 2.1) : isRootLink(l) ? 2.1 : 1.3));
-
-            const isCategory = d.group === "category";
-            const metaLine = d.parent ? d.parent : (isCategory ? `${categoryToolCount(d.id)} tools` : "Core skill node");
-
-            tooltip
-                .style("opacity", 1)
-                .style("left", event.pageX + 14 + "px")
-                .style("top", event.pageY - 14 + "px")
-                .html(`
-                    <div style="display:flex;align-items:center;gap:8px;">
-                        <span style="width:10px;height:10px;border-radius:50%;background:${graphTheme.accent};display:inline-block;"></span>
-                        <strong>${d.id}</strong>
-                    </div>
-                    <div style="margin-top:4px;color:${graphTheme.labelMuted};font-size:0.8rem;">${metaLine}</div>
-                `);
-        })
-        .on("mousemove", function (event) {
-            tooltip.style("left", event.pageX + 14 + "px").style("top", event.pageY - 14 + "px");
-        })
-        .on("mouseout", function (event, d) {
-            d3.select(this)
-                .transition()
-                .duration(180)
-                .attr("r", d.size)
-                .attr("stroke", d.group === "center" ? "#ffffff" : "rgba(29, 29, 31, 0.14)")
-                .attr("stroke-width", d.group === "center" ? 1.8 : 1.2);
-
-            link
-                .attr("stroke-opacity", 0.9)
-                .attr("stroke", (l) => (isRootLink(l) ? graphTheme.rootLink : graphTheme.link))
-                .attr("stroke-width", (l) => (isRootLink(l) ? 2.1 : 1.3));
-
-            tooltip.style("opacity", 0);
-        });
-
-    node
+    nodeSel
         .append("text")
-        .text((d) => d.id)
         .attr("text-anchor", "middle")
         .attr("dy", "0.35em")
         .attr("font-family", "-apple-system, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif")
-        .attr("font-size", (d) => {
-            const base = d.size * 0.44;
-            const len = d.id.length;
-            if (len > 11) return Math.min(base, d.size * 0.31) + "px";
-            if (len > 8) return Math.min(base, d.size * 0.36) + "px";
-            return base + "px";
-        })
-        .attr("font-weight", (d) => {
-            if (d.group === "center") return 600;
-            if (d.group === "category") return 600;
-            return 500;
-        })
-        .attr("fill", (d) => (d.group === "center" ? "#ffffff" : graphTheme.nearBlack))
+        .style("letter-spacing", "-0.12px")
         .style("pointer-events", "none")
-        .style("letter-spacing", "-0.22px");
+        .text((node) => node.showLabel ? node.label : "")
+        .attr("opacity", (node) => node.showLabel ? 1 : 0);
 
-    simulation.on("tick", () => {
-        link
-            .attr("x1", (d) => d.source.x)
-            .attr("y1", (d) => d.source.y)
-            .attr("x2", (d) => d.target.x)
-            .attr("y2", (d) => d.target.y);
-
-        node.attr("transform", (d) => `translate(${d.x},${d.y})`);
-    });
-
-    function dragstarted(event, d) {
-        if (!event.active) simulation.alphaTarget(0.3).restart();
-        d.fx = d.x;
-        d.fy = d.y;
+    function resolveNode(value) {
+        if (typeof value === "object") return value;
+        return nodeById.get(value);
     }
 
-    function dragged(event, d) {
-        d.fx = event.x;
-        d.fy = event.y;
+    function computeLayoutState() {
+        if (!activeCategoryId) {
+            rootNode.targetX = width / 2;
+            rootNode.targetY = height / 2;
+            rootNode.targetW = 96;
+            rootNode.targetH = 34;
+
+            const ringRX = Math.max(220, width * 0.34);
+            const ringRY = Math.max(150, height * 0.30);
+
+            categoryNodes.forEach((node, index) => {
+                const angle = ((index / categoryNodes.length) * Math.PI * 2) - (Math.PI / 2);
+                node.targetX = (width / 2) + (Math.cos(angle) * ringRX);
+                node.targetY = (height / 2) + (Math.sin(angle) * ringRY);
+                node.targetW = labelWidth(node.label, 100, 220, 30);
+                node.targetH = 28;
+            });
+
+            skillNodes.forEach((node) => {
+                const parent = nodeById.get(node.parentId);
+                node.targetX = parent ? parent.targetX : width / 2;
+                node.targetY = parent ? parent.targetY : height / 2;
+                node.targetW = 3;
+                node.targetH = 3;
+            });
+        } else {
+            const activeCategory = nodeById.get(activeCategoryId);
+
+            rootNode.targetX = 68;
+            rootNode.targetY = 36;
+            rootNode.targetW = 72;
+            rootNode.targetH = 22;
+
+            if (activeCategory) {
+                activeCategory.targetX = width / 2;
+                activeCategory.targetY = 72;
+                activeCategory.targetW = labelWidth(activeCategory.label, 130, 260, 42);
+                activeCategory.targetH = 32;
+            }
+
+            const otherCategories = categoryNodes.filter((node) => node.id !== activeCategoryId);
+            const sidePadding = 28;
+            const topY = 36;
+            const spacing = otherCategories.length > 1
+                ? (width - (sidePadding * 2)) / (otherCategories.length - 1)
+                : 0;
+
+            otherCategories.forEach((node, index) => {
+                node.targetX = sidePadding + (spacing * index);
+                node.targetY = topY;
+                node.targetW = labelWidth(node.label, 58, 150, 14);
+                node.targetH = 18;
+            });
+
+            const activeSkills = skillNodes.filter((node) => node.parentId === activeCategoryId);
+            const areaLeft = 16;
+            const areaRight = width - 16;
+            const areaTop = 126;
+            const areaBottom = height - 20;
+            const areaWidth = Math.max(260, areaRight - areaLeft);
+            const areaHeight = Math.max(220, areaBottom - areaTop);
+
+            const columnCount = Math.max(2, Math.ceil(Math.sqrt((activeSkills.length * areaWidth) / areaHeight)));
+            const rowCount = Math.max(1, Math.ceil(activeSkills.length / columnCount));
+            const cellWidth = areaWidth / columnCount;
+            const cellHeight = areaHeight / rowCount;
+
+            activeSkills.forEach((node, index) => {
+                const col = index % columnCount;
+                const row = Math.floor(index / columnCount);
+                node.targetX = areaLeft + (col * cellWidth) + (cellWidth / 2);
+                node.targetY = areaTop + (row * cellHeight) + (cellHeight / 2);
+                node.targetW = labelWidth(node.label, 92, 210, 26);
+                node.targetH = 24;
+            });
+
+            skillNodes
+                .filter((node) => node.parentId !== activeCategoryId)
+                .forEach((node) => {
+                    const parent = nodeById.get(node.parentId);
+                    node.targetX = parent ? parent.targetX : width / 2;
+                    node.targetY = parent ? parent.targetY : height / 2;
+                    node.targetW = 3;
+                    node.targetH = 3;
+                });
+        }
+
+        nodes.forEach((node) => {
+            if (node.type === "skill") {
+                const isActiveSkill = activeCategoryId && node.parentId === activeCategoryId;
+                node.showLabel = !!isActiveSkill;
+                node.opacity = isActiveSkill ? 1 : 0;
+            } else if (node.type === "category") {
+                node.showLabel = true;
+                node.opacity = (activeCategoryId && node.id !== activeCategoryId) ? 0.56 : 1;
+            } else {
+                node.showLabel = true;
+                node.opacity = 1;
+            }
+
+            node.x = clamp(node.targetX, (node.targetW / 2) + 4, width - (node.targetW / 2) - 4);
+            node.y = clamp(node.targetY, (node.targetH / 2) + 4, height - (node.targetH / 2) - 4);
+            node.boxW = node.targetW;
+            node.boxH = node.targetH;
+        });
     }
 
-    function dragended(event, d) {
-        if (!event.active) simulation.alphaTarget(0);
-        if (d.group === "center") {
-            d.fx = centerX;
-            d.fy = centerY;
+    function styleLinks() {
+        linkSel
+            .attr("stroke", (linkDatum) => {
+                if (linkDatum.kind === "root") {
+                    if (!activeCategoryId) return GRAPH_THEME.link;
+                    return resolveNode(linkDatum.target).id === activeCategoryId ? GRAPH_THEME.accent : GRAPH_THEME.linkDim;
+                }
+
+                if (!activeCategoryId) return GRAPH_THEME.linkDim;
+                return linkDatum.parentId === activeCategoryId ? "rgba(0, 113, 227, 0.34)" : "rgba(29, 29, 31, 0.06)";
+            })
+            .attr("stroke-opacity", (linkDatum) => {
+                if (linkDatum.kind === "root") return activeCategoryId ? 0.9 : 1;
+                if (!activeCategoryId) return 0.1;
+                return linkDatum.parentId === activeCategoryId ? 1 : 0.05;
+            })
+            .attr("stroke-width", (linkDatum) => {
+                if (linkDatum.kind === "root") return resolveNode(linkDatum.target).id === activeCategoryId ? 1.4 : 1;
+                return linkDatum.parentId === activeCategoryId ? 1 : 0.8;
+            });
+    }
+
+    function styleNodes() {
+        nodeSel.select("rect")
+            .attr("fill", (node) => {
+                if (node.type === "root") return GRAPH_THEME.nearBlack;
+                if (node.type === "category") return node.id === activeCategoryId ? GRAPH_THEME.accent : GRAPH_THEME.softGray;
+                return GRAPH_THEME.skillFill;
+            })
+            .attr("stroke", (node) => {
+                if (node.type === "root") return GRAPH_THEME.nearBlack;
+                if (node.type === "category") return node.id === activeCategoryId ? GRAPH_THEME.accent : GRAPH_THEME.edge;
+                return GRAPH_THEME.edge;
+            })
+            .attr("stroke-width", (node) => {
+                if (node.type === "category" && node.id === activeCategoryId) return 1.8;
+                return 1;
+            });
+
+        nodeSel.select("text")
+            .text((node) => node.showLabel ? node.label : "")
+            .attr("fill", (node) => {
+                if (node.type === "root") return GRAPH_THEME.white;
+                if (node.type === "category" && node.id === activeCategoryId) return GRAPH_THEME.white;
+                return GRAPH_THEME.nearBlack;
+            })
+            .attr("font-size", (node) => {
+                if (node.type === "root") return "11px";
+                if (node.type === "category" && activeCategoryId && node.id !== activeCategoryId) return "8px";
+                if (node.type === "skill") return "9px";
+                return "10px";
+            })
+            .attr("font-weight", (node) => node.type === "skill" ? 500 : 600);
+    }
+
+    function render(duration) {
+        styleLinks();
+        styleNodes();
+
+        const ease = d3.easeCubicOut;
+
+        nodeSel
+            .interrupt()
+            .transition()
+            .duration(duration)
+            .ease(ease)
+            .attr("transform", (node) => `translate(${node.x},${node.y})`);
+
+        nodeSel
+            .select("rect")
+            .interrupt()
+            .transition()
+            .duration(duration)
+            .ease(ease)
+            .attr("x", (node) => -node.boxW / 2)
+            .attr("y", (node) => -node.boxH / 2)
+            .attr("width", (node) => node.boxW)
+            .attr("height", (node) => node.boxH)
+            .attr("opacity", (node) => node.opacity);
+
+        nodeSel
+            .select("text")
+            .interrupt()
+            .transition()
+            .duration(duration)
+            .ease(ease)
+            .attr("opacity", (node) => node.showLabel ? node.opacity : 0);
+
+        linkSel
+            .interrupt()
+            .transition()
+            .duration(duration)
+            .ease(ease)
+            .attr("x1", (linkDatum) => resolveNode(linkDatum.source).x)
+            .attr("y1", (linkDatum) => resolveNode(linkDatum.source).y)
+            .attr("x2", (linkDatum) => resolveNode(linkDatum.target).x)
+            .attr("y2", (linkDatum) => resolveNode(linkDatum.target).y);
+    }
+
+    function applyLayout(duration) {
+        computeLayoutState();
+        render(duration);
+    }
+
+    nodeSel.on("click", (event, node) => {
+        event.stopPropagation();
+
+        if (node.type === "root") {
+            activeCategoryId = null;
+            applyLayout(420);
             return;
         }
-        d.fx = null;
-        d.fy = null;
-    }
+
+        if (node.type === "category") {
+            activeCategoryId = activeCategoryId === node.id ? null : node.id;
+            applyLayout(420);
+        }
+    });
+
+    svg.on("click", () => {
+        if (activeCategoryId) {
+            activeCategoryId = null;
+            applyLayout(420);
+        }
+    });
+
+    applyLayout(0);
 }
 
 document.addEventListener("DOMContentLoaded", initSkillsGraph);
 window.addEventListener("resize", () => {
     clearTimeout(window.resizeTimer);
-    window.resizeTimer = setTimeout(initSkillsGraph, 250);
+    window.resizeTimer = setTimeout(initSkillsGraph, 180);
 });
