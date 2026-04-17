@@ -920,6 +920,7 @@ body {
 /* Pulsing green ring */
 .fab-status-ring {
     position: absolute;
+    top: 10px;
     left: 10px;
     width: 36px;
     height: 36px;
@@ -1143,8 +1144,9 @@ body {
     .module-icon { width: 26px; height: 26px; }
 
     /* Skills */
-    #skills-graph  { display: none; }
-    #skills-mobile { display: block; }
+    #skills-graph  { display: block; height: 440px; }
+    #skills-mobile { display: none; }
+    #skill-tooltip { display: none; }
     .skills-subtitle { font-size: 0.9375rem; margin-bottom: 1.25rem; }
 
     /* ── CHATBOT MOBILE SHEET ── */
@@ -1158,8 +1160,10 @@ body {
     .fab-label { display: none; }
 
     .fab-status-ring {
+        top: 50%;
         left: 50%;
-        transform: translateX(-50%);
+        margin-top: -18px;
+        margin-left: -18px;
     }
 
     /* Full-screen slide-up */
