@@ -124,7 +124,7 @@ function buildGraphData() {
     return { nodes, links };
 }
 
-function initSkillsGraph() {
+function initSkillsGraphD3() {
     const container = document.getElementById("skills-graph");
     if (!container || typeof d3 === "undefined") return;
 
@@ -498,6 +498,176 @@ function initSkillsGraph() {
     });
 
     applyLayout(0);
+}
+
+function initSkillsGraphFallbackMobile(container) {
+    const NS = "http://www.w3.org/2000/svg";
+    const width = Math.max(container.clientWidth || 320, 280);
+    const height = Math.max(container.clientHeight || 460, 420);
+    let activeIndex = null;
+
+    function svgEl(tag, attrs) {
+        const el = document.createElementNS(NS, tag);
+        Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, String(value)));
+        return el;
+    }
+
+    function nodeGroup(svg, x, y, w, h, label, fill, stroke, textFill, onClick) {
+        const g = svgEl("g", { transform: `translate(${x},${y})` });
+        const rect = svgEl("rect", {
+            x: -w / 2,
+            y: -h / 2,
+            width: w,
+            height: h,
+            rx: 0,
+            ry: 0,
+            fill,
+            stroke,
+            "stroke-width": 1.1
+        });
+        const text = svgEl("text", {
+            "text-anchor": "middle",
+            dy: "0.35em",
+            fill: textFill,
+            "font-size": "10",
+            "font-weight": "600",
+            "font-family": "-apple-system, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+        });
+        text.textContent = label;
+        g.appendChild(rect);
+        g.appendChild(text);
+        if (onClick) {
+            g.style.cursor = "pointer";
+            g.addEventListener("click", onClick);
+        }
+        svg.appendChild(g);
+    }
+
+    function render() {
+        container.innerHTML = "";
+        const svg = svgEl("svg", {
+            width,
+            height,
+            viewBox: `0 0 ${width} ${height}`,
+            role: "img",
+            "aria-label": "Technical skills graph"
+        });
+
+        const rootX = width / 2;
+        const rootY = 32;
+        const cols = 2;
+        const areaLeft = 10;
+        const areaRight = width - 10;
+        const cellW = (areaRight - areaLeft) / cols;
+        const catTop = 76;
+        const catGapY = 54;
+
+        SKILL_GROUPS.forEach((group, i) => {
+            const col = i % cols;
+            const row = Math.floor(i / cols);
+            const x = areaLeft + (col * cellW) + (cellW / 2);
+            const y = catTop + (row * catGapY);
+
+            const line = svgEl("line", {
+                x1: rootX,
+                y1: rootY + 14,
+                x2: x,
+                y2: y - 12,
+                stroke: "rgba(29, 29, 31, 0.16)",
+                "stroke-width": 1
+            });
+            svg.appendChild(line);
+
+            const isActive = activeIndex === i;
+            nodeGroup(
+                svg,
+                x,
+                y,
+                Math.min(150, Math.max(96, (group.name.length * 6.4) + 22)),
+                24,
+                group.name,
+                isActive ? GRAPH_THEME.accent : GRAPH_THEME.softGray,
+                isActive ? GRAPH_THEME.accent : GRAPH_THEME.edge,
+                isActive ? GRAPH_THEME.white : GRAPH_THEME.nearBlack,
+                (event) => {
+                    event.stopPropagation();
+                    activeIndex = activeIndex === i ? null : i;
+                    render();
+                }
+            );
+        });
+
+        nodeGroup(svg, rootX, rootY, 84, 26, "Skills", GRAPH_THEME.nearBlack, GRAPH_THEME.nearBlack, GRAPH_THEME.white, () => {
+            activeIndex = null;
+            render();
+        });
+
+        if (activeIndex !== null) {
+            const group = SKILL_GROUPS[activeIndex];
+            const title = svgEl("text", {
+                x: width / 2,
+                y: 302,
+                "text-anchor": "middle",
+                fill: GRAPH_THEME.nearBlack,
+                "font-size": "11",
+                "font-weight": "600",
+                "font-family": "-apple-system, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif"
+            });
+            title.textContent = `${group.name} skills`;
+            svg.appendChild(title);
+
+            const skills = group.skills;
+            const skillCols = 2;
+            const skillLeft = 10;
+            const skillWidth = (width - 20) / skillCols;
+            const skillTop = 326;
+            const skillGapY = 28;
+
+            skills.forEach((skill, idx) => {
+                const col = idx % skillCols;
+                const row = Math.floor(idx / skillCols);
+                const x = skillLeft + (col * skillWidth) + (skillWidth / 2);
+                const y = skillTop + (row * skillGapY);
+                if (y > height - 16) return;
+
+                nodeGroup(
+                    svg,
+                    x,
+                    y,
+                    Math.max(92, skillWidth - 10),
+                    22,
+                    skill,
+                    GRAPH_THEME.white,
+                    GRAPH_THEME.edge,
+                    GRAPH_THEME.nearBlack
+                );
+            });
+        }
+
+        svg.addEventListener("click", () => {
+            if (activeIndex !== null) {
+                activeIndex = null;
+                render();
+            }
+        });
+
+        container.appendChild(svg);
+    }
+
+    render();
+}
+
+function initSkillsGraph() {
+    const container = document.getElementById("skills-graph");
+    if (!container) return;
+
+    if (window.innerWidth <= 768) {
+        initSkillsGraphFallbackMobile(container);
+        return;
+    }
+
+    if (typeof d3 === "undefined") return;
+    initSkillsGraphD3();
 }
 
 function buildMobileSkillsAccordion() {
