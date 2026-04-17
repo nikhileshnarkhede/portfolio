@@ -500,8 +500,70 @@ function initSkillsGraph() {
     applyLayout(0);
 }
 
-document.addEventListener("DOMContentLoaded", initSkillsGraph);
+function buildMobileSkillsAccordion() {
+    const container = document.getElementById("skills-mobile");
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    SKILL_GROUPS.forEach((group, index) => {
+        const item = document.createElement("div");
+        item.className = "sk-accordion-item";
+
+        const header = document.createElement("button");
+        header.className = "sk-accordion-header";
+        header.type = "button";
+        header.setAttribute("aria-expanded", "false");
+        header.setAttribute("aria-controls", `sk-acc-body-${index}`);
+        header.innerHTML = `<span>${group.name}</span><span>+</span>`;
+
+        const body = document.createElement("div");
+        body.className = "sk-accordion-body";
+        body.id = `sk-acc-body-${index}`;
+
+        const pills = document.createElement("div");
+        pills.className = "sk-accordion-pills";
+        group.skills.forEach((skill) => {
+            const pill = document.createElement("span");
+            pill.className = "sk-accordion-pill";
+            pill.textContent = skill;
+            pills.appendChild(pill);
+        });
+        body.appendChild(pills);
+
+        header.addEventListener("click", () => {
+            const isOpen = body.classList.contains("open");
+            container.querySelectorAll(".sk-accordion-body.open").forEach((openBody) => {
+                openBody.classList.remove("open");
+            });
+            container.querySelectorAll(".sk-accordion-header").forEach((btn) => {
+                btn.setAttribute("aria-expanded", "false");
+                const symbol = btn.querySelector("span:last-child");
+                if (symbol) symbol.textContent = "+";
+            });
+
+            if (!isOpen) {
+                body.classList.add("open");
+                header.setAttribute("aria-expanded", "true");
+                const symbol = header.querySelector("span:last-child");
+                if (symbol) symbol.textContent = "-";
+            }
+        });
+
+        item.appendChild(header);
+        item.appendChild(body);
+        container.appendChild(item);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    initSkillsGraph();
+    buildMobileSkillsAccordion();
+});
 window.addEventListener("resize", () => {
     clearTimeout(window.resizeTimer);
-    window.resizeTimer = setTimeout(initSkillsGraph, 180);
+    window.resizeTimer = setTimeout(() => {
+        initSkillsGraph();
+        buildMobileSkillsAccordion();
+    }, 180);
 });

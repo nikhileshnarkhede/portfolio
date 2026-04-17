@@ -1144,26 +1144,31 @@ body {
     .module-icon { width: 26px; height: 26px; }
 
     /* Skills */
-    #skills-graph  { display: block; height: 440px; }
-    #skills-mobile { display: none; }
+    #skills-graph  { display: none; }
+    #skills-mobile { display: block; }
     #skill-tooltip { display: none; }
     .skills-subtitle { font-size: 0.9375rem; margin-bottom: 1.25rem; }
 
     /* ── CHATBOT MOBILE SHEET ── */
     #chatbot-fab {
         bottom: 20px; right: 20px;
-        padding: 10px;
+        padding: 8px;
         width: 52px; height: 52px;
         justify-content: center;
     }
 
     .fab-label { display: none; }
 
+    .fab-avatar {
+        width: 36px;
+        height: 36px;
+    }
+
     .fab-status-ring {
-        top: 50%;
-        left: 50%;
-        margin-top: -18px;
-        margin-left: -18px;
+        top: 8px;
+        left: 8px;
+        margin-top: 0;
+        margin-left: 0;
     }
 
     /* Full-screen slide-up */
