@@ -1144,8 +1144,8 @@ body {
     .module-icon { width: 26px; height: 26px; }
 
     /* Skills */
-    #skills-graph  { display: none; }
-    #skills-mobile { display: block; }
+    #skills-graph  { display: block; height: 460px; }
+    #skills-mobile { display: none; }
     #skill-tooltip { display: none; }
     .skills-subtitle { font-size: 0.9375rem; margin-bottom: 1.25rem; }
 
