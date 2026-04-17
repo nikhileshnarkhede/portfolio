@@ -394,23 +394,54 @@
         <p>&copy; 2025 Nikhilesh Narkhede. All rights reserved.</p>
     </footer>
 
-    <!-- ===== Chatbot ===== -->
-    <button id="chatbot-btn" onclick="document.getElementById('chatbot-modal').style.display='flex'" title="Chat with me!">
-        <img class="chat-icon-img" src="Image/chatbot-icon.jpeg" alt="" aria-hidden="true">
-        <span class="chat-label">Chat with My AI Clone</span>
+    <!-- ===== Chatbot FAB ===== -->
+    <button id="chatbot-fab" aria-label="Chat with my AI Clone">
+        <span class="fab-status-ring" aria-hidden="true"></span>
+        <img class="fab-avatar" src="Image/chatbot-icon.jpeg" alt="" aria-hidden="true">
+        <span class="fab-label">Chat with My AI Clone</span>
     </button>
 
-    <div id="chatbot-modal">
-        <div id="chatbot-header">
-            <span><img class="chat-icon-img" src="Image/chatbot-icon.jpeg" alt="" aria-hidden="true"> Chat with My AI Clone</span>
-            <button id="chatbot-close" onclick="document.getElementById('chatbot-modal').style.display='none'">&times;</button>
+    <!-- ===== Chatbot Sheet ===== -->
+    <div id="chatbot-sheet" role="dialog" aria-modal="true" aria-label="Chat with Nikhilesh's AI Clone">
+        <div id="sheet-inner">
+            <!-- drag handle (mobile) -->
+            <div class="sheet-drag-handle" aria-hidden="true"></div>
+
+            <!-- header -->
+            <div id="sheet-header">
+                <button id="sheet-back" aria-label="Close chat">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                        <path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+                <div class="sheet-identity">
+                    <div class="sheet-avatar-wrap">
+                        <img class="sheet-avatar" src="Image/chatbot-icon.jpeg" alt="AI Clone avatar">
+                        <span class="sheet-online-dot" aria-label="Online"></span>
+                    </div>
+                    <div class="sheet-meta">
+                        <span class="sheet-name">Nikhilesh&rsquo;s AI Clone</span>
+                        <span class="sheet-status">Online &bull; Ask me anything</span>
+                    </div>
+                </div>
+
+                <button id="sheet-close" aria-label="Close chat">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                        <path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- iframe -->
+            <iframe
+                src="https://nikhileshportfoliochatbot.streamlit.app/?embed=true"
+                id="chatbot-iframe"
+                title="Chat with Nikhilesh's AI Clone"
+                loading="lazy"
+                allow="camera;microphone"
+            ></iframe>
         </div>
-        <iframe
-            src="https://nikhileshportfoliochatbot.streamlit.app/?embed=true"
-            id="chatbot-iframe"
-            title="Chat with Nikhilesh"
-            allow="camera;microphone"
-        ></iframe>
     </div>
 
     <script src="assets/js/main.js"></script>

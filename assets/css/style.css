@@ -1,6 +1,6 @@
-﻿/* ===========================
+/* ===========================
    APPLE DESIGN SYSTEM
-   DESIGN.md â€” Applied
+   DESIGN.md — Applied
    =========================== */
 
 :root {
@@ -10,7 +10,7 @@
     --near-black:     #1d1d1f;
     --white:          #ffffff;
 
-    /* Interactive â€” Apple Blue ONLY accent */
+    /* Interactive — Apple Blue ONLY accent */
     --apple-blue:     #0071e3;
     --link-light:     #0066cc;
     --link-dark:      #2997ff;
@@ -32,7 +32,7 @@
     /* Shadows */
     --shadow-card: rgba(0, 0, 0, 0.22) 3px 5px 30px 0px;
 
-    /* Typography â€” emoji fonts included so ðŸ¤–ðŸ’¬ðŸ“ˆ etc. render in full color */
+    /* Typography — emoji fonts included so 🤖💬📈 etc. render in full color */
     --font-display: -apple-system, "SF Pro Display", "Helvetica Neue", Helvetica, Arial,
                     "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
     --font-body:    -apple-system, "SF Pro Text",    "Helvetica Neue", Helvetica, Arial,
@@ -55,7 +55,7 @@ body {
 }
 
 /* ===========================
-   NAVIGATION â€” Apple glass
+   NAVIGATION — Apple glass
    =========================== */
 .navbar {
     position: fixed;
@@ -95,7 +95,7 @@ body {
 
 .nav-menu a {
     font-family: var(--font-body);
-    font-size: 0.75rem;           /* 12px */
+    font-size: 0.75rem;
     font-weight: 400;
     color: var(--white);
     opacity: 0.8;
@@ -126,19 +126,13 @@ body {
 .section-dark  { background: var(--black); }
 .section-light { background: var(--light-bg); }
 
-.section {
-    padding: 5rem 2rem;
-}
+.section { padding: 5rem 2rem; }
 
-.container {
-    max-width: 980px;
-    margin: 0 auto;
-}
+.container { max-width: 980px; margin: 0 auto; }
 
-/* Section titles â€” light bg */
 .section-title {
     font-family: var(--font-display);
-    font-size: 2.50rem;           /* 40px */
+    font-size: 2.50rem;
     font-weight: 600;
     line-height: 1.10;
     letter-spacing: -0.02em;
@@ -147,17 +141,11 @@ body {
     color: var(--near-black);
 }
 
-/* Section titles â€” dark bg */
-.section-dark .section-title {
-    color: var(--white);
-}
-
-.section-title::after {
-    display: none;                /* Remove old underline â€” Apple doesn't do this */
-}
+.section-dark .section-title { color: var(--white); }
+.section-title::after        { display: none; }
 
 /* ===========================
-   HERO â€” Black immersive
+   HERO
    =========================== */
 .hero {
     min-height: 100vh;
@@ -172,7 +160,7 @@ body {
 
 .hero-content h1 {
     font-family: var(--font-display);
-    font-size: clamp(2.25rem, 5vw, 3.50rem); /* max 56px */
+    font-size: clamp(2.25rem, 5vw, 3.50rem);
     font-weight: 600;
     line-height: 1.07;
     letter-spacing: -0.28px;
@@ -180,13 +168,11 @@ body {
     color: var(--white);
 }
 
-.highlight {
-    color: var(--white);          /* Keep white â€” no colored underline */
-}
+.highlight { color: var(--white); }
 
 .tagline {
     font-family: var(--font-display);
-    font-size: clamp(1rem, 2.5vw, 1.3125rem); /* 21px */
+    font-size: clamp(1rem, 2.5vw, 1.3125rem);
     font-weight: 400;
     line-height: 1.19;
     letter-spacing: 0.231px;
@@ -196,7 +182,7 @@ body {
 
 .subtitle {
     font-family: var(--font-body);
-    font-size: 1.0625rem;         /* 17px */
+    font-size: 1.0625rem;
     font-weight: 400;
     line-height: 1.47;
     letter-spacing: -0.374px;
@@ -204,7 +190,6 @@ body {
     margin-bottom: 2.5rem;
 }
 
-/* CTA row */
 .cta-buttons {
     display: flex;
     gap: 1rem;
@@ -215,12 +200,10 @@ body {
 /* ===========================
    BUTTONS
    =========================== */
-
-/* Primary Blue CTA */
 .btn {
     display: inline-block;
     font-family: var(--font-body);
-    font-size: 1.0625rem;         /* 17px */
+    font-size: 1.0625rem;
     font-weight: 400;
     line-height: 1;
     padding: 8px 18px;
@@ -231,47 +214,31 @@ body {
     letter-spacing: -0.374px;
 }
 
-.btn-primary {
-    background: var(--apple-blue);
-    color: var(--white);
-}
+.btn-primary { background: var(--apple-blue); color: var(--white); }
+.btn-primary:hover { background: #0077ed; }
 
-.btn-primary:hover {
-    background: #0077ed;
-    transform: none;
-    box-shadow: none;
-}
-
-/* Pill outline â€” "Learn more" / newsletter on dark bg
-   Inherits size from .btn â€” only overrides visual style */
 .btn-pill-dark {
     background: transparent;
-    color: var(--link-dark);       /* #2997ff bright blue */
+    color: var(--link-dark);
     border: 1px solid var(--link-dark);
-    border-radius: 980px;          /* DESIGN.md signature pill */
+    border-radius: 980px;
 }
-
 .btn-pill-dark:hover {
     color: var(--white);
     border-color: rgba(255,255,255,0.70);
     background: rgba(255,255,255,0.06);
 }
 
-/* Pill outline on light bg â€” inline "Learn more" */
 .btn-pill-light {
     background: transparent;
     color: var(--link-light);
     border: 1px solid var(--link-light);
     border-radius: 980px;
-    font-size: 0.875rem;           /* smaller â€” used inline in content */
+    font-size: 0.875rem;
     padding: 6px 14px;
 }
+.btn-pill-light:hover { text-decoration: underline; }
 
-.btn-pill-light:hover {
-    text-decoration: underline;
-}
-
-/* Hero secondary â€” pill outline white */
 .btn-secondary {
     background: transparent;
     color: var(--white);
@@ -280,13 +247,11 @@ body {
     font-size: 1.0625rem;
     padding: 8px 18px;
 }
-
 .btn-secondary:hover {
     border-color: var(--white);
     background: rgba(255,255,255,0.08);
 }
 
-/* Focus accessibility */
 .btn:focus-visible,
 .btn-pill-dark:focus-visible,
 .btn-pill-light:focus-visible,
@@ -296,7 +261,7 @@ body {
 }
 
 /* ===========================
-   ABOUT â€” Light section
+   ABOUT
    =========================== */
 .about-content {
     display: grid;
@@ -313,15 +278,10 @@ body {
     letter-spacing: -0.374px;
     color: var(--text-body-light);
     margin-bottom: 1rem;
-    text-align: justify;
 }
 
 .about-text strong { color: var(--near-black); }
-
-.about-text a {
-    color: var(--link-light);
-    transition: var(--transition);
-}
+.about-text a { color: var(--link-light); transition: var(--transition); }
 .about-text a:hover { text-decoration: underline; }
 
 .skills h3 {
@@ -333,11 +293,7 @@ body {
     letter-spacing: -0.02em;
 }
 
-.skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
+.skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
 .skill-tags span {
     font-family: var(--font-body);
@@ -350,27 +306,17 @@ body {
     border-radius: 980px;
     transition: var(--transition);
 }
-
-.skill-tags span:hover {
-    background: var(--apple-blue);
-    color: var(--white);
-}
+.skill-tags span:hover { background: var(--apple-blue); color: var(--white); }
 
 /* ===========================
-   EXPERIENCE â€” Dark section
+   EXPERIENCE
    =========================== */
-.timeline {
-    position: relative;
-    max-width: 860px;
-    margin: 0 auto;
-}
+.timeline { position: relative; max-width: 860px; margin: 0 auto; }
 
 .timeline::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
+    left: 0; top: 0; bottom: 0;
     width: 2px;
     background: rgba(255,255,255,0.15);
     border-radius: 1px;
@@ -385,10 +331,8 @@ body {
 .timeline-item::before {
     content: '';
     position: absolute;
-    left: -5px;
-    top: 6px;
-    width: 12px;
-    height: 12px;
+    left: -5px; top: 6px;
+    width: 12px; height: 12px;
     background: var(--apple-blue);
     border-radius: 50%;
     border: 2px solid var(--black);
@@ -396,7 +340,7 @@ body {
 
 .timeline-date {
     font-family: var(--font-body);
-    font-size: 0.75rem;           /* 12px */
+    font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: -0.08px;
     color: var(--link-dark);
@@ -439,11 +383,7 @@ body {
     margin-bottom: 0.75rem;
 }
 
-.exp-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-}
+.exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 
 .exp-tags span {
     font-family: var(--font-body);
@@ -457,7 +397,7 @@ body {
 }
 
 /* ===========================
-   PROJECTS â€” Light section
+   PROJECTS
    =========================== */
 .projects-grid {
     display: grid;
@@ -473,10 +413,7 @@ body {
     transition: var(--transition);
     border: none;
 }
-
-.project-card:hover {
-    box-shadow: rgba(0,0,0,0.28) 3px 8px 40px 0px;
-}
+.project-card:hover { box-shadow: rgba(0,0,0,0.28) 3px 8px 40px 0px; }
 
 .project-card h3 {
     font-family: var(--font-display);
@@ -498,12 +435,7 @@ body {
     margin-bottom: 1rem;
 }
 
-.project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-bottom: 1rem;
-}
+.project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
 
 .project-tags span {
     font-family: var(--font-body);
@@ -524,21 +456,14 @@ body {
     color: var(--link-light);
     transition: var(--transition);
 }
-
 .project-link:hover { text-decoration: underline; }
 
-.more-projects {
-    text-align: center;
-    margin-top: 2.5rem;
-}
+.more-projects { text-align: center; margin-top: 2.5rem; }
 
 /* ===========================
-   PUBLICATIONS â€” Dark section
+   PUBLICATIONS
    =========================== */
-.publications-list {
-    max-width: 860px;
-    margin: 0 auto;
-}
+.publications-list { max-width: 860px; margin: 0 auto; }
 
 .publication-item {
     background: var(--ds-3);
@@ -577,12 +502,10 @@ body {
     margin-bottom: 0.75rem;
 }
 
-.publication-item .project-link {
-    color: var(--link-dark);
-}
+.publication-item .project-link { color: var(--link-dark); }
 
 /* ===========================
-   SKILLS GRAPH â€” Light section
+   SKILLS GRAPH
    =========================== */
 .skills-subtitle {
     text-align: center;
@@ -594,29 +517,22 @@ body {
     margin-bottom: 2rem;
 }
 
-/* Desktop SVG graph */
 #skills-graph {
     width: 100%;
     height: 600px;
     background: var(--light-bg);
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0,0,0,0.08);
     border-radius: 8px;
     overflow: hidden;
     position: relative;
 }
 
-#skills-graph svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    z-index: 1;
-}
+#skills-graph svg { display: block; }
 
 #skill-tooltip {
     position: absolute;
-    background: rgba(255, 255, 255, 0.99);
-    border: 1px solid rgba(29, 29, 31, 0.12);
+    background: rgba(255,255,255,0.99);
+    border: 1px solid rgba(29,29,31,0.12);
     padding: 0.6rem 0.85rem;
     border-radius: 8px;
     box-shadow: var(--shadow-card);
@@ -631,15 +547,10 @@ body {
     letter-spacing: -0.224px;
 }
 
-#skill-tooltip strong {
-    color: var(--near-black);
-    font-weight: 600;
-}
+#skill-tooltip strong { color: var(--near-black); font-weight: 600; }
 
-/* Mobile skills accordion â€” shown only on small screens */
-#skills-mobile {
-    display: none;
-}
+/* Mobile accordion */
+#skills-mobile { display: none; }
 
 .sk-accordion-item {
     background: var(--white);
@@ -666,18 +577,11 @@ body {
     text-align: left;
     transition: background 0.2s ease;
 }
-
-.sk-accordion-header:hover {
-    background: rgba(0, 0, 0, 0.03);
-}
-
-.sk-accordion-header.active {
-    color: var(--apple-blue);
-}
+.sk-accordion-header:hover { background: rgba(0,0,0,0.03); }
+.sk-accordion-header.active { color: var(--apple-blue); }
 
 .sk-accordion-dot {
-    width: 10px;
-    height: 10px;
+    width: 10px; height: 10px;
     border-radius: 50%;
     flex-shrink: 0;
     margin-right: 0.75rem;
@@ -691,7 +595,6 @@ body {
     flex-shrink: 0;
     margin-left: 0.5rem;
 }
-
 .sk-accordion-header.active .sk-accordion-chevron {
     transform: rotate(180deg);
     opacity: 0.8;
@@ -703,17 +606,9 @@ body {
     transition: max-height 0.32s ease, padding 0.2s ease;
     padding: 0 1.25rem;
 }
+.sk-accordion-body.open { max-height: 400px; padding: 0 1.25rem 1rem; }
 
-.sk-accordion-body.open {
-    max-height: 400px;
-    padding: 0 1.25rem 1rem;
-}
-
-.sk-accordion-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-}
+.sk-accordion-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 
 .sk-accordion-pill {
     font-family: var(--font-body);
@@ -728,7 +623,7 @@ body {
 }
 
 /* ===========================
-   EDUCATION â€” Dark section
+   EDUCATION
    =========================== */
 .education-grid {
     display: grid;
@@ -819,9 +714,6 @@ body {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    transform: translateY(1px);
-    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
-    font-variant-emoji: emoji;
 }
 
 .cert-header h4 {
@@ -833,11 +725,7 @@ body {
     margin-bottom: 0.25rem;
 }
 
-.cert-header h4 a {
-    color: var(--link-dark);
-    transition: var(--transition);
-}
-
+.cert-header h4 a { color: var(--link-dark); transition: var(--transition); }
 .cert-header h4 a:hover { text-decoration: underline; }
 
 .cert-issuer {
@@ -851,7 +739,7 @@ body {
 .cert-modules { display: grid; gap: 0.75rem; }
 
 .cert-module {
-    background: #ffffff;          /* white so logos show original colors */
+    background: #ffffff;
     padding: 1rem 1.25rem;
     border-radius: 8px;
 }
@@ -863,19 +751,17 @@ body {
     font-family: var(--font-display);
     font-size: 0.9375rem;
     font-weight: 600;
-    color: var(--near-black);     /* dark text on white card */
+    color: var(--near-black);
     letter-spacing: -0.224px;
     margin-bottom: 0.5rem;
 }
 
 .module-icon {
-    width: 32px;
-    height: 32px;
+    width: 32px; height: 32px;
     object-fit: contain;
     flex-shrink: 0;
     border-radius: 4px;
     background: transparent;
-    /* no filter â€” show original brand colors */
 }
 
 .cert-module p {
@@ -887,13 +773,10 @@ body {
     color: var(--text-secondary-light);
 }
 
-.cert-card .btn {
-    display: inline-block;
-    margin-top: 1.25rem;
-}
+.cert-card .btn { display: inline-block; margin-top: 1.25rem; }
 
 /* ===========================
-   CONTACT â€” Light section
+   CONTACT
    =========================== */
 .contact-content { text-align: center; }
 
@@ -930,15 +813,13 @@ body {
     color: var(--near-black);
     transition: var(--transition);
 }
-
 .contact-link:hover {
     color: var(--apple-blue);
     box-shadow: rgba(0,0,0,0.28) 3px 8px 40px 0px;
 }
 
 .contact-link .contact-icon {
-    width: 1.1rem;
-    height: 1.1rem;
+    width: 1.1rem; height: 1.1rem;
     object-fit: contain;
     display: block;
     background: transparent;
@@ -949,6 +830,13 @@ body {
     filter: saturate(1.05) contrast(1.08);
 }
 
+.contact-icon {
+    width: 22px; height: 22px;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 4px;
+}
+
 .location {
     font-family: var(--font-body);
     font-size: 0.875rem;
@@ -957,32 +845,27 @@ body {
     margin-top: 1.5rem;
 }
 
-/* LinkedIn newsletter pill â€” DESIGN.md 980px pill CTA */
+/* LinkedIn newsletter pill */
 .libutton {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     padding: 10px 22px;
-    background: #0a66c2;           /* LinkedIn brand blue */
+    background: #0a66c2;
     color: #ffffff;
-    border-radius: 980px;          /* DESIGN.md pill shape */
+    border-radius: 980px;
     font-family: var(--font-body);
-    font-size: 0.9375rem;          /* 15px â€” between body and button size */
+    font-size: 0.9375rem;
     font-weight: 400;
     letter-spacing: -0.224px;
     text-decoration: none;
     margin-top: 1.25rem;
     transition: var(--transition);
 }
-
-.libutton:hover {
-    background: #004182;
-    color: #ffffff;
-}
+.libutton:hover { background: #004182; color: #ffffff; }
 
 .libutton-icon {
-    width: 18px;
-    height: 18px;
+    width: 18px; height: 18px;
     object-fit: contain;
     flex-shrink: 0;
 }
@@ -1002,129 +885,208 @@ body {
 }
 
 /* ===========================
-   IMAGE ICONS
+   CHATBOT FAB
    =========================== */
-
-/* Contact link icons */
-.contact-icon {
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-    flex-shrink: 0;
-    border-radius: 4px;
-}
-
-/* Chatbot button image */
-.chat-icon-img {
-    width: 22px;
-    height: 22px;
-    object-fit: cover;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-#chatbot-header .chat-icon-img {
-    width: 18px;
-    height: 18px;
-}
-
-/* ===========================
-   CHATBOT â€” updated to Apple
-   =========================== */
-#chatbot-btn {
+#chatbot-fab {
     position: fixed;
     bottom: 28px;
     right: 28px;
-    background: var(--apple-blue);
-    color: var(--white);
-    border: none;
-    border-radius: 980px;
-    padding: 10px 20px;
-    font-family: var(--font-body);
-    font-size: 0.875rem;
-    font-weight: 400;
-    letter-spacing: -0.224px;
-    cursor: pointer;
+    z-index: 900;
     display: flex;
     align-items: center;
-    gap: 8px;
-    box-shadow: rgba(0, 113, 227, 0.35) 0 4px 20px;
-    transition: var(--transition);
-    z-index: 999;
+    gap: 10px;
+    padding: 10px 20px 10px 10px;
+    background: #1d1d1f;
+    color: #ffffff;
+    border: none;
+    border-radius: 980px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: -0.224px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.28), 0 1px 4px rgba(0,0,0,0.18);
+    transition: transform 0.22s cubic-bezier(.34,1.56,.64,1),
+                box-shadow 0.22s ease;
 }
 
-#chatbot-btn:hover {
-    background: #0077ed;
-    box-shadow: rgba(0, 113, 227, 0.50) 0 6px 28px;
+#chatbot-fab:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.32), 0 2px 6px rgba(0,0,0,0.18);
 }
 
-.chat-icon-img {
-    width: 1.05rem;
-    height: 1.05rem;
-    object-fit: contain;
-    display: inline-block;
-    vertical-align: middle;
+#chatbot-fab:active { transform: scale(0.97); }
+
+/* Pulsing green ring */
+.fab-status-ring {
+    position: absolute;
+    left: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #30d158;
+    opacity: 0;
+    animation: fab-pulse 2.6s ease-out infinite;
+    pointer-events: none;
+}
+
+@keyframes fab-pulse {
+    0%   { transform: scale(0.92); opacity: 0.75; }
+    70%  { transform: scale(1.30); opacity: 0; }
+    100% { opacity: 0; }
+}
+
+.fab-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.15);
+}
+
+.fab-label { white-space: nowrap; line-height: 1; }
+
+/* ===========================
+   CHATBOT SHEET
+   =========================== */
+#chatbot-sheet {
+    position: fixed;
+    bottom: 90px;
+    right: 28px;
+    z-index: 1000;
+    width: 400px;
+    max-width: calc(100vw - 32px);
+    height: 580px;
+    max-height: calc(100vh - 120px);
+    pointer-events: none;
+    transform: translateY(20px) scale(0.96);
+    opacity: 0;
+    transition: transform 0.32s cubic-bezier(.32,.72,0,1),
+                opacity 0.26s ease;
+}
+
+#chatbot-sheet[data-open="true"] {
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+#sheet-inner {
+    width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #1c1c1e;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow:
+        0 24px 60px rgba(0,0,0,0.50),
+        0 8px 20px rgba(0,0,0,0.30),
+        0 0 0 0.5px rgba(255,255,255,0.08);
+}
+
+.sheet-drag-handle {
+    display: none;
+    width: 36px; height: 4px;
     border-radius: 2px;
+    background: rgba(255,255,255,0.20);
+    margin: 10px auto 0;
     flex-shrink: 0;
 }
 
-#chatbot-modal {
-    display: none;
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 400px;
-    max-width: 92vw;
-    height: 580px;
-    background: var(--near-black);
-    border-radius: 12px;
-    box-shadow: rgba(0,0,0,0.50) 0 8px 40px;
-    z-index: 1000;
-    flex-direction: column;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.10);
-}
-
-#chatbot-header {
-    background: var(--ds-4);
-    padding: 12px 18px;
-    display: flex;
-    justify-content: space-between;
+/* Header */
+#sheet-header {
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
     align-items: center;
-    color: var(--white);
-    font-family: var(--font-body);
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: -0.224px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 14px 12px 14px 8px;
+    background: #1c1c1e;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    flex-shrink: 0;
 }
 
-#chatbot-close {
-    background: none;
-    border: none;
-    color: rgba(255,255,255,0.48);
-    font-size: 1.25rem;
-    cursor: pointer;
-    line-height: 1;
-    transition: color 0.2s;
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
+#sheet-back,
+#sheet-close {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.07);
+    border: none;
+    border-radius: 50%;
+    color: rgba(255,255,255,0.70);
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease;
+    flex-shrink: 0;
 }
 
-#chatbot-close:hover {
-    background: rgba(255,255,255,0.12);
-    color: var(--white);
+#sheet-back:hover,
+#sheet-close:hover {
+    background: rgba(255,255,255,0.14);
+    color: #ffffff;
 }
 
+/* Back hidden on desktop */
+#sheet-back { display: none; }
+
+.sheet-identity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+}
+
+.sheet-avatar-wrap { position: relative; flex-shrink: 0; }
+
+.sheet-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid rgba(255,255,255,0.12);
+    display: block;
+}
+
+.sheet-online-dot {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #30d158;
+    border: 2px solid #1c1c1e;
+}
+
+.sheet-meta {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    gap: 1px;
+}
+
+.sheet-name {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -0.224px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sheet-status {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    color: #30d158;
+}
+
+/* iframe */
 #chatbot-iframe {
     flex: 1;
     width: 100%;
     border: none;
     background: #0f1117;
+    display: block;
+    min-height: 0;
 }
 
 /* ===========================
@@ -1133,11 +1095,10 @@ body {
 @media (max-width: 768px) {
     .nav-menu {
         position: fixed;
-        top: 48px;
-        left: -100%;
+        top: 48px; left: -100%;
         width: 100%;
         height: calc(100vh - 48px);
-        background: rgba(0, 0, 0, 0.96);
+        background: rgba(0,0,0,0.96);
         backdrop-filter: saturate(180%) blur(20px);
         -webkit-backdrop-filter: saturate(180%) blur(20px);
         flex-direction: column;
@@ -1148,22 +1109,17 @@ body {
     }
 
     .nav-menu.active { left: 0; }
-
-    .nav-menu a {
-        font-size: 1.0625rem;
-        opacity: 1;
-    }
+    .nav-menu a { font-size: 1.0625rem; opacity: 1; }
 
     .hamburger { display: flex; }
-
     .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
     .hamburger.active span:nth-child(2) { opacity: 0; }
     .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
     /* Layouts */
-    .about-content { grid-template-columns: 1fr; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .education-grid { grid-template-columns: 1fr; }
+    .about-content   { grid-template-columns: 1fr; }
+    .projects-grid   { grid-template-columns: 1fr; }
+    .education-grid  { grid-template-columns: 1fr; }
 
     /* Hero */
     .hero { padding: 5rem 1.5rem 4rem; }
@@ -1180,21 +1136,62 @@ body {
 
     /* Contact */
     .contact-links { flex-direction: column; align-items: stretch; }
-    .contact-link { justify-content: center; }
+    .contact-link  { justify-content: center; }
 
-    /* Cert modules */
+    /* Cert */
     .cert-header { grid-template-columns: 1.75rem 1fr; column-gap: 0.75rem; }
     .module-icon { width: 26px; height: 26px; }
 
-    /* Skills graph - keep SVG visible on mobile */
-    #skills-graph { display: block; height: 460px; min-height: 420px; }
-    #skills-mobile { display: none; }
+    /* Skills */
+    #skills-graph  { display: none; }
+    #skills-mobile { display: block; }
     .skills-subtitle { font-size: 0.9375rem; margin-bottom: 1.25rem; }
 
-    /* Chatbot button â€” smaller on mobile */
-    #chatbot-btn { padding: 9px 14px; font-size: 0.8125rem; bottom: 16px; right: 16px; }
-    .chat-label { display: none; }   /* icon only on mobile */
-    #chatbot-btn .chat-icon-img { width: 20px; height: 20px; }
+    /* ── CHATBOT MOBILE SHEET ── */
+    #chatbot-fab {
+        bottom: 20px; right: 20px;
+        padding: 10px;
+        width: 52px; height: 52px;
+        justify-content: center;
+    }
+
+    .fab-label { display: none; }
+
+    .fab-status-ring {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* Full-screen slide-up */
+    #chatbot-sheet {
+        bottom: 0; right: 0; left: 0;
+        width: 100%; max-width: 100%;
+        height: 100dvh; max-height: 100dvh;
+        transform: translateY(100%);
+        opacity: 1;
+        border-radius: 0;
+        transition: transform 0.38s cubic-bezier(.32,.72,0,1);
+    }
+
+    #chatbot-sheet[data-open="true"] {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    #sheet-inner { border-radius: 0; height: 100%; box-shadow: none; }
+
+    .sheet-drag-handle { display: block; }
+    #sheet-back  { display: flex; }
+    #sheet-close { display: none; }
+
+    #sheet-header {
+        padding: 12px 16px;
+        grid-template-columns: 44px 1fr 0;
+    }
+
+    .sheet-name   { font-size: 1rem; }
+    .sheet-status { font-size: 0.75rem; }
+    .sheet-avatar { width: 40px; height: 40px; }
 }
 
 @media (max-width: 480px) {
@@ -1203,26 +1200,8 @@ body {
     .tagline { font-size: 1rem; }
     .section { padding: 3.5rem 1rem; }
     .section-title { font-size: 1.75rem; }
-
-    #skills-graph { height: 400px; min-height: 360px; }
-
-    /* Project cards full-width */
-    .project-card { padding: 1.25rem; }
-
-    /* Timeline tighter */
+    .project-card  { padding: 1.25rem; }
     .timeline-item { padding-left: 2rem; }
     .timeline-content { padding: 1rem; }
-
-    /* Libutton full width */
     .libutton { width: 100%; max-width: 280px; justify-content: center; }
-
-    /* Chatbot modal full-screen on very small phones */
-    #chatbot-modal { width: 100vw; height: 100vh; bottom: 0; right: 0; border-radius: 0; }
 }
-
-
-
-
-
-
-
