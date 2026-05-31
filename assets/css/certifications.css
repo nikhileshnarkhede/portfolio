@@ -1,0 +1,252 @@
+/* ===========================
+   CERTIFICATIONS SECTION
+   Aligned with Apple design system (style.css)
+   - 8px radii, --shadow-card, Apple Blue accent
+   - brand logo colors kept for issuer marks only
+   =========================== */
+
+/* Subtitle — matches .skills-subtitle */
+.certs-subtitle {
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    font-weight: 400;
+    letter-spacing: -0.374px;
+    color: var(--text-body-light);
+    margin-bottom: 3rem;
+}
+
+/* Group wrapper */
+.cert-group {
+    margin-bottom: 2.75rem;
+}
+
+.cert-group:last-of-type {
+    margin-bottom: 0;
+}
+
+/* Group label row */
+.cert-group-label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--near-black);
+    letter-spacing: -0.224px;
+    margin-bottom: 1.25rem;
+}
+
+/* Apple Blue bullet — single accent color per DESIGN.md */
+.cert-group-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--apple-blue);
+    flex-shrink: 0;
+}
+
+/* Count chip — neutral */
+.cert-group-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 20px;
+    padding: 0 7px;
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--text-secondary-light);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 980px;
+}
+
+/* "2026" recency chip — Apple Blue */
+.cert-group-new {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 9px;
+    background: var(--apple-blue);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-radius: 980px;
+}
+
+/* 3-column grid */
+.certs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+/* ── Tile — matches .project-card (white, 8px, shadow-card) ── */
+.cert-tile {
+    position: relative;
+    background: var(--white);
+    border-radius: 8px;
+    padding: 1.5rem 1.25rem 1.1rem;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    transition: var(--transition);
+}
+
+.cert-tile:hover {
+    box-shadow: rgba(0, 0, 0, 0.28) 3px 8px 40px 0px;
+    transform: translateY(-2px);
+}
+
+/* Header row: logo + meta */
+.cert-tile-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Issuer logo mark — brand colors (like contact icons) */
+.cert-tile-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--white);
+    flex-shrink: 0;
+}
+
+/* When the logo is a real image (Anthropic), fill the rounded box */
+img.cert-tile-logo {
+    object-fit: cover;
+    background: var(--white);
+}
+
+.edvancer-logo  { background: #1e3a8a; }   /* Edvancer deep blue */
+.anthropic-logo { background: #c15f3c; }   /* Anthropic clay (text fallback only) */
+
+/* Issuer name + date */
+.cert-tile-issuer {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--near-black);
+    letter-spacing: -0.12px;
+    line-height: 1.25;
+}
+
+.cert-tile-date {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-secondary-light);
+    letter-spacing: -0.08px;
+}
+
+/* Cert name */
+.cert-tile-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--near-black);
+    line-height: 1.25;
+    letter-spacing: -0.224px;
+}
+
+/* Skill pill tags (Edvancer cards) — matches .project-tags */
+.cert-tile-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.cert-tile-tags span {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: -0.08px;
+    background: var(--light-bg);
+    color: var(--text-body-light);
+    padding: 3px 9px;
+    border-radius: 980px;
+}
+
+/* Credential ID line (Edvancer — no public verify URL) */
+.cert-tile-cred {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: -0.08px;
+    color: var(--text-secondary-light);
+    margin-top: auto;
+}
+
+/* Expert / Certified badge — Apple Blue */
+.cert-tile-badge {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.1rem;
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--apple-blue);
+    background: rgba(0, 113, 227, 0.08);
+    padding: 3px 9px;
+    border-radius: 980px;
+}
+
+/* Description (Anthropic cards) */
+.cert-tile-desc {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.47;
+    letter-spacing: -0.12px;
+    color: var(--text-body-light);
+    flex: 1;
+}
+
+/* Credential link — matches .project-link */
+.cert-tile-link {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: -0.224px;
+    color: var(--link-light);
+    transition: var(--transition);
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+.cert-tile-link:hover {
+    text-decoration: underline;
+}
+
+/* Footer CTA */
+.certs-footer {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .certs-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .certs-subtitle { font-size: 0.9375rem; margin-bottom: 2rem; }
+}
+
+@media (max-width: 580px) {
+    .certs-grid { grid-template-columns: 1fr; }
+    .cert-tile { padding: 1.25rem 1.1rem 1rem; }
+}
