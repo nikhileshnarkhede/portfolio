@@ -49,7 +49,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-document.querySelectorAll('.project-card, .publication-item').forEach(el => {
+document.querySelectorAll('.__disabled-handled-by-scrolljs').forEach(el => {
     el.style.opacity   = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +6,7 @@
     <title>Chat with YouTube Videos | Nikhilesh Narkhede</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="project.css">
+    <link rel="stylesheet" href="../assets/css/scroll.css">
 </head>
 <body>
     <nav class="navbar">
@@ -27,42 +28,42 @@
 
     <main class="project-detail">
         <section>
-            <h2>Project Overview</h2>
-            <ul class="highlight-list">
-                <li>Designed and built an end-to-end conversational AI system enabling users to ask natural language questions about long-form YouTube videos</li>
-                <li>Extracted and processed video transcripts, performing text chunking and preprocessing to support efficient semantic retrieval</li>
-                <li>Generated dense vector embeddings using Sentence Transformers and HuggingFace models to capture contextual meaning</li>
-                <li>Implemented semantic search pipelines using FAISS and ChromaDB to retrieve the most relevant transcript segments in real time</li>
-                <li>Integrated Large Language Models (LLMs) via LangChain with OpenAI and Anthropic APIs to generate accurate, context-aware answers (RAG architecture)</li>
-                <li>Developed an interactive Streamlit application to deliver low-latency, user-friendly conversational experiences</li>
-                <li>Demonstrated applied NLP and GenAI system design, combining retrieval, embeddings, and generation into a production-style workflow</li>
+            <h2 class="reveal">Project Overview</h2>
+            <ul class="highlight-list reveal" data-stagger="60">
+                <li class="reveal">Designed and built an end-to-end conversational AI system enabling users to ask natural language questions about long-form YouTube videos</li>
+                <li class="reveal">Extracted and processed video transcripts, performing text chunking and preprocessing to support efficient semantic retrieval</li>
+                <li class="reveal">Generated dense vector embeddings using Sentence Transformers and HuggingFace models to capture contextual meaning</li>
+                <li class="reveal">Implemented semantic search pipelines using FAISS and ChromaDB to retrieve the most relevant transcript segments in real time</li>
+                <li class="reveal">Integrated Large Language Models (LLMs) via LangChain with OpenAI and Anthropic APIs to generate accurate, context-aware answers (RAG architecture)</li>
+                <li class="reveal">Developed an interactive Streamlit application to deliver low-latency, user-friendly conversational experiences</li>
+                <li class="reveal">Demonstrated applied NLP and GenAI system design, combining retrieval, embeddings, and generation into a production-style workflow</li>
             </ul>
         </section>
 
         <section>
-            <h2>Repository</h2>
-            <div class="repo-card">
+            <h2 class="reveal">Repository</h2>
+            <div class="repo-card reveal reveal--scale">
                 <h3>&#x1F4AC; Chat with YouTube Video</h3>
                 <p>RAG-based conversational AI with semantic search using FAISS and ChromaDB, LLM integration via LangChain, and interactive Streamlit interface.</p>
                 <a href="https://github.com/nikhileshnarkhede/Chat_with_YouTube_Video" target="_blank" class="repo-link">View on GitHub &rarr;</a>
             </div>
         </section>
 
-        <div class="skills-section">
+        <div class="skills-section reveal reveal--scale">
             <h3>Technologies Used</h3>
-            <div class="tech-tags">
-                <span>Python</span>
-                <span>NLP</span>
-                <span>Conversational AI</span>
-                <span>RAG</span>
-                <span>LLMs</span>
-                <span>LangChain</span>
-                <span>HuggingFace</span>
-                <span>FAISS</span>
-                <span>ChromaDB</span>
-                <span>Vector Databases</span>
-                <span>Streamlit</span>
-                <span>API Integration</span>
+            <div class="tech-tags" data-stagger="45">
+                <span class="reveal reveal--scale">Python</span>
+                <span class="reveal reveal--scale">NLP</span>
+                <span class="reveal reveal--scale">Conversational AI</span>
+                <span class="reveal reveal--scale">RAG</span>
+                <span class="reveal reveal--scale">LLMs</span>
+                <span class="reveal reveal--scale">LangChain</span>
+                <span class="reveal reveal--scale">HuggingFace</span>
+                <span class="reveal reveal--scale">FAISS</span>
+                <span class="reveal reveal--scale">ChromaDB</span>
+                <span class="reveal reveal--scale">Vector Databases</span>
+                <span class="reveal reveal--scale">Streamlit</span>
+                <span class="reveal reveal--scale">API Integration</span>
             </div>
         </div>
     </main>
@@ -70,6 +71,7 @@
     <footer class="footer">
         <p>&copy; 2025 Nikhilesh Narkhede. All rights reserved.</p>
     </footer>
+    <script src="../assets/js/scroll.js"></script>
 </body>
 </html>
 
