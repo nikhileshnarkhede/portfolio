@@ -1,3 +1,6 @@
+html, body { overflow-x: clip; }
+img, svg, video { max-width: 100%; }
+
 /* ===========================
    PROJECT PAGES — Apple Design
    Shared stylesheet for all

@@ -222,11 +222,18 @@
 @media (max-width: 768px) {
     .exp-card {
         top: calc(72px + var(--i) * 12px);
+        margin-bottom: 30px;        /* tighter stack rhythm on phones */
         padding: 1.4rem 1.4rem 1.3rem;
         border-radius: 16px;
     }
-    .exp-index { font-size: 2rem; }
+    /* let the date pill drop below the index number if space is tight */
+    .exp-card-top {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    .exp-index { font-size: 1.9rem; }
     .exp-role  { font-size: 1.15rem; }
+    .exp-stack { padding-bottom: 4vh; }
 }
 
 /* ============================================================
