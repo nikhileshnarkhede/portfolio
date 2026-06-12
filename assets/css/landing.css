@@ -1,0 +1,304 @@
+/* ============================================================
+   landing.css — Award-level landing layer
+   Sits on top of style.css / scroll.css.
+   • Three.js "loss landscape" hero (gradient descent signature)
+   • GSAP-orchestrated intro (masked line reveals)
+   • Stats strip, scroll cue, figure caption
+   • Auto-hiding glass navbar
+   All motion honors prefers-reduced-motion.
+   ============================================================ */
+
+/* ---------- Navbar: auto-hide on scroll down ---------- */
+.navbar {
+    transition: transform 0.42s cubic-bezier(0.32, 0.72, 0, 1),
+                box-shadow 0.3s ease;
+    will-change: transform;
+}
+.navbar.nav-hidden { transform: translateY(-100%); }
+
+@media (prefers-reduced-motion: reduce) {
+    .navbar { transition: none; }
+    .navbar.nav-hidden { transform: none; }
+}
+
+/* ---------- Selection ---------- */
+::selection { background: #0071e3; color: #ffffff; }
+
+/* ============================================================
+   HERO — full-viewport stage for the loss-landscape canvas
+   ============================================================ */
+.hero {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+    /* override style.css flex centering padding rhythm slightly */
+    padding: 7rem 2rem 6rem;
+    isolation: isolate;
+}
+
+#hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: block;
+    opacity: 0.95;
+}
+
+/* soft vignette so type stays legible above the surface */
+.hero-vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 70% 52% at 50% 42%,
+            rgba(0, 0, 0, 0.62) 0%,
+            rgba(0, 0, 0, 0.30) 55%,
+            rgba(0, 0, 0, 0) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+/* ---------- Eyebrow ---------- */
+.hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.64);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 7px 16px;
+    border-radius: 980px;
+    margin-bottom: 1.75rem;
+}
+
+.eyebrow-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #2997ff;
+    box-shadow: 0 0 10px rgba(41, 151, 255, 0.9);
+    flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .eyebrow-dot { animation: eyebrow-pulse 2.8s ease-in-out infinite; }
+}
+@keyframes eyebrow-pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.35; }
+}
+
+/* ---------- Title: masked line reveal ---------- */
+.hero-content .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 10vw, 6.75rem);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -0.028em;
+    color: var(--white);
+    margin: 0 0 1.5rem;
+}
+
+.hero-line-mask {
+    display: block;
+    overflow: hidden;
+    /* breathing room so descenders aren't clipped by the mask */
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+}
+
+.hero-line { display: block; will-change: transform; }
+
+/* ---------- Sub ---------- */
+.hero-content .hero-sub {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.6vw, 1.1875rem);
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.374px;
+    color: rgba(255, 255, 255, 0.66);
+    max-width: 620px;
+    margin: 0 auto 2.5rem;
+}
+
+/* ---------- Stats strip ---------- */
+.hero-stats {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 0;
+    margin-top: 3.25rem;
+}
+
+.hero-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0 2.25rem;
+    position: relative;
+}
+
+.hero-stat + .hero-stat::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12%;
+    bottom: 12%;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.stat-value {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.4vw, 1.625rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    line-height: 1.1;
+    white-space: nowrap;
+}
+
+.stat-label {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.44);
+    white-space: nowrap;
+}
+
+/* ---------- Figure caption (signature footnote) ---------- */
+.hero-fig {
+    position: absolute;
+    left: 2rem;
+    bottom: 1.6rem;
+    z-index: 2;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.03em;
+    color: rgba(255, 255, 255, 0.34);
+    pointer-events: none;
+}
+
+/* ---------- Scroll cue ---------- */
+.scroll-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 1.5rem;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scroll-cue-track {
+    display: block;
+    width: 24px;
+    height: 40px;
+    border: 1.5px solid rgba(255, 255, 255, 0.30);
+    border-radius: 980px;
+    position: relative;
+    transition: border-color 0.25s ease;
+}
+
+.scroll-cue:hover .scroll-cue-track { border-color: rgba(255, 255, 255, 0.7); }
+
+.scroll-cue-dot {
+    position: absolute;
+    left: 50%;
+    top: 7px;
+    width: 4px;
+    height: 8px;
+    margin-left: -2px;
+    border-radius: 980px;
+    background: rgba(255, 255, 255, 0.75);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .scroll-cue-dot { animation: cue-drop 2.2s cubic-bezier(0.45, 0, 0.2, 1) infinite; }
+}
+@keyframes cue-drop {
+    0%   { transform: translateY(0);    opacity: 1; }
+    62%  { transform: translateY(14px); opacity: 0; }
+    63%  { transform: translateY(0);    opacity: 0; }
+    100% { transform: translateY(0);    opacity: 1; }
+}
+
+.scroll-cue:focus-visible {
+    outline: 2px solid #0071e3;
+    outline-offset: 4px;
+    border-radius: 980px;
+}
+
+/* ---------- CTA refinements ---------- */
+.hero .cta-buttons .btn { will-change: transform; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+    .hero { padding: 6.5rem 1.5rem 5.5rem; }
+
+    .hero-stats {
+        flex-wrap: wrap;
+        gap: 1.1rem 0;
+        margin-top: 2.5rem;
+    }
+
+    .hero-stat {
+        flex: 1 1 50%;
+        padding: 0 0.75rem;
+    }
+
+    /* keep only the middle divider per row */
+    .hero-stat + .hero-stat::before { display: none; }
+    .hero-stat:nth-child(2)::before,
+    .hero-stat:nth-child(4)::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 12%;
+        bottom: 12%;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.14);
+    }
+
+    .hero-fig { display: none; }
+    .scroll-cue { bottom: 1.1rem; }
+}
+
+@media (max-width: 480px) {
+    .hero-content .hero-title { font-size: clamp(2.6rem, 14vw, 3.4rem); }
+    .hero-eyebrow {
+        font-size: 0.6875rem;
+        letter-spacing: 0.1em;
+        padding: 6px 13px;
+    }
+    .stat-label { font-size: 0.65rem; }
+}
+
+/* short viewports (landscape phones): hide the cue, tighten */
+@media (max-height: 560px) {
+    .scroll-cue { display: none; }
+    .hero { padding-top: 5.5rem; padding-bottom: 3.5rem; }
+    .hero-stats { margin-top: 1.75rem; }
+}

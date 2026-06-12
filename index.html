@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/certifications.css">
     <link rel="stylesheet" href="assets/css/scroll.css">
+    <link rel="stylesheet" href="assets/css/landing.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
@@ -33,24 +35,40 @@
         </div>
     </nav>
 
-    <!-- ===== Hero — Dark immersive ===== -->
-    <header class="hero">
+    <!-- ===== Hero — Dark immersive · Three.js loss landscape ===== -->
+    <header class="hero" id="top">
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
+        <div class="hero-vignette" aria-hidden="true"></div>
         <div class="hero-content">
-            <h1>Hi, I'm <span class="highlight">Nikhilesh Narkhede</span></h1>
-            <p class="tagline">Data Science Researcher &amp; ML/DL Engineer</p>
-            <p class="subtitle">Bridging Machine Learning and Deep Learning with real-world applications</p>
+            <p class="hero-eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Data Science Researcher &amp; ML/DL Engineer</p>
+            <h1 class="hero-title">
+                <span class="hero-line-mask"><span class="hero-line">Nikhilesh</span></span>
+                <span class="hero-line-mask"><span class="hero-line">Narkhede</span></span>
+            </h1>
+            <p class="hero-sub">Bridging machine learning and deep learning with real-world applications  interpretable, scalable, and production-ready.</p>
             <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">View Projects</a>
-                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
-                <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7447323018998988800" target="_blank" class="btn btn-pill-dark">View My Newsletter</a>
+                <a href="#projects" class="btn btn-primary">View projects</a>
+                <a href="#contact" class="btn btn-secondary">Get in touch</a>
+                <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7447323018998988800" target="_blank" class="btn btn-pill-dark">Read my newsletter</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat"><span class="stat-value">4.0</span><span class="stat-label">Graduate GPA</span></div>
+                <div class="hero-stat"><span class="stat-value">R&sup2; &gt; 0.98</span><span class="stat-label">Published model</span></div>
+                <div class="hero-stat"><span class="stat-value">10+</span><span class="stat-label">Featured projects</span></div>
+                <div class="hero-stat"><span class="stat-value">23</span><span class="stat-label">Certifications</span></div>
             </div>
         </div>
+        <!-- <p class="hero-fig">fig. 01 &dash; gradient descent over f(&theta;)</p> -->
+        <a class="scroll-cue" href="#about" aria-label="Scroll to About">
+            <span class="scroll-cue-track"><span class="scroll-cue-dot"></span></span>
+        </a>
     </header>
 
     <!-- ===== About — Light ===== -->
     <section id="about" class="section section-light">
         <div class="container">
             <h2 class="section-title reveal">About Me</h2>
+            <p class="about-lead" data-accent="interpretable,scalable,production-ready">I turn ambiguous, real-world problems into interpretable, scalable, production-ready machine learning  from first principles to deployed models.</p>
             <div class="about-content">
                 <div class="about-text" data-stagger="120">
                     <p class="reveal">I am a <strong>Master's student in Data Science</strong> at UMass Dartmouth with a Bachelor's degree in Mechanical Engineering and an <strong><a href="https://verify.eicta.digitalcredentials.in/65e424b5-68ff-44eb-b974-fc73e27add6c" target="_blank">Advanced Certification in AI &amp; ML from IIT Kanpur</a></strong>. I bring a strong academic foundation and deep enthusiasm for statistical modeling, mathematics, and using data to solve real-world problems.</p>
@@ -74,8 +92,11 @@
         </div>
     </section>
 
-    <!-- ===== Experience — Dark ===== -->
+    <!-- ===== Experience — Dark · Three.js career trajectory ===== -->
     <section id="experience" class="section section-dark">
+        <div class="exp-canvas-wrap" aria-hidden="true">
+            <canvas id="exp-canvas"></canvas>
+        </div>
         <div class="container">
             <h2 class="section-title reveal">Experience</h2>
             <div class="exp-stack">
@@ -86,7 +107,7 @@
                         <span class="exp-index">01</span>
                     </div>
                     <h3 class="exp-role">Research Assistant (Part-Time)</h3>
-                    <h4 class="exp-org">University of Massachusetts Dartmouth &mdash; Greater Boston, MA</h4>
+                    <h4 class="exp-org">University of Massachusetts Dartmouth &dash; Greater Boston, MA</h4>
                     <p class="exp-desc">Developed physics-aware ML framework for FFF-processed ABS materials. Applied Symbolic Regression Analysis and trained DNN surrogate models. Implemented NSGA-II multi-objective optimization achieving Pareto-optimal process windows for strength, toughness, and energy absorption.</p>
                     <div class="exp-tags">
                         <span>Python</span><span>Deep Learning</span><span>NSGA-II</span><span>Feature Engineering</span>
@@ -125,7 +146,7 @@
                         <span class="exp-index">04</span>
                     </div>
                     <h3 class="exp-role">Research Assistant Intern</h3>
-                    <h4 class="exp-org">DRDO — Armament Research &amp; Development Establishment &mdash; Pune, India</h4>
+                    <h4 class="exp-org">DRDO — Armament Research &amp; Development Establishment &dash; Pune, India</h4>
                     <p class="exp-desc">Designed propulsion systems for artillery rockets. Performed CFD and thermal simulations using Ansys. Built mathematical models with Python and MATLAB for performance prediction and design validation.</p>
                     <div class="exp-tags">
                         <span>Python</span><span>MATLAB</span><span>CFD</span><span>Ansys</span>
@@ -138,7 +159,7 @@
                         <span class="exp-index">05</span>
                     </div>
                     <h3 class="exp-role">Project Trainee — Predictive Maintenance</h3>
-                    <h4 class="exp-org">Bajaj Auto Ltd &mdash; Chakan, India</h4>
+                    <h4 class="exp-org">Bajaj Auto Ltd &dash; Chakan, India</h4>
                     <p class="exp-desc">Developed predictive maintenance models for automotive manufacturing. Analyzed machine data to identify equipment failure indicators. Applied statistical techniques for maintenance forecasting and reliability improvement.</p>
                     <div class="exp-tags">
                         <span>Predictive Maintenance</span><span>Data Analysis</span><span>Python</span><span>Statistics</span>
@@ -151,7 +172,7 @@
                         <span class="exp-index">06</span>
                     </div>
                     <h3 class="exp-role">CAD Engineer Intern (Computer Vision Collaboration)</h3>
-                    <h4 class="exp-org">Artenal &mdash; Vancouver, Canada</h4>
+                    <h4 class="exp-org">Artenal &dash; Vancouver, Canada</h4>
                     <p class="exp-desc">Collaborated with CV engineers on robotics projects. Designed mechanical end effectors for vision-based robotic manipulation. Contributed to autonomous apple-harvesting robot integrating robotics and vision systems.</p>
                     <div class="exp-tags">
                         <span>Computer Vision</span><span>Robotics</span><span>SOLIDWORKS</span><span>CAD</span>
@@ -297,10 +318,36 @@
             <h2 class="section-title reveal">Publications</h2>
             <div class="publications-list">
                 <div class="publication-item reveal reveal--scale">
-                    <h3>Prediction of Mechanical and Fracture Properties of Lightweight Polyurethane Composites Using Machine Learning Methods</h3>
-                    <p class="pub-venue">Journal of Composite Science, 2025</p>
-                    <p>Developed ML models achieving R² &gt; 0.99 for predicting mechanical properties of polyurethane composites, outperforming traditional empirical approaches.</p>
-                    <a href="https://doi.org/10.3390/jcs9060271" target="_blank" class="project-link">Read Paper →</a>
+                    <div class="pub-body">
+                        <h3>Prediction of Mechanical and Fracture Properties of Lightweight Polyurethane Composites Using Machine Learning Methods</h3>
+                        <p class="pub-venue">Journal of Composite Science, 2025</p>
+                        <p>Developed ML models achieving R² &gt; 0.99 for predicting mechanical properties of polyurethane composites, outperforming traditional empirical approaches.</p>
+                        <a href="https://doi.org/10.3390/jcs9060271" target="_blank" class="project-link">Read Paper →</a>
+                    </div>
+                    <figure class="pub-figure" aria-hidden="true">
+                        <svg viewBox="0 0 220 170" xmlns="http://www.w3.org/2000/svg">
+                            <!-- axes -->
+                            <line class="pub-axis pub-axis-y" x1="28" y1="10" x2="28" y2="146"/>
+                            <line class="pub-axis pub-axis-x" x1="28" y1="146" x2="208" y2="146"/>
+                            <!-- data points (predicted vs measured) -->
+                            <circle class="pub-pt" style="--d:0.45s" cx="36"  cy="134" r="3"/>
+                            <circle class="pub-pt" style="--d:0.51s" cx="49"  cy="124" r="3"/>
+                            <circle class="pub-pt" style="--d:0.57s" cx="62"  cy="121" r="3"/>
+                            <circle class="pub-pt" style="--d:0.63s" cx="74"  cy="109" r="3"/>
+                            <circle class="pub-pt" style="--d:0.69s" cx="88"  cy="102" r="3"/>
+                            <circle class="pub-pt" style="--d:0.75s" cx="101" cy="92"  r="3"/>
+                            <circle class="pub-pt" style="--d:0.81s" cx="113" cy="87"  r="3"/>
+                            <circle class="pub-pt" style="--d:0.87s" cx="126" cy="74"  r="3"/>
+                            <circle class="pub-pt" style="--d:0.93s" cx="139" cy="69"  r="3"/>
+                            <circle class="pub-pt" style="--d:0.99s" cx="152" cy="57"  r="3"/>
+                            <circle class="pub-pt" style="--d:1.05s" cx="165" cy="48"  r="3"/>
+                            <circle class="pub-pt" style="--d:1.11s" cx="178" cy="40"  r="3"/>
+                            <circle class="pub-pt" style="--d:1.17s" cx="191" cy="28"  r="3"/>
+                            <!-- regression fit — anchored at the plot origin (0,0) -->
+                            <line class="pub-fit" pathLength="1" x1="28" y1="146" x2="204" y2="18"/>
+                        </svg>
+                        <figcaption class="pub-figcap">fig. 1 &dash; predicted vs. measured &middot; R² <span class="pub-r2">0.99</span></figcaption>
+                    </figure>
                 </div>
             </div>
         </div>
@@ -588,20 +635,20 @@
             <h2 class="section-title reveal">Get in Touch</h2>
             <div class="contact-content reveal reveal--scale">
                 <p>Interested in collaboration, research opportunities, or just want to connect?</p>
-                <div class="contact-links">
-                    <a href="mailto:narkhede.nikhilesh@gmail.com" class="contact-link">
+                <div class="contact-links" data-stagger="70">
+                    <a href="mailto:narkhede.nikhilesh@gmail.com" class="contact-link reveal reveal--scale">
                         <img class="contact-icon" src="Image/pngtree-email-icon-png-image_5065641.jpg" alt="">narkhede.nikhilesh@gmail.com
                     </a>
-                    <a href="https://github.com/nikhileshnarkhede" target="_blank" class="contact-link">
+                    <a href="https://github.com/nikhileshnarkhede" target="_blank" class="contact-link reveal reveal--scale">
                         <img class="contact-icon" src="Image/github-computer-icons-logo-repository-png-favpng-3D6iEY0b391hz9PYJZqnvKTLT.jpg" alt="">GitHub
                     </a>
-                    <a href="https://www.linkedin.com/in/nikhileshnarkhede" target="_blank" class="contact-link">
+                    <a href="https://www.linkedin.com/in/nikhileshnarkhede" target="_blank" class="contact-link reveal reveal--scale">
                         <img class="contact-icon" src="Image/hd-vector-flat-linkedin-in-round-icon-png-701751695046390m4phkuuiqm.png" alt="">LinkedIn
                     </a>
-                    <a href="https://medium.com/@narkhede.nikhilesh" target="_blank" class="contact-link">
+                    <a href="https://medium.com/@narkhede.nikhilesh" target="_blank" class="contact-link reveal reveal--scale">
                         <img class="contact-icon" src="Image/png-transparent-medium-medium-logo-social-media-circle-icon.png" alt="">Medium
                     </a>
-                    <a href="tel:+15085093697" class="contact-link">
+                    <a href="tel:+15085093697" class="contact-link reveal reveal--scale">
                         <img class="contact-icon" src="Image/pngtree-mobile-vector-icon-png-image_470662.jpg" alt="">+1 (508) 509-3697
                     </a>
                 </div>
@@ -625,6 +672,12 @@
         <img class="fab-avatar" src="Image/chatbot-icon.jpeg" alt="" aria-hidden="true">
         <span class="fab-label">Chat with My AI Clone</span>
     </button>
+
+    <!-- Greeting nudge -->
+    <div id="chat-nudge" role="status" hidden>
+        <span class="chat-nudge-text">&#x1F44B; Hi! Ask my AI clone about my research &amp; projects</span>
+        <button id="chat-nudge-close" aria-label="Dismiss">&times;</button>
+    </div>
 
     <!-- ===== Chatbot Sheet ===== -->
     <div id="chatbot-sheet" role="dialog" aria-modal="true" aria-label="Chat with Nikhilesh's AI Clone">
@@ -652,18 +705,36 @@
                     </svg>
                 </button>
             </div>
-            <iframe
-                src="https://nikhileshportfoliochatbot.streamlit.app/?embed=true"
-                id="chatbot-iframe"
-                title="Chat with Nikhilesh's AI Clone"
-                loading="lazy"
-                allow="camera;microphone"
-            ></iframe>
+            <div id="sheet-body">
+                <div id="sheet-loading" aria-hidden="true">
+                    <div class="sheet-loading-dots"><span></span><span></span><span></span></div>
+                    <p>Waking up my clone&hellip;</p>
+                </div>
+                <iframe
+                    src="https://nikhileshportfoliochatbot.streamlit.app/?embed=true&embed_options=dark_theme"
+                    id="chatbot-iframe"
+                    title="Chat with Nikhilesh's AI Clone"
+                    loading="lazy"
+                    allow="camera;microphone"
+                ></iframe>
+            </div>
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/skills-graph.js"></script>
+    <script src="assets/js/skills-neural.js"></script>
     <script src="assets/js/scroll.js"></script>
+    <script src="assets/js/hero-three.js"></script>
+    <script src="assets/js/exp-three.js"></script>
+    <script src="assets/js/projects-fx.js"></script>
+    <script src="assets/js/certs-fx.js"></script>
+    <script src="assets/js/about-fx.js"></script>
+    <script src="assets/js/pubs-fx.js"></script>
+    <script src="assets/js/contact-fx.js"></script>
+    <script src="assets/js/landing-anim.js"></script>
 </body>
 </html>

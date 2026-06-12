@@ -915,9 +915,11 @@ body {
     align-items: center;
     gap: 10px;
     padding: 10px 20px 10px 10px;
-    background: #1d1d1f;
+    background: rgba(29, 29, 31, 0.86);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+    backdrop-filter: saturate(160%) blur(14px);
     color: #ffffff;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.10);
     border-radius: 980px;
     cursor: pointer;
     font-family: var(--font-body);
@@ -931,12 +933,58 @@ body {
 
 #chatbot-fab:hover {
     transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.32), 0 2px 6px rgba(0,0,0,0.18);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.36),
+                0 0 22px rgba(41, 151, 255, 0.22),
+                0 2px 6px rgba(0,0,0,0.18);
 }
 
 #chatbot-fab:active { transform: scale(0.97); }
 
-/* Pulsing green ring */
+/* hidden until main.js plays the entrance (visible if JS fails) */
+#chatbot-fab.fab-pre { opacity: 0; }
+
+#chatbot-fab.fab-in {
+    animation: fab-enter 0.6s cubic-bezier(.34,1.56,.64,1) both;
+}
+
+@keyframes fab-enter {
+    from { opacity: 0; transform: translateY(18px) scale(0.7); }
+    to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+/* rotating "AI presence" ring around the avatar
+   (uses the global @property --beam registered in scroll.css) */
+#chatbot-fab::before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    padding: 2px;
+    pointer-events: none;
+    background: conic-gradient(from var(--beam),
+        rgba(41, 151, 255, 0.0) 0deg,
+        rgba(41, 151, 255, 0.9) 120deg,
+        rgba(142, 200, 255, 1) 160deg,
+        rgba(41, 151, 255, 0.9) 200deg,
+        rgba(41, 151, 255, 0.0) 330deg);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    #chatbot-fab::before { animation: edu-beam 3.6s linear infinite; }
+}
+
+/* soft outward pulse — blue, matching the site accent */
 .fab-status-ring {
     position: absolute;
     top: 10px;
@@ -944,16 +992,21 @@ body {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    border: 2px solid #30d158;
+    border: 2px solid rgba(41, 151, 255, 0.8);
     opacity: 0;
-    animation: fab-pulse 2.6s ease-out infinite;
+    animation: fab-pulse 2.8s ease-out infinite;
     pointer-events: none;
 }
 
 @keyframes fab-pulse {
-    0%   { transform: scale(0.92); opacity: 0.75; }
-    70%  { transform: scale(1.30); opacity: 0; }
+    0%   { transform: scale(0.92); opacity: 0.65; }
+    70%  { transform: scale(1.34); opacity: 0; }
     100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fab-status-ring { animation: none; }
+    #chatbot-fab.fab-in { animation: none; opacity: 1; }
 }
 
 .fab-avatar {
@@ -965,6 +1018,62 @@ body {
 }
 
 .fab-label { white-space: nowrap; line-height: 1; }
+
+/* ===========================
+   GREETING NUDGE
+   =========================== */
+#chat-nudge {
+    position: fixed;
+    right: 28px;
+    bottom: 96px;
+    z-index: 899;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 280px;
+    padding: 12px 14px;
+    background: rgba(29, 29, 31, 0.92);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+    backdrop-filter: saturate(160%) blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 16px 16px 4px 16px;
+    box-shadow: 0 10px 34px rgba(0,0,0,0.34);
+    color: rgba(255, 255, 255, 0.92);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    letter-spacing: -0.1px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(.34,1.56,.64,1);
+}
+
+#chat-nudge.nudge-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+#chat-nudge-close {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.08);
+    border: none;
+    border-radius: 50%;
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease;
+}
+
+#chat-nudge-close:hover {
+    background: rgba(255,255,255,0.16);
+    color: #ffffff;
+}
 
 /* ===========================
    CHATBOT SHEET
@@ -1023,6 +1132,13 @@ body {
     border-bottom: 1px solid rgba(255,255,255,0.07);
     flex-shrink: 0;
 }
+
+/* explicit placement — #sheet-back is display:none on desktop, so
+   without these the identity auto-places into the 40px column
+   (squashed avatar, invisible name, close button out of position) */
+#sheet-back      { grid-column: 1; }
+.sheet-identity  { grid-column: 2; }
+#sheet-close     { grid-column: 3; justify-self: end; }
 
 #sheet-back,
 #sheet-close {
@@ -1099,7 +1215,14 @@ body {
     color: #30d158;
 }
 
-/* iframe */
+/* iframe + loading state */
+#sheet-body {
+    position: relative;
+    flex: 1;
+    display: flex;
+    min-height: 0;
+}
+
 #chatbot-iframe {
     flex: 1;
     width: 100%;
@@ -1107,6 +1230,54 @@ body {
     background: #0f1117;
     display: block;
     min-height: 0;
+}
+
+#sheet-loading {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    background: #0f1117;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    letter-spacing: -0.1px;
+    transition: opacity 0.4s ease;
+}
+
+#sheet-loading.done {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#sheet-loading p { margin: 0; }
+
+.sheet-loading-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.sheet-loading-dots span {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #2997ff;
+    animation: sheet-dot 1.2s ease-in-out infinite;
+}
+
+.sheet-loading-dots span:nth-child(2) { animation-delay: 0.15s; }
+.sheet-loading-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes sheet-dot {
+    0%, 100% { transform: translateY(0);    opacity: 0.45; }
+    50%      { transform: translateY(-7px); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sheet-loading-dots span { animation: none; opacity: 0.8; }
 }
 
 /* ===========================
@@ -1174,6 +1345,19 @@ body {
         padding: 8px;
         width: 52px; height: 52px;
         justify-content: center;
+    }
+
+    #chatbot-fab::before {
+        top: 5px;
+        left: 5px;
+        width: 42px;
+        height: 42px;
+    }
+
+    #chat-nudge {
+        right: 20px;
+        bottom: 84px;
+        max-width: min(280px, calc(100vw - 40px));
     }
 
     .fab-label { display: none; }

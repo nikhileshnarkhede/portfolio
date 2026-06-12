@@ -16,6 +16,14 @@
     margin-bottom: 3rem;
 }
 
+/* counting numbers (wrapped by certs-fx.js) — tabular so the line
+   doesn't jitter while digits roll up */
+.certs-num {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    color: var(--near-black);
+}
+
 /* Group wrapper */
 .cert-group {
     margin-bottom: 2.75rem;
@@ -36,6 +44,27 @@
     color: var(--near-black);
     letter-spacing: -0.224px;
     margin-bottom: 1.25rem;
+}
+
+/* hairline rule that draws across the remaining row width when the
+   group enters the viewport (class added by certs-fx.js) */
+.cert-group-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    margin-left: 0.4rem;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.04));
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.15s;
+}
+
+.cert-group-label.rule-in::after {
+    transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cert-group-label::after { transform: scaleX(1); transition: none; }
 }
 
 /* Apple Blue bullet — single accent color per DESIGN.md */
@@ -95,6 +124,42 @@
     flex-direction: column;
     gap: 0.7rem;
     transition: var(--transition);
+    overflow: hidden;   /* contains the gleam sweep */
+}
+
+/* ── Credential gleam — a diagonal light sweep that crosses the tile
+   once, right after the cascade reveals it (.in is toggled by
+   scroll.js; --rd is the tile's cascade stagger delay) ── */
+.cert-tile::after {
+    content: '';
+    position: absolute;
+    top: -40%;
+    bottom: -40%;
+    left: 0;
+    width: 55%;
+    pointer-events: none;
+    transform: translateX(-220%) rotate(18deg);
+    background: linear-gradient(
+        100deg,
+        transparent 20%,
+        rgba(255, 255, 255, 0.0) 35%,
+        rgba(0, 113, 227, 0.06) 48%,
+        rgba(255, 255, 255, 0.55) 52%,
+        rgba(0, 113, 227, 0.06) 56%,
+        transparent 75%
+    );
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .cert-tile.in::after {
+        animation: cert-gleam 1.05s cubic-bezier(0.4, 0.0, 0.2, 1) 1 both;
+        animation-delay: calc(var(--rd, 0ms) + 380ms);
+    }
+}
+
+@keyframes cert-gleam {
+    from { transform: translateX(-220%) rotate(18deg); }
+    to   { transform: translateX(420%)  rotate(18deg); }
 }
 
 .cert-tile:hover {

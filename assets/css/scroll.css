@@ -20,6 +20,20 @@
     background: linear-gradient(90deg, #0071e3, #2997ff);
     z-index: 999;
     will-change: transform;
+    transition: opacity 0.4s ease;
+}
+
+/* once docked inside the navbar (main.js), ride its bottom edge
+   so the bar appears/disappears together with the nav */
+.navbar .scroll-progress {
+    position: absolute;
+    top: auto;
+    bottom: -2px;
+}
+
+/* fades away once the reader reaches Get in Touch (contact-fx.js) */
+.scroll-progress.is-retired {
+    opacity: 0;
 }
 
 /* ============================================================
@@ -64,8 +78,19 @@
 .exp-stack {
     max-width: 820px;
     margin: 0 auto;
-    /* breathing room so the last card fully releases before Publications */
-    padding-bottom: 6vh;
+    /* small release gap after the last card — keeps the section tail tight */
+    padding-bottom: 1vh;
+}
+
+/* SPLIT LAYOUT (desktop) — timeline rail + cards sit close together,
+   reading as one combined component */
+@media (min-width: 1024px) {
+    #experience .container { max-width: 1280px; }
+    .exp-stack {
+        width: min(960px, 78%);
+        max-width: none;
+        margin: 0 0 0 auto;
+    }
 }
 
 .exp-card {
@@ -85,7 +110,10 @@
     will-change: transform, filter;
 }
 
-/* accent hairline along the top edge — visible even when buried */
+/* accent hairline along the top edge — QUIET by default so the
+   stacked heap doesn't read as stripes; ignites via .exp-card--active
+   (driven by GSAP ScrollTrigger in exp-three.js, synced with the
+   3D milestone node) */
 .exp-card::before {
     content: '';
     position: absolute;
@@ -94,7 +122,21 @@
     height: 3px;
     width: 100%;
     background: linear-gradient(90deg, #2997ff, transparent 70%);
-    opacity: 0.9;
+    opacity: 0.16;
+    transition: opacity 0.5s ease;
+}
+
+.exp-card--active::before {
+    opacity: 1;
+    box-shadow: 0 0 18px rgba(41, 151, 255, 0.55);
+}
+
+.exp-card--active .exp-index {
+    color: rgba(41, 151, 255, 0.32);
+}
+
+.exp-card .exp-index {
+    transition: color 0.5s ease;
 }
 
 .exp-card-top {
@@ -176,6 +218,48 @@
         opacity: 1;
         transform: none;
     }
+
+    /* while the pointer is on a card, GSAP owns `transform` (3D tilt in
+       projects-fx.js) — drop it from the transition list so tween frames
+       aren't smeared/delayed by the cascade transition above */
+    .projects-grid .project-card.fx-live {
+        transition:
+            opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) var(--rd, 0ms),
+            box-shadow 0.3s ease 0ms;
+    }
+}
+
+/* ============================================================
+   FEATURED PROJECTS  —  cursor spotlight + tilt support
+   (driven by projects-fx.js · fine pointers only)
+   ============================================================ */
+.project-card {
+    position: relative;
+    overflow: hidden;
+}
+
+/* light-reactive sheen that follows the cursor */
+.project-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    background: radial-gradient(
+        260px circle at var(--mx, 50%) var(--my, 50%),
+        rgba(0, 113, 227, 0.10),
+        rgba(0, 113, 227, 0.035) 42%,
+        transparent 70%
+    );
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .project-card:hover::after { opacity: 1; }
+
+    .project-card:hover .project-link {
+        color: var(--apple-blue);
+    }
 }
 
 /* slight lift refinement on hover already in style.css */
@@ -217,6 +301,53 @@
 }
 
 /* ============================================================
+   EXPERIENCE — Three.js trajectory canvas (exp-three.js)
+   Sticky 100vh canvas inside an absolute wrapper so the WebGL
+   framebuffer stays viewport-sized while the tall section scrolls.
+   ============================================================ */
+#experience {
+    position: relative;
+    /* clip (not hidden) keeps position:sticky working for .exp-card */
+    overflow: clip;
+}
+
+#experience .container {
+    position: relative;
+    z-index: 1;
+}
+
+.exp-canvas-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+#exp-canvas {
+    position: sticky;
+    top: 0;
+    display: block;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+}
+
+.exp-fig { display: none; }
+
+@media (max-width: 1023px) {
+    /* mobile/tablet: no rail — the cards carry the section alone */
+    .exp-canvas-wrap { display: none; }
+}
+
+@media (max-width: 768px) {
+    .exp-fig { padding: 0 0.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .exp-card--active::before { box-shadow: none; }
+}
+
+/* ============================================================
    MOBILE  —  relax the stack so cards don't crowd the navbar
    ============================================================ */
 @media (max-width: 768px) {
@@ -233,7 +364,7 @@
     }
     .exp-index { font-size: 1.9rem; }
     .exp-role  { font-size: 1.15rem; }
-    .exp-stack { padding-bottom: 4vh; }
+    .exp-stack { padding-bottom: 1vh; }
 }
 
 /* ============================================================
@@ -251,4 +382,361 @@
    ============================================================ */
 .repo-card.in:hover {
     transform: translateY(-2px);
+}
+
+/* ============================================================
+   EDUCATION  —  "border beam"
+   A blue comet orbits the rim of each degree card and the IIT
+   flagship credential. Built with the masked-border technique
+   (gradient painted on an overlay, masked down to a 1px ring),
+   so it can't be disturbed by the reveal transforms.
+   Runs only while the card is in view (.in, toggled by scroll.js).
+   ============================================================ */
+@property --beam {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.education-card,
+#education .cert-card {
+    position: relative;
+}
+
+.education-card::after,
+#education .cert-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    padding: 1px;                /* ring thickness */
+    pointer-events: none;
+    background:
+        conic-gradient(from var(--beam),
+            transparent 0deg,
+            transparent 286deg,
+            rgba(41, 151, 255, 0.55) 318deg,
+            rgba(142, 200, 255, 0.95) 338deg,
+            rgba(41, 151, 255, 0.55) 352deg,
+            transparent 360deg),
+        linear-gradient(rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10));
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .education-card.in::after,
+    #education .cert-card.in::after {
+        animation: edu-beam 5.5s linear infinite;
+    }
+    /* opposite phases so the two degree cards never mirror each other */
+    .education-card.reveal--right.in::after {
+        animation-delay: -2.75s;
+    }
+    /* the flagship credential is wider — let its comet travel slower */
+    #education .cert-card.in::after {
+        animation-duration: 8s;
+        animation-delay: -1.5s;
+    }
+}
+
+@keyframes edu-beam {
+    to { --beam: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .education-card::after,
+    #education .cert-card::after {
+        background: linear-gradient(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12));
+    }
+}
+
+/* ============================================================
+   EDUCATION  —  IIT credential modules cascade
+   The three course modules rise in one-by-one once the flagship
+   card reveals (.in via scroll.js), then the verify CTA follows.
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+    #education .cert-card .cert-module,
+    #education .cert-card .btn-primary {
+        opacity: 0;
+        transform: translateY(14px);
+        transition:
+            opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+            transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    #education .cert-card.in .cert-module,
+    #education .cert-card.in .btn-primary {
+        opacity: 1;
+        transform: none;
+    }
+
+    #education .cert-card.in .cert-module:nth-child(1) { transition-delay: 0.22s; }
+    #education .cert-card.in .cert-module:nth-child(2) { transition-delay: 0.38s; }
+    #education .cert-card.in .cert-module:nth-child(3) { transition-delay: 0.54s; }
+    #education .cert-card.in .btn-primary              { transition-delay: 0.72s; }
+}
+
+/* ============================================================
+   ABOUT  —  keynote lead statement (scroll typewriter, about-fx.js)
+   ============================================================ */
+.about-lead {
+    max-width: 860px;
+    margin: -0.75rem auto 3.25rem;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 3.2vw, 2.125rem);
+    font-weight: 600;
+    line-height: 1.28;
+    letter-spacing: -0.02em;
+    color: var(--near-black);           /* fallback: fully readable */
+    text-wrap: balance;
+}
+
+/* keep words intact so line wrapping never changes mid-type */
+.about-lead.is-split .about-word {
+    white-space: nowrap;
+}
+
+/* every character exists from the start (stable layout) —
+   invisible until "typed" by the scrubbed GSAP driver */
+.about-lead.is-split .about-char {
+    position: relative;
+    color: transparent;
+    transition: color 0.12s linear;
+}
+
+.about-lead.is-split .about-char.typed {
+    color: var(--near-black);
+}
+
+.about-lead.is-split .about-word--accent .about-char.typed {
+    color: var(--apple-blue);
+}
+
+.about-word--accent {
+    font-weight: 700;
+}
+
+/* blinking caret riding the typing boundary */
+.about-lead.is-split .about-char.caret::after {
+    content: '';
+    position: absolute;
+    right: -0.085em;
+    top: 9%;
+    bottom: 5%;
+    width: 0.05em;
+    background: var(--apple-blue);
+    border-radius: 1px;
+    animation: about-caret 0.95s steps(1) infinite;
+}
+
+@keyframes about-caret {
+    50% { opacity: 0; }
+}
+
+@media (max-width: 768px) {
+    .about-lead { margin-bottom: 2.25rem; }
+}
+
+/* ============================================================
+   PUBLICATIONS  —  "the figure comes alive"
+   The publication card carries a miniature predicted-vs-measured
+   plot. When the card reveals (.in via scroll.js): axes draft in,
+   data points populate one by one, the regression fit draws
+   through them, and R² counts up to 0.99 (pubs-fx.js).
+   Replays in both scroll directions.
+   ============================================================ */
+.publication-item {
+    display: grid;
+    grid-template-columns: 1fr 230px;
+    gap: 2rem;
+    align-items: center;
+}
+
+.pub-figure {
+    margin: 0;
+    user-select: none;
+}
+
+.pub-figure svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.pub-axis {
+    stroke: rgba(255, 255, 255, 0.28);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+}
+
+.pub-pt {
+    fill: #8ec8ff;
+    opacity: 0.92;
+}
+
+.pub-fit {
+    stroke: var(--link-dark);
+    stroke-width: 2;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 5px rgba(41, 151, 255, 0.55));
+}
+
+.pub-figcap {
+    margin-top: 0.6rem;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.42);
+    text-align: center;
+}
+
+.pub-r2 {
+    font-variant-numeric: tabular-nums;
+    font-style: normal;
+    font-weight: 600;
+    color: var(--link-dark);
+}
+
+/* —— motion is scroll-scrubbed by pubs-fx.js (GSAP timeline).
+   These base styles are the FINAL state, which doubles as the
+   fallback for reduced-motion / no-GSAP visitors. */
+
+@media (max-width: 768px) {
+    .publication-item {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+    .pub-figure {
+        max-width: 260px;
+        margin: 0 auto;
+    }
+}
+
+/* ============================================================
+   GET IN TOUCH  —  aurora glow + magnetic pills + copy email
+   (interactions in contact-fx.js; aurora is pure CSS)
+   ============================================================ */
+#contact {
+    position: relative;
+    overflow: clip;
+}
+
+#contact .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* two soft Apple-blue blobs drifting slowly behind the closer */
+#contact::before,
+#contact::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(64px);
+}
+
+#contact::before {
+    width: 520px;
+    height: 520px;
+    top: -14%;
+    left: -10%;
+    background: radial-gradient(circle, rgba(0, 113, 227, 0.14), transparent 65%);
+}
+
+#contact::after {
+    width: 460px;
+    height: 460px;
+    bottom: -18%;
+    right: -8%;
+    background: radial-gradient(circle, rgba(41, 151, 255, 0.11), transparent 65%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    #contact::before { animation: contact-aurora-a 16s ease-in-out infinite alternate; }
+    #contact::after  { animation: contact-aurora-b 19s ease-in-out infinite alternate; }
+}
+
+@keyframes contact-aurora-a {
+    to { transform: translate(70px, 46px) scale(1.14); }
+}
+
+@keyframes contact-aurora-b {
+    to { transform: translate(-60px, -36px) scale(1.10); }
+}
+
+/* while magnetized, GSAP owns the pill's transform — drop it from
+   the reveal transition list so frames aren't smeared/delayed */
+.contact-link.fx-live,
+.libutton.fx-live {
+    transition:
+        opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) var(--rd, 0ms),
+        color 0.3s ease 0ms,
+        box-shadow 0.3s ease 0ms,
+        background 0.3s ease 0ms;
+}
+
+/* click-to-copy email feedback */
+.contact-link .contact-email-label {
+    transition: color 0.2s ease;
+}
+
+.contact-link.copied {
+    color: #1da647;
+}
+
+.contact-link.copied .contact-email-label {
+    font-weight: 600;
+}
+
+/* icon gives a tiny nod on hover */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .contact-link .contact-icon {
+        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .contact-link:hover .contact-icon {
+        transform: scale(1.18) rotate(-6deg);
+    }
+}
+
+/* ============================================================
+   TECHNICAL SKILLS  —  living neural network (skills-neural.js)
+   Signal pulses travel the graph's edges; nodes flash as the
+   signal arrives; the root breathes.
+   ============================================================ */
+.sk-pulse {
+    fill: #2997ff;
+    filter: drop-shadow(0 0 4px rgba(41, 151, 255, 0.85));
+    pointer-events: none;
+}
+
+.sk-nodes g rect {
+    transition: filter 0.18s ease;
+}
+
+.sk-nodes g.sk-firing rect {
+    filter: drop-shadow(0 0 8px rgba(0, 113, 227, 0.55));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .sk-nodes g.sk-breathe rect {
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: sk-breathe 4.2s ease-in-out infinite;
+    }
+}
+
+@keyframes sk-breathe {
+    50% { transform: scale(1.045); }
 }
