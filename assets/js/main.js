@@ -4,6 +4,62 @@
 //  History API (mobile back button fix)
 // =============================================
 
+// ── Hash landing fix ─────────────────────────
+// Arriving with a hash (e.g. a sub-page's "← Back to Projects"
+// → index.html#projects) normally lands in the WRONG section:
+// the reveal system + Experience's sticky plate-heap make every
+// section's measured height/position change frame-to-frame while
+// animations run, so the browser's jump misses.
+// Fix: add .hash-instant to <html> (CSS finalizes all reveal
+// state — full opacity, no transform, no transition → true static
+// layout), measure + scroll cleanly, then drop the class so
+// normal scroll motion resumes.
+(function () {
+    const hash = window.location.hash;
+    if (!hash || hash.length < 2) return;
+
+    let target;
+    try { target = document.querySelector(hash); } catch (e) { return; }
+    if (!target) return;
+
+    const NAV_H = 48;
+    const docEl = document.documentElement;
+
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+    function scrollToTarget() {
+        const y = target.getBoundingClientRect().top + window.pageYOffset - NAV_H;
+        window.scrollTo(0, Math.max(0, y));
+    }
+
+    function land() {
+        // 1. freeze into true static layout
+        docEl.classList.add('hash-instant');
+        // also mark every reveal as 'in' so non-CSS observers agree
+        document.querySelectorAll('.reveal, .reveal-fade').forEach(function (el) {
+            el.classList.add('in');
+        });
+
+        // 2. measure + scroll on a clean layout (next frame)
+        requestAnimationFrame(function () {
+            scrollToTarget();
+
+            // 3. correct once more after late layout (images/fonts),
+            //    then release the freeze so motion resumes normally
+            requestAnimationFrame(function () {
+                scrollToTarget();
+                setTimeout(function () {
+                    scrollToTarget();
+                    docEl.classList.remove('hash-instant');
+                }, 120);
+            });
+        });
+    }
+
+    if (document.readyState === 'complete') land();
+    else window.addEventListener('load', land);
+})();
+
 // ── Mobile Nav ───────────────────────────────
 const hamburger = document.querySelector('.hamburger');
 const navMenu   = document.querySelector('.nav-menu');

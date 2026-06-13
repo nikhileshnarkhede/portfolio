@@ -39,6 +39,21 @@
 /* ============================================================
    REVEAL SYSTEM
    ============================================================ */
+
+/* hash-landing: when the page loads at #section, finalize ALL
+   reveal state instantly (no transition, no transform, full
+   opacity) so layout is static and the scroll target measures
+   correctly. main.js adds .hash-instant to <html>, scrolls, then
+   removes it on the next frame so normal motion resumes. */
+html.hash-instant .reveal,
+html.hash-instant .reveal-fade,
+html.hash-instant .reveal.in,
+html.hash-instant .reveal-fade.in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
 
     .reveal,
