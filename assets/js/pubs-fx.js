@@ -1,30 +1,22 @@
 /* ============================================================
-   pubs-fx.js — Publications figure, full play on arrival
-   The moment the publication card enters the viewport — whether
-   scrolling DOWN into it or back UP into it — the COMPLETE
-   sequence plays start-to-finish at its own pace:
+   pubs-fx.js — Publications figures, full play on arrival
+   Each publication card carries its own miniature figure that
+   plays start-to-finish whenever the card enters the viewport
+   (from either scroll direction) and restarts on every entry.
 
-     axes draft in → points populate → fit draws → R² rolls to 0.99
+   Paper 1 (.pub-figure--bars): grouped R² bars grow up; the DNN
+     bars (blue) overtake the SR bars (grey).
+   Paper 2 (scatter): axes draft in → points populate → fit draws
+     → R² rolls to 0.99.
 
-   It restarts on every entry (both directions), so the reader
-   always sees the whole figure perform.
-
-   CSS holds the figure's FINAL state, so reduced-motion visitors
-   and GSAP-less fallbacks simply see the completed plot with the
-   static "0.99" from the HTML.
+   CSS holds each figure's FINAL state, so reduced-motion / no-GSAP
+   visitors see the completed figures.
    ============================================================ */
 (function () {
     'use strict';
 
-    var item = document.querySelector('.publication-item');
-    if (!item) return;
-
-    var axisY = item.querySelector('.pub-axis-y');
-    var axisX = item.querySelector('.pub-axis-x');
-    var points = item.querySelectorAll('.pub-pt');
-    var fit = item.querySelector('.pub-fit');
-    var r2 = item.querySelector('.pub-r2');
-    if (!axisY || !axisX || !fit) return;
+    var items = document.querySelectorAll('.publication-item');
+    if (!items.length) return;
 
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var hasGSAP = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
@@ -32,54 +24,89 @@
 
     gsap.registerPlugin(ScrollTrigger);
 
-    var r2state = { v: 0 };
-    if (r2) r2.textContent = '0.00';
-
-    var tl = gsap.timeline({
-        paused: true,
-        scrollTrigger: {
-            trigger: item,
-            start: 'top 82%',     // entering from below (scrolling down)
-            end: 'bottom 18%',    // entering from above (scrolling back up)
-            // restart on enter (down) and on enter-back (up)
-            toggleActions: 'restart none restart none'
+    items.forEach(function (item) {
+        var bars = item.querySelectorAll('.pub-bar');
+        if (bars.length) {
+            buildBarChart(item, bars);
+        } else {
+            buildScatter(item);
         }
     });
 
-    tl
-        // axes draft in — anchored at the plot origin (28,146)
-        .fromTo(axisY,
-            { scaleY: 0, svgOrigin: '28 146' },
-            { scaleY: 1, duration: 0.5, ease: 'power2.out' }, 0)
-        .fromTo(axisX,
-            { scaleX: 0, svgOrigin: '28 146' },
-            { scaleX: 1, duration: 0.5, ease: 'power2.out' }, 0.12)
+    /* ---- Paper 1: grouped R² bar chart ---- */
+    function buildBarChart(item, bars) {
+        // bars grow upward: y must move up as height grows, so animate
+        // both height and y from the (baseline, 0) start to (top, h).
+        var BASE = 168;   // svg baseline y (matches markup)
 
-        // data points populate one by one
-        .fromTo(points,
-            { opacity: 0, scale: 0, transformOrigin: '50% 50%' },
-            {
-                opacity: 0.92,
-                scale: 1,
-                duration: 0.35,
-                stagger: 0.06,
-                ease: 'back.out(2.2)'
-            }, 0.45)
-
-        // regression fit draws through the cloud
-        .fromTo(fit,
-            { strokeDasharray: 1, strokeDashoffset: 1 },
-            { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' }, 1.35);
-
-    // R² rolls up in lockstep with the fit line
-    if (r2) {
-        tl.to(r2state, {
-            v: 0.99,
-            duration: 0.9,
-            ease: 'power2.out',
-            onUpdate: function () {
-                r2.textContent = r2state.v.toFixed(2);
+        var tl = gsap.timeline({
+            paused: true,
+            scrollTrigger: {
+                trigger: item,
+                start: 'top 82%',
+                end: 'bottom 18%',
+                toggleActions: 'restart none restart none'
             }
-        }, 1.35);
+        });
+
+        bars.forEach(function (bar, i) {
+            var h = parseFloat(bar.getAttribute('data-h')) || 0;
+            // SR bars first (even index), DNN bars a beat later (odd) so
+            // the blue "overtake" reads as a second wave
+            var at = (i % 2 === 0) ? (i * 0.045) : (i * 0.045 + 0.12);
+            tl.fromTo(bar,
+                { attr: { height: 0, y: BASE } },
+                {
+                    attr: { height: h, y: BASE - h },
+                    duration: 0.7,
+                    ease: 'power3.out'
+                }, at);
+        });
+    }
+
+    /* ---- Paper 2: scatter + fit + R² counter ---- */
+    function buildScatter(item) {
+        var axisY = item.querySelector('.pub-axis-y');
+        var axisX = item.querySelector('.pub-axis-x');
+        var points = item.querySelectorAll('.pub-pt');
+        var fit = item.querySelector('.pub-fit');
+        var r2 = item.querySelector('.pub-r2');
+        if (!axisY || !axisX || !fit) return;
+
+        var r2state = { v: 0 };
+        if (r2) r2.textContent = '0.00';
+
+        var tl = gsap.timeline({
+            paused: true,
+            scrollTrigger: {
+                trigger: item,
+                start: 'top 82%',
+                end: 'bottom 18%',
+                toggleActions: 'restart none restart none'
+            }
+        });
+
+        tl
+            .fromTo(axisY,
+                { scaleY: 0, svgOrigin: '28 146' },
+                { scaleY: 1, duration: 0.5, ease: 'power2.out' }, 0)
+            .fromTo(axisX,
+                { scaleX: 0, svgOrigin: '28 146' },
+                { scaleX: 1, duration: 0.5, ease: 'power2.out' }, 0.12)
+            .fromTo(points,
+                { opacity: 0, scale: 0, transformOrigin: '50% 50%' },
+                { opacity: 0.92, scale: 1, duration: 0.35, stagger: 0.06, ease: 'back.out(2.2)' }, 0.45)
+            .fromTo(fit,
+                { strokeDasharray: 1, strokeDashoffset: 1 },
+                { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' }, 1.35);
+
+        if (r2) {
+            tl.to(r2state, {
+                v: 0.99,
+                duration: 0.9,
+                ease: 'power2.out',
+                onUpdate: function () { r2.textContent = r2state.v.toFixed(2); }
+            }, 1.35);
+        }
     }
 })();

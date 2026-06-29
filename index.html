@@ -53,7 +53,7 @@
             </div>
             <div class="hero-stats">
                 <div class="hero-stat"><span class="stat-value">4.0</span><span class="stat-label">Graduate GPA</span></div>
-                <div class="hero-stat"><span class="stat-value">R&sup2; &gt; 0.98</span><span class="stat-label">Published model</span></div>
+                <div class="hero-stat"><span class="stat-value">2</span><span class="stat-label">Journal papers</span></div>
                 <div class="hero-stat"><span class="stat-value">10+</span><span class="stat-label">Featured projects</span></div>
                 <div class="hero-stat"><span class="stat-value">23</span><span class="stat-label">Certifications</span></div>
             </div>
@@ -319,6 +319,71 @@
             <div class="publications-list">
                 <div class="publication-item reveal reveal--scale">
                     <div class="pub-body">
+                        <span class="pub-flag">Latest &middot; 2026</span>
+                        <h3>Hybrid Machine Learning Workflow for Process-Property Optimization in Fused Filament Fabrication</h3>
+                        <p class="pub-venue">Int. Journal on Interactive Design and Manufacturing (IJIDeM), Springer &middot; 2026</p>
+                        <p>A hybrid, interpretable pipeline coupling symbolic regression (gplearn) with a DNN surrogate and NSGA-II multi-objective optimization to map FFF process parameters to six mechanical properties of ABS. The DNN refines the white-box symbolic features, lifting R² to 0.96&ndash;0.997 across all properties; NSGA-II then recovers Pareto-optimal print settings validated against experiment.</p>
+                        <div class="pub-tags">
+                            <span>Symbolic Regression</span><span>DNN Surrogate</span><span>NSGA-II</span><span>Additive Manufacturing</span>
+                        </div>
+                        <div class="pub-links">
+                            <a href="https://doi.org/10.1007/s12008-026-02637-y" target="_blank" rel="noopener" class="project-link">Read Paper →</a>
+                            <a href="https://github.com/nikhileshnarkhede/SymbOptAI" target="_blank" rel="noopener" class="project-link pub-link-code">View Code →</a>
+                        </div>
+                    </div>
+                    <figure class="pub-figure pub-figure--bars" aria-hidden="true">
+                        <svg viewBox="0 0 264 196" xmlns="http://www.w3.org/2000/svg">
+                            <!-- scale: R²=0.80 → y=168 ; R²=1.00 → y=18  (150px span / 0.20 R²) -->
+                            <line class="pub-axis pub-axis-x" x1="10" y1="168" x2="256" y2="168"/>
+                            <!-- 0.925 reference line: y = 168 - (0.925-0.80)*750 = 74.25 -->
+                            <line class="pub-ref" x1="10" y1="74" x2="256" y2="74" stroke-dasharray="3 3"/>
+                            <text class="pub-ref-label" x="12" y="70">R² 0.925</text>
+
+                            <!-- 6 property groups, SR + DNN bar each. height = (R²-0.80)*750 -->
+                            <!-- TS .898/.960 · EB .912/.963 · TG .959/.997 · FT .897/.985 · FM .919/.990 · FS .992/.989 -->
+                            <g class="pub-bargroup">
+                                <rect class="pub-bar pub-bar-sr"  x="20"  y="168" width="14" height="0" data-h="73.5"/>
+                                <rect class="pub-bar pub-bar-dnn" x="35"  y="168" width="14" height="0" data-h="120"/>
+                            </g>
+                            <g class="pub-bargroup">
+                                <rect class="pub-bar pub-bar-sr"  x="61"  y="168" width="14" height="0" data-h="84"/>
+                                <rect class="pub-bar pub-bar-dnn" x="76"  y="168" width="14" height="0" data-h="122.25"/>
+                            </g>
+                            <g class="pub-bargroup">
+                                <rect class="pub-bar pub-bar-sr"  x="102" y="168" width="14" height="0" data-h="119.25"/>
+                                <rect class="pub-bar pub-bar-dnn" x="117" y="168" width="14" height="0" data-h="147.75"/>
+                            </g>
+                            <g class="pub-bargroup">
+                                <rect class="pub-bar pub-bar-sr"  x="143" y="168" width="14" height="0" data-h="72.75"/>
+                                <rect class="pub-bar pub-bar-dnn" x="158" y="168" width="14" height="0" data-h="138.75"/>
+                            </g>
+                            <g class="pub-bargroup">
+                                <rect class="pub-bar pub-bar-sr"  x="184" y="168" width="14" height="0" data-h="89.25"/>
+                                <rect class="pub-bar pub-bar-dnn" x="199" y="168" width="14" height="0" data-h="142.5"/>
+                            </g>
+                            <g class="pub-bargroup">
+                                <rect class="pub-bar pub-bar-sr"  x="225" y="168" width="14" height="0" data-h="144"/>
+                                <rect class="pub-bar pub-bar-dnn" x="240" y="168" width="14" height="0" data-h="141.75"/>
+                            </g>
+
+                            <!-- property axis labels -->
+                            <text class="pub-bar-label" x="34"  y="182">TS</text>
+                            <text class="pub-bar-label" x="75"  y="182">EB</text>
+                            <text class="pub-bar-label" x="116" y="182">TG</text>
+                            <text class="pub-bar-label" x="157" y="182">FT</text>
+                            <text class="pub-bar-label" x="198" y="182">FM</text>
+                            <text class="pub-bar-label" x="239" y="182">FS</text>
+                        </svg>
+                        <figcaption class="pub-figcap">
+                            fig. 1 &dash; R² by property
+                            <span class="pub-legend"><span class="pub-legend-swatch pub-legend-sr"></span>SR</span>
+                            <span class="pub-legend"><span class="pub-legend-swatch pub-legend-dnn"></span>DNN</span>
+                        </figcaption>
+                    </figure>
+                </div>
+
+                <div class="publication-item reveal reveal--scale">
+                    <div class="pub-body">
                         <h3>Prediction of Mechanical and Fracture Properties of Lightweight Polyurethane Composites Using Machine Learning Methods</h3>
                         <p class="pub-venue">Journal of Composite Science, 2025</p>
                         <p>Developed ML models achieving R² &gt; 0.99 for predicting mechanical properties of polyurethane composites, outperforming traditional empirical approaches.</p>
@@ -346,7 +411,7 @@
                             <!-- regression fit — anchored at the plot origin (0,0) -->
                             <line class="pub-fit" pathLength="1" x1="28" y1="146" x2="204" y2="18"/>
                         </svg>
-                        <figcaption class="pub-figcap">fig. 1 &dash; predicted vs. measured &middot; R² <span class="pub-r2">0.99</span></figcaption>
+                        <figcaption class="pub-figcap">fig. 2 &dash; predicted vs. measured &middot; R² <span class="pub-r2">0.99</span></figcaption>
                     </figure>
                 </div>
             </div>

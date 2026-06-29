@@ -563,17 +563,67 @@ html.hash-instant .reveal-fade.in {
 
 /* ============================================================
    PUBLICATIONS  —  "the figure comes alive"
-   The publication card carries a miniature predicted-vs-measured
-   plot. When the card reveals (.in via scroll.js): axes draft in,
-   data points populate one by one, the regression fit draws
-   through them, and R² counts up to 0.99 (pubs-fx.js).
+   Each publication card carries a miniature figure that animates
+   on entry (pubs-fx.js). Paper 1 = grouped R² bar chart (SR vs
+   DNN); paper 2 = predicted-vs-measured scatter + fit + R² count.
    Replays in both scroll directions.
    ============================================================ */
+.publications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
 .publication-item {
     display: grid;
-    grid-template-columns: 1fr 230px;
-    gap: 2rem;
+    grid-template-columns: 1fr 250px;
+    gap: 2.25rem;
     align-items: center;
+}
+
+/* “Latest” flag on the featured paper */
+.pub-flag {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--link-dark);
+    background: rgba(41, 151, 255, 0.12);
+    border: 1px solid rgba(41, 151, 255, 0.28);
+    padding: 4px 11px;
+    border-radius: 980px;
+    margin-bottom: 0.85rem;
+}
+
+/* tag pills + dual links reuse the dark tag look */
+.pub-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.2rem 0 1.1rem;
+}
+
+.pub-tags span {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text-secondary-dark);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    padding: 5px 12px;
+    border-radius: 980px;
+}
+
+.pub-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.pub-link-code {
+    opacity: 0.85;
 }
 
 .pub-figure {
@@ -622,9 +672,61 @@ html.hash-instant .reveal-fade.in {
     color: var(--link-dark);
 }
 
-/* —— motion is scroll-scrubbed by pubs-fx.js (GSAP timeline).
-   These base styles are the FINAL state, which doubles as the
-   fallback for reduced-motion / no-GSAP visitors. */
+/* —— R² grouped bar chart (paper 1) —— */
+.pub-ref {
+    stroke: rgba(255, 255, 255, 0.22);
+    stroke-width: 1;
+}
+
+.pub-ref-label,
+.pub-bar-label {
+    font-family: var(--font-body);
+    fill: rgba(255, 255, 255, 0.4);
+    font-size: 8px;
+    font-style: italic;
+}
+
+.pub-bar-label {
+    text-anchor: middle;
+    font-style: normal;
+    letter-spacing: 0.02em;
+}
+
+.pub-bar {
+    rx: 1.5;
+}
+
+.pub-bar-sr {
+    fill: rgba(255, 255, 255, 0.28);
+}
+
+.pub-bar-dnn {
+    fill: #2997ff;
+    filter: drop-shadow(0 0 4px rgba(41, 151, 255, 0.4));
+}
+
+/* legend swatches in the caption */
+.pub-legend {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 0.6rem;
+    font-style: normal;
+}
+
+.pub-legend-swatch {
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.pub-legend-sr  { background: rgba(255, 255, 255, 0.32); }
+.pub-legend-dnn { background: #2997ff; }
+
+/* —— motion is driven by pubs-fx.js (GSAP). These base styles
+   are the FINAL state, doubling as the reduced-motion / no-GSAP
+   fallback (bars sit at full height, scatter fully drawn). */
 
 @media (max-width: 768px) {
     .publication-item {
@@ -632,8 +734,8 @@ html.hash-instant .reveal-fade.in {
         gap: 1.25rem;
     }
     .pub-figure {
-        max-width: 260px;
-        margin: 0 auto;
+        max-width: 280px;
+        margin: 0.5rem auto 0;
     }
 }
 
